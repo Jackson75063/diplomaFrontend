@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {log} from 'util';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'matTest';
+  options: FormGroup;
+
+  constructor(fb: FormBuilder) {
+    this.options = fb.group({
+      hideRequired: false,
+      floatLabel: 'auto',
+    });
+  }
 }

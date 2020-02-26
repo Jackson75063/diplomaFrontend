@@ -1,0 +1,105 @@
+
+<div class="container">
+
+
+
+
+
+  <table>
+    <th style="width: 50px;">id</th>
+    <th style="width: 200px;">name</th>
+    <th style="width: 200px;">surname</th>
+    <th style="width: 50px;">avgDiplomaMark</th>
+    <th style="width: 50px;">avgDiplomaMark</th>
+    <th> Action </th>
+    <th> Delete </th>
+    <tr *ngFor="let customer of result">
+      <td>
+        {{customer.idAbitCode}}
+      </td>
+
+
+      <td>
+        {{customer.name}}
+      </td>
+
+      <td>
+        {{customer.surname}}
+      </td>
+
+      <td>
+        {{customer.avgDiplomaMark}}
+      </td>
+
+      <td>
+        {{customer.avgDiplomaMark}}
+      </td>
+
+      <td >
+        <button class="btn btn-info"  (click)="ID(customer.idAbitCode.valueOf())" > Edit</button>
+      </td>
+
+      <td >
+        <button class="btn btn-danger"  (click)="delById(customer.idAbitCode.valueOf())" > Delete</button>
+      </td>
+
+    </tr>
+
+  </table>
+
+
+
+
+  <button class="btn btn-primary" (click)="clickc()">YEAH</button>
+
+  <hr>
+  <!--  <br>-->
+
+
+
+  <div class="container">
+    <h2>Stacked form</h2>
+    <form #formCtrl="ngForm">
+      <div class="form-group">
+        <label>ID:</label>
+        <input class="form-control"  type="number" [(ngModel)] = "reqq.idAbitCode"  name="idAbit" placeholder="Ваш id" required>
+      </div>
+
+      <div class="form-group">
+        <label>Прізвище:</label>
+        <input type="text" class="form-control"  class="form-control"   [(ngModel)] = "reqq.name"        name="name" placeholder="Ім'я" required>
+      </div>
+
+
+      <div class="form-group">
+        <label>Ім'я:</label>
+        <input type="text"  class="form-control"  [(ngModel)] = "reqq.surname"     name="surname" placeholder="Прізвище" required>
+      </div>
+
+
+      <!-- <div class="form-group">
+         <label>ID:</label>
+         <input type="number"class="form-control"  [(ngModel)] = "reqq.requestCounter" name="counter" placeholder="requests">
+       </div>-->
+
+
+      <div class="form-group">
+        <label>Середній бал атестата:</label>
+        <input type="text" class="form-control"    [(ngModel)] = "reqq.avgDiplomaMark"  name="avg" placeholder="Середній бал атестату" required>
+      </div>
+
+      <button class="btn btn-success" aria-disabled="false"
+              [disabled]="!formCtrl.form.valid"
+              (click)="addAbit()"
+              [ngClass] = "{'btn-dark': !formCtrl.form.valid}"
+      >Підтвердити</button>
+
+    </form>
+  </div>
+
+  <select formControlName="name">
+    <option value="">Choose oppo suit</option>
+    <option *ngFor="let suit of result">{{suit}}</option>
+  </select>
+
+</div>
