@@ -39,23 +39,15 @@ export class AbiturientComponent implements OnInit {
   }
 
   addAbit() {
-    /* const a: Abit = {
-          name:  'Andriy',
-          idAbitCode:  100,
-          faculties: [],
-          avgDiplomaMark:  5.6,
-          surname:  'Semenyuk',
-          requestCounter:  5,
-          znoSubjectList: { MATH:  10 }
-        };*/
 
-    // console.log(a);
+/*
 
     this.httpClient.post('http://localhost:8081/addAbit', this.reqq)
       .subscribe((success) => {
           alert('success');
         },
         (error) => alert('error'));
+*/
 
     // this.httpClient.post('http://localhost:8081/addAbit', a).map((res: Response) => res.json()).subscribe(
 
