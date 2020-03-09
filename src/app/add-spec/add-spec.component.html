@@ -1,0 +1,108 @@
+<div class="container">
+  <p>add-spec works!</p>
+
+  <form #formCtrl="ngForm">
+    <div class="form-group">
+      <label>ID спеціальності:</label>
+      <input class="form-control"  type="number" [(ngModel)] = "spec.id"  name="specId" placeholder="Ваш id" required>
+    </div>
+
+    <div class="form-group">
+      <label>Код спеціальності</label>
+      <input type="number"  class="form-control"  [(ngModel)] = "spec.specializationCode"     name="surname" placeholder="Код спеціальності" required>
+    </div>
+
+    <div class="form-group">
+      <label>Назва спеціальності:</label>
+
+      <input type="text" class="form-control"  class="form-control"   [(ngModel)] = "spec.specializationName"        name="name" placeholder="Ім'я" required>
+    </div>
+
+
+
+
+
+
+<!--    modal start-->
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Підтвердити відправлення
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="approveSubmit()">Так</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Ні</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--    modal end-->
+  </form>
+
+
+
+  <mat-form-field>
+    <mat-label>Предмет</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let option of znoSubjects " [value]="znoSubjects" >
+        <span (click)="print(option)">{{ option}} </span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button class="btn btn-dark" (click)="addToMap()">addToList</button>
+
+
+  <hr>
+
+  <button
+    data-toggle="modal" data-target="#exampleModalCenter"
+    class="btn btn-success" aria-disabled="false"
+    [disabled]="!formCtrl.form.valid"
+    [ngClass] = "{'btn-dark': !formCtrl.form.valid}"
+    (click)="createSpec()"
+  >Створити спецільальність
+  </button>
+
+  <table>
+    <th style="width: 50px;">id</th>
+    <th style="width: 200px;">Код спеціальності</th>
+    <th style="width: 200px;">Назва спеціальності</th>
+    <th> Action </th>
+    <th> Delete </th>
+    <tr *ngFor="let customer of allSpec">
+      <td>
+        {{customer.id}}
+      </td>
+
+      <td>
+        {{customer.specializationCode}}
+      </td>
+
+      <td>
+        {{customer.specializationName}}
+      </td>
+
+
+    </tr>
+  </table>
+
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+
+  <app-map-subj-test></app-map-subj-test>
+
+
+</div>
+

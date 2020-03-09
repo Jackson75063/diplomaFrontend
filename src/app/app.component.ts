@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {log} from 'util';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
@@ -10,6 +8,9 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class AppComponent {
   options: FormGroup;
+  sidenav: any;
+
+
 
   constructor(fb: FormBuilder) {
     this.options = fb.group({

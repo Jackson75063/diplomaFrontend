@@ -2,48 +2,68 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatDatepickerModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatRadioModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule
-} from '@angular/material';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 import {AbiturientComponent} from './abiturient/abiturient.component';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
+import {AdminPanelComponent} from './admin-panel/admin-panel.component';
+import {AboutUsComponent} from './about-us/about-us.component';
+import {RouterModule, Routes} from '@angular/router';
+import {AddFacultComponent} from './add-facult/add-facult.component';
+import {AddSpecComponent} from './add-spec/add-spec.component';
+import {MapSubjTestComponent} from './map-subj-test/map-subj-test.component';
+import {KeyValuePipe} from './keys.pipe';
+import {FinishMapComponent} from './finish-map/finish-map.component';
+import {AbitMainPageComponent} from './abit-main-page/abit-main-page.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatIconModule, MatSelectModule, MatToolbarModule} from '@angular/material';
+
+import { MatInputModule } from '@angular/material';
+
+const appRoutes: Routes = [
+  { path: '', component: AbiturientComponent },
+  { path: 'pass', component: AbitMainPageComponent },
+  { path: 'fa' , component: AddFacultComponent},
+  { path: 'spec' , component: AddSpecComponent},
+  { path: 'about' , component: AboutUsComponent},
+  {
+    path: 'heroes',
+    component: AboutUsComponent,
+    data: { title: 'Heroes List' }
+  },
+  { path: '',
+    redirectTo: '/heroes',
+    pathMatch: 'full'
+  }
+];
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    AbiturientComponent
+    AbiturientComponent,
+    AdminPanelComponent,
+    AboutUsComponent,
+    AddFacultComponent,
+    AddSpecComponent,
+    MapSubjTestComponent,
+    KeyValuePipe,
+    FinishMapComponent,
+    AbitMainPageComponent
   ],
   imports: [
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
-    BrowserAnimationsModule,
-    MatSliderModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatDatepickerModule,
-    MatCardModule,
-    MatButtonModule,
-    DragDropModule,
-    MatListModule,
-    MatCheckboxModule,
-    MatSelectModule,
     HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    BrowserModule /* or CommonModule */,
+    FormsModule,
     ReactiveFormsModule,
-    FormsModule
+    MatToolbarModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

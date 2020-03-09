@@ -1,10 +1,8 @@
-
-import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {Abit} from '../model/Abit';
 import {log} from 'util';
-import {Faculties} from '../model/Faculties';
-import set = Reflect.set;
+import {AbitutientServiceService} from './abitutient-service.service';
 
 
 @Component({
@@ -14,15 +12,20 @@ import set = Reflect.set;
 })
 export class AbiturientComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private abitutientServiceService: AbitutientServiceService) { }
+
+  message: string;
 
   reqq = new Abit();
 
   result: Abit[];
-  rea: any;
 
+  fac: Abit;
 
   ngOnInit() {
+    this.abitutientServiceService.msg.subscribe(message => this.message = message);
+
+
     this.httpClient.get<Abit[]>('http://localhost:8081/allAb').subscribe(
 
       res => {
@@ -33,21 +36,22 @@ export class AbiturientComponent implements OnInit {
   }
 
   clickc() {
-
-    this.result.forEach(value => log(value));
+    this.result.forEach(value => {
+      log(value);
+    });
 
   }
 
   addAbit() {
 
-/*
+    /*
 
-    this.httpClient.post('http://localhost:8081/addAbit', this.reqq)
-      .subscribe((success) => {
-          alert('success');
-        },
-        (error) => alert('error'));
-*/
+        this.httpClient.post('http://localhost:8081/addAbit', this.reqq)
+          .subscribe((success) => {
+              alert('success');
+            },
+            (error) => alert('error'));
+    */
 
     // this.httpClient.post('http://localhost:8081/addAbit', a).map((res: Response) => res.json()).subscribe(
 
@@ -60,8 +64,8 @@ export class AbiturientComponent implements OnInit {
 
   }
 
-  ID(number: number) {
-    console.log(number);
+  ID(id: number) {
+    console.log(id);
 
   }
 
@@ -72,16 +76,23 @@ export class AbiturientComponent implements OnInit {
     this.httpClient.delete('http://localhost:8081/del/' + id).subscribe(res => {
       console.log(res);
     });
-    // @ts-ignore
+
     this.ngOnInit();
 
   }
 
-  checkPasswordEmpty() {
-
+  newMsgg() {
+    this.abitutientServiceService.changeMsg('CHANGED');
   }
 
-  onSubmit() {
+  printFac() {
 
+
+    this.result.forEach(value =>  this.fac = value);
+    // this.fac = callbackfn();
+
+    console.log(this.fac);
+    this.fac.faculties.forEach(value => console.log(value));
   }
+
 }

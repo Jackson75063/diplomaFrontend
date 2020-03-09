@@ -1,7 +1,8 @@
 export class Specializations {
-      // id: 1;
-      specializationCode: number;
-      specializationName: string;
-      requiredSubjects: [];
-      optionalSubjecst: [];
+  id: number;
+  specializationCode: number;
+  specializationName: string;
+  requiredSubjects: string[];
+  optionalSubjecst: string[];
+
 }

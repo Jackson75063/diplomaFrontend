@@ -1,2 +1,42 @@
 
-<app-abiturient></app-abiturient>
+<mat-toolbar color="">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <h5><span class="text-info" style="align-items: center; ">WELCOME</span></h5>
+    <span class="menu-spacer"></span>
+    <div style="font-size: 16px"  >
+      <a  class="navbar-link" mat-button [routerLink]="''"> Абітурієнти </a>
+      <a class="navbar-link" mat-button [routerLink]="'pass'"> Подати заявку </a>
+      <a class="navbar-link" mat-button [routerLink]="'/fa'"> Факультети </a>
+      <a class="navbar-link" mat-button [routerLink]="'/spec'"> Спеціальності </a>
+      <a class="navbar-link" mat-button [routerLink]="'/about'"> Про нас </a>
+
+    </div>
+
+<!--    <span style="font-size: 12px;">*************************88</span>-->
+  </mat-toolbar-row>
+
+
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+
+<!--
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <li class="nav-item active">
+    <a  class="navbar-link"  routerLink="" routerLinkActive="active">Абітурієнти</a>
+    <a  class="navbar-link"  routerLink="/heroes" routerLinkActive="active">Про нас</a>
+    <a  class="navbar-link"  routerLink="fa" routerLinkActive="active">Факультет</a>
+    <a  class="navbar-link"  routerLink="spec" routerLinkActive="active">Спеціальності</a>
+  </li>
+</nav>
+
+<router-outlet></router-outlet>
+-->
+
+<!--<app-abiturient></app-abiturient>-->
+<!--<app-about-us></app-about-us>-->

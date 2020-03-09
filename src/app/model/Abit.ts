@@ -5,12 +5,10 @@ export class Abit {
   idAbitCode: 0;
   name: ' ';
   surname: '';
-  avgDiplomaMark: 1;
-  requestCounter: 4;
+  avgDiplomaMark: number;
+  requestCounter: 5;
   faculties: Faculties[];
-  znoSubjectList: {
-    MATH: 0
-  };
+  subjs: {  } = [];
 
 
 }

@@ -1,0 +1,95 @@
+
+
+<mat-form-field>
+  <mat-label>Оберіть предмет</mat-label>
+  <mat-select >
+    <mat-option *ngFor="let option of list | keyvalue  "  [value]="option">
+      <span (click)="bind1(option.value)"> {{ option?.key }} </span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+  <mat-label >Предмет №1</mat-label>
+  <input matInput placeholder="100"  [(ngModel)]="subject1Subkect" value="">
+</mat-form-field>
+
+
+<button class="btn btn-info" (click)="print(subject1, subject1Subkect)"> click </button>
+<hr>
+
+<mat-form-field>
+  <mat-label>Оберіть предмет</mat-label>
+  <mat-select >
+    <mat-option *ngFor="let option of list | keyvalue  "  [value]="option">
+      <span (click)="bind2(option.value)"> {{ option?.key }} </span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Предмет №2</mat-label>
+  <input matInput placeholder="100" [(ngModel)]="subject2Subkect" [min]="100" max="200" value="">
+</mat-form-field>
+
+
+<button class="btn btn-info" (click)="print(subject2, subject2Subkect)"> click </button>
+<hr>
+
+
+<mat-form-field>
+  <mat-label>Оберіть предмет</mat-label>
+  <mat-select >
+    <mat-option *ngFor="let option of list | keyvalue  "  [value]="option">
+      <span (click)="bind3(option.value)"> {{ option?.key }} </span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Предмет №3</mat-label>
+  <input matInput placeholder="100" [(ngModel)]="subject3Subkect" [min]="100" max="200" value="">
+</mat-form-field>
+
+
+<button class="btn btn-info" (click)="print(subject3, subject3Subkect)"> click </button>
+<hr>
+
+
+<mat-form-field>
+  <mat-label>Оберіть предмет</mat-label>
+  <mat-select >
+    <mat-option *ngFor="let option of list | keyvalue  "    [value]="subjj">
+      <span (click)="bind4(option.value)"  > {{ option?.key }} </span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Предмет №4</mat-label>
+  <input matInput type="number"
+         placeholder="100"
+         [(ngModel)]="subject4Subkect"
+         [min]="100"
+         [max]="200"
+         name="someNumber" value="">
+<!--  <p *ngIf="someNumber.errors?.range">Must be in range</p>-->
+
+
+</mat-form-field>
+<button class="btn btn-info" (click)="print(subject4, subject4Subkect)"> click </button>
+
+
+
+<mat-form-field>
+  <mat-label>Оберіть предмет</mat-label>
+  <mat-select >
+    <mat-option *ngFor="let option of map | keyvalue  "    [value]="option">
+      <span (click)="print(option.value)"  > {{ option?.key }} </span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+
+<button (click)="sendSubkectsToServer()">click</button>
