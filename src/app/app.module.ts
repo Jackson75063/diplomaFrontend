@@ -16,7 +16,7 @@ import {FinishMapComponent} from './finish-map/finish-map.component';
 import {AbitMainPageComponent} from './abit-main-page/abit-main-page.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatIconModule, MatSelectModule, MatToolbarModule} from '@angular/material';
+import {MatIconModule, MatSelectModule, MatSortModule, MatTableModule, MatToolbarModule} from '@angular/material';
 
 import { MatInputModule } from '@angular/material';
 
@@ -51,20 +51,22 @@ const appRoutes: Routes = [
     FinishMapComponent,
     AbitMainPageComponent
   ],
-  imports: [
-    RouterModule.forRoot(appRoutes),
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    BrowserModule /* or CommonModule */,
-    FormsModule,
-    ReactiveFormsModule,
-    MatToolbarModule,
-    MatInputModule,
-    MatSelectModule
-  ],
+    imports: [
+        RouterModule.forRoot(appRoutes),
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        BrowserModule /* or CommonModule */,
+        FormsModule,
+        ReactiveFormsModule,
+        MatToolbarModule,
+        MatInputModule,
+        MatSelectModule,
+        MatTableModule,
+        MatSortModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
