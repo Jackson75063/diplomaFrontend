@@ -53,8 +53,8 @@ export class AddSpecComponent implements OnInit {
 
     this.message.push( ZNO_SUBJECTS.Математика);
 
-    sendSpecialis1.requiredSubjects = this.message;
-    sendSpecialis1.optionalSubjecst = this.message;
+    // sendSpecialis1.requiredSubjects = this.message;
+    // sendSpecialis1.optionalSubjecst = this.message;
     sendSpecialis1.specializationCode = this.spec.specializationCode;
     console.log(sendSpecialis1);
   }

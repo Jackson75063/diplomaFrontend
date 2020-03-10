@@ -68,7 +68,7 @@ export class AboutUsComponent implements OnInit {
   dataSource: MatTableDataSource<Facul>;
   usersData: Facul[] = [];
   columnsToDisplay = ['id', 'nameF'];
-  innerDisplayedColumns = ['id', 'specializationCode', 'specializationName'];
+  innerDisplayedColumns = ['id', 'specializationCode', 'specializationName', 'requst'];
   expandedElement: Facul | null;
 
   toggleRow(element: Facul) {
@@ -100,6 +100,8 @@ export class AboutUsComponent implements OnInit {
   columnsToDisplay2 = ['facultyIdl', 'facultyName'];
   innerDisplayedColumns2 = ['id', 'specializationCode', 'specializationName'];
   expandedElement2: Faculties | null;
+  notShow: boolean;
+  condition: boolean;
 
   print(element: any) {
     console.log(element);
@@ -152,12 +154,10 @@ const FACULT: Faculties[] = [
   }
 ];
 
-
 const USERS: Facul[] = [
   {
     id: "Mason",
     nameF: "mason@test.com",
-
     speec: [
       {
         id: "Street 1",
@@ -193,7 +193,3 @@ const USERS: Facul[] = [
   }
 ];
 
-
-/**  Copyright 2019 Google Inc. All Rights Reserved.
- Use of this source code is governed by an MIT-style license that
- can be found in the LICENSE file at http://angular.io/license */

@@ -24,18 +24,21 @@
           </mat-form-field>
 
           <table #innerTables mat-table #innerSort="matSort" [dataSource]="element.speec" matSort>
-            <ng-container matColumnDef="{{innerColumn}}" *ngFor="let innerColumn of innerDisplayedColumns">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{innerColumn}} </th>
-              <td mat-cell (click)="print(element)"  *matCellDef="let element"> {{element[innerColumn]}}                   <button> add </button>  </td>
 
+            <ng-container matColumnDef="{{innerColumn }}" *ngFor="let innerColumn of innerDisplayedColumns">
+
+
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{innerColumn  }} </th>
+              <td mat-cell (click)="print(innerColumn)"  *matCellDef="let element"> {{element[innerColumn]  | renamer  }}
+
+                <div *ngIf="innerColumn == 'requst' ">  <button >Подати заявку </button> </div>
+
+              </td>
 
             </ng-container>
-
-
             <tr mat-header-row *matHeaderRowDef="innerDisplayedColumns"></tr>
             <tr style="background-color: aqua" mat-row  *matRowDef="let row; columns: innerDisplayedColumns;">  </tr>
           </table>
-
         </div>
       </div>
     </td>

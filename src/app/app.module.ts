@@ -19,6 +19,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule, MatSelectModule, MatSortModule, MatTableModule, MatToolbarModule} from '@angular/material';
 
 import { MatInputModule } from '@angular/material';
+import { RenamerPipe } from './renamer.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: AbiturientComponent },
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     MapSubjTestComponent,
     KeyValuePipe,
     FinishMapComponent,
-    AbitMainPageComponent
+    AbitMainPageComponent,
+    RenamerPipe
   ],
     imports: [
         RouterModule.forRoot(appRoutes),
