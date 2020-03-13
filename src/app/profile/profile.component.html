@@ -13,6 +13,10 @@
     <strong>Email:</strong>
     {{ currentUser.email }}
   </p>
+
+
+
+
   <strong>Roles:</strong>
   <ul>
     <li *ngFor="let role of currentUser.roles">
@@ -22,5 +26,5 @@
 </div>
 
 <ng-template #loggedOut>
-  Please login.
+  Увійдіть будь ласка
 </ng-template>

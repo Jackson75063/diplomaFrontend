@@ -226,6 +226,8 @@ import {FinishMapComponent} from './finish-map/finish-map.component';
 import {AbitMainPageComponent} from './abit-main-page/abit-main-page.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import { NgxSpinnerModule } from "ngx-spinner";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -276,6 +278,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatSortModule,
     MatSelectModule,
     BrowserAnimationsModule,
+
+    NgxSpinnerModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

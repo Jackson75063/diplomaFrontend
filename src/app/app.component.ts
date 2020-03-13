@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {TokenStorageService} from './_services/token-storage.service';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,7 +24,16 @@ export class AppComponent implements  OnInit{
 
 
 
-  constructor(/*fb: FormBuilder,*/ private tokenStorageService: TokenStorageService) {
+  constructor(/*fb: FormBuilder,*/ private tokenStorageService: TokenStorageService, private spinner: NgxSpinnerService) {
+
+    this.spinner.show();
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
+
+
+
     // this.options = fb.group({
     //   hideRequired: false,
     //   floatLabel: 'auto',

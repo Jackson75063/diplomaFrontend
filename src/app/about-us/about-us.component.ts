@@ -11,7 +11,7 @@ import {Specializations} from '../model/Specializations';
   templateUrl: './about-us.component.html',
   styleUrls: ['./about-us.component.css'],
   animations: [
-    trigger('detailExpand', [
+     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
@@ -29,17 +29,19 @@ export class AboutUsComponent implements OnInit {
 
   ngOnInit() {
 
+    this.abitutientServiceService.msg.subscribe(message => this.name = message);
 
-    console.log('AAAAAAAAAAA');
-    console.log(this.facult);
-    console.log();
-    console.log(' aaaaaaaaaaaaaaaaaaaaaaaA ');
 
     this.httpClient.get<Faculties[]>('http://localhost:8081/allFa').subscribe(
       value => {
         this.facult = value;
         console.log(this.facult);
       });
+
+    console.log('AAAAAAAAAAA');
+    console.log(this.facult);
+    console.log();
+    console.log(' aaaaaaaaaaaaaaaaaaaaaaaA ');
 
 
     // this.httpClient.get<Facul2[]>('http://localhost:8081/allFa').subscribe(
@@ -48,7 +50,6 @@ export class AboutUsComponent implements OnInit {
     //     console.log(value);
     //   });
     //
-    this.abitutientServiceService.msg.subscribe(message => this.name = message);
 
     console.log();
 
@@ -57,7 +58,10 @@ export class AboutUsComponent implements OnInit {
 
     setTimeout(()=>{
       console.log("HELLO");
-        }, 3000);
+      this.printt();
+
+        }, 1000);
+
 
   }
 
@@ -69,18 +73,11 @@ export class AboutUsComponent implements OnInit {
   @ViewChildren('innerSort') innerSort: QueryList<MatSort>;
   @ViewChildren('innerTables') innerTables: QueryList<MatTable<Specializations>>;
 
-  /*  @ViewChild('outerSort2', { static: true }) sort2: MatSort;
-    @ViewChildren('innerSort2') innerSort2: QueryList<MatSort>;
-    @ViewChildren('innerTables2') innerTables2: QueryList<MatTable<Specializations>>;
 
-    @ViewChild('outerSort3', { static: true }) sort3: MatSort;
-    @ViewChildren('innerSort3') innerSort3: QueryList<MatSort>;
-    @ViewChildren('innerTables3') innerTables3: QueryList<MatTable<Specializations>>;*/
 
   dataSource: MatTableDataSource<Faculties>;
   usersData: Faculties[] = [];
-  // usersData: Facul[] = [];
-  columnsToDisplay = ['facultyIdl', 'facultyName'];
+  columnsToDisplay = ['facultyIdl', 'facultyName'  ]  ;
   innerDisplayedColumns = ['id', 'specializationCode', 'specializationName', 'requst'];
   expandedElement: Faculties | null;
 
@@ -97,25 +94,6 @@ export class AboutUsComponent implements OnInit {
   }
 
 
-  /*  toggleRow2(element2: Faculties) {
-      element2.specializations && (element2.specializations as MatTableDataSource<Specializations>).data.length ? (this.expandedElement2 = this.expandedElement2 === element2 ? null : element2) : null;
-      this.cd.detectChanges();
-      this.innerTables2.forEach((table, index) => (table.dataSource as MatTableDataSource<Specializations>).sort = this.innerSort2.toArray()[index]);
-    }
-
-    applyFilter2(filterValue: string) {
-      this.innerTables2.forEach((table, index) => (table.dataSource as MatTableDataSource<Specializations>).filter = filterValue.trim().toLowerCase());
-    }*/
-
-
-  /* dataSource2: MatTableDataSource<Faculties>;
-   usersData2: Faculties[] = [];
-   columnsToDisplay2 = ['facultyIdl', 'facultyName'];
-   innerDisplayedColumns2 = ['id', 'specializationCode', 'specializationName'];
-   expandedElement2: Faculties | null;
-   notShow: boolean;
-   condition: boolean;*/
-
 
   printt(){
     this.facult.forEach(user => {
@@ -130,111 +108,6 @@ export class AboutUsComponent implements OnInit {
 
 
   }
-/*
-
-  print(element: any) {
-    console.log(element);
-
-
-
-
-  }
-*/
-
-
-
 
 }
 
-
-
-/*
-export interface Facul {
-  id: string;
-  facultyName: string;
-  specializations?: specializations[] | MatTableDataSource<specializations>;
-}
-
-export interface specializations {
-  id: string;
-  specializationCode: string;
-  specializationName: string;
-}
-
-export interface UserDataSource {
-  id: string;
-  facultyName: string;
-  addresses?: MatTableDataSource<specializations>;
-}
-*/
-
-
-export interface Facul2 {
-  facultyIdl: number;
-  facultyName: string;
-  specializations?: specialization2[]; /* | MatTableDataSource<specialization2>;*/
-}
-
-export interface specialization2 {
-  id: number;
-  specializationCode: number;
-  specializationName: string;
-}
-/*
-export interface UserDataSource {
-  id: string;
-  facultyName: string;
-  addresses?: MatTableDataSource<specialization>;
-}*/
-
-
-// let FACULT = this.facult;
-
-/*
-const FACULT: Facul2[] = this.facult;*/
-// {
-//   facultyIdl: 3,
-//   facultyName: "Комп науки",
-//   specializations: [
-//     {
-//       id: 1,
-//       specializationCode: 0,
-//       specializationName: "string" //,
-//       requiredSubjects: [
-//         "MATH"
-//       ],
-//       optionalSubjecst: [
-//         "MATH"
-//       ]
-// }
-// ]
-// },
-// {
-//   facultyIdl: 1,
-//   facultyName: "ХІМІЯ",
-//   specializations: [ ]
-// }
-// ];
-
-
-
-// const USERS = this.facult;
-/*= [
- {
-   facultyIdl: 3,
-   facultyName: "mason@test.com",
-   specializations: [
-     {
-       id: 3,
-       specializationCode: 78542,
-       specializationName: "Kansas"
-     },
-     {
-       id: 2,
-       specializationCode: 78554,
-       specializationName: "Texas"
-     }
-   ]
- }
-];
-*/
