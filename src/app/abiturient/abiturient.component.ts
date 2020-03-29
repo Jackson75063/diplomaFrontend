@@ -58,7 +58,7 @@ export class AbiturientComponent implements OnInit {
 
     this.ngOnInit();
 
-    const message = this.reqq.name;
+    const message = this.reqq.username;
     console.log(message);
     console.log(this.reqq);
 

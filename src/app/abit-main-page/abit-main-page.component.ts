@@ -1,10 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {Abit} from '../model/Abit';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {TestMapOnePredmet} from '../model/testMapOnePredmet';
 import {stringify} from 'querystring';
 import {MapTest} from '../model/mapTest';
 import {AbitutientServiceService} from '../abiturient/abitutient-service.service';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {TokenStorageService} from '../_services/token-storage.service';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Component({
   selector: 'app-abit-main-page',
@@ -15,6 +22,12 @@ export class AbitMainPageComponent implements OnInit {
 
 
   reqq = new Abit();
+
+  reqq2 = new Abit();
+
+  currentUser: any;
+
+  isFilled : boolean;
 
   private subject1Subkect: number;
   private subject1: string;
@@ -28,61 +41,43 @@ export class AbitMainPageComponent implements OnInit {
   private subject4Subkect: number;
   private subject4: string;
 
-
-
   mapTest = new MapTest();
 
-// can be replaced  instead list if will be long loading 'list' values
-  map = new Map([
-      ['Україська мова'  , 'UKR_MOVA'],
-      ['Математика'      , 'MATH'],
-      ['Фізика'          , 'PHISIC'],
-      ['Хімія'           , 'CHEMESTRY'],
-      ['Англійська мова' , 'ENGLISH'],
-      ['Історія'         , 'HISTORY'],
-      ['Біологія'        , 'BOILOGY'],
-      ['Географія'       , 'GEOGRAPHY']
-
-    ]
-  );
-
-  list = {
-    'Україська мова'  : 'UKR_MOVA',
-    'Математика'      : 'MATH',
-    'Фізика'          : 'PHISIC',
-    'Хімія'           : 'CHEMESTRY',
-    'Англійська мова' : 'ENGLISH',
-    'Історія'         : 'HISTORY',
-    'Іспанська мова'  : 'SPANISHE',
-    'Німецька мова'   : 'GERMANY',
-    'Французька мова' : 'FRANCE',
-    'Біологія'        : 'BOILOGY',
-    'Географія'       : 'GEOGRAPHY'
-  };
-
-
-  mapSendSubject = new Map([
-    [this.subject1,this.subject1Subkect],
-    [this.subject2,this.subject2Subkect],
-    [this.subject3,this.subject3Subkect],
-    [this.subject4,this.subject4Subkect],
-  ]);
+  list = ['UKR_MOVA', 'MATH', 'PHISIC', 'CHEMESTRY', 'ENGLISH', 'HISTORY','BOILOGY', 'GEOGRAPHY'];
 
 
   private message: string;
   private result: Abit[];
 
+  constructor(private httpClient: HttpClient, private abitutientServiceService: AbitutientServiceService,   private spinner: NgxSpinnerService, private token: TokenStorageService) {}
 
-  constructor(private httpClient: HttpClient, private abitutientServiceService: AbitutientServiceService) { }
+
 
   ngOnInit() {
+
+    this.currentUser = this.token.getUser();
+
+    console.log( 'usernameid: ' +this.currentUser.id);
+
+    this.currentUser = this.token.getUser();
+
+
     this.abitutientServiceService.msg.subscribe(message => this.message = message);
 
 
-    this.httpClient.get<Abit[]>('http://localhost:8081/allAb').subscribe(
+   /* this.httpClient.get<Abit[]>('http://localhost:8081/allAb').subscribe(
       res => {
         this.result = res;
+      });*/
+
+    this.httpClient.get<Abit>('http://localhost:8081/getById/' +this.currentUser.id, httpOptions).subscribe(
+      res => {
+        stringify(res);
+        console.log("res "+res.idAbitCode);
+        this.reqq2 = res;
       });
+
+    console.log(this.reqq2);
   }
 
 
@@ -91,49 +86,36 @@ export class AbitMainPageComponent implements OnInit {
     if (option === undefined) {
       console.log('wrong');
     }
-    // alert('AAAAAA')
+
+    this.spinner.show();
+
     setTimeout(() => {
-      console.log('Hello from timeout!')
+      this.spinner.hide();
     }, 1000);
+
 
     console.log(option + ':' + mark1);
   }
 
   bind1(option: string) {
 
-    setTimeout(() => {
-      console.log('bind1')
-    }, 1000);
-
     this.subject1 = option;
+
+    console.log(option + " " +this.subject1);
+
   }
 
   bind2(option: string) {
-
-
-    setTimeout(() => {
-      console.log('bind2')
-    }, 1000);
 
     this.subject2 = option;
   }
 
   bind3(option: string) {
 
-
-    setTimeout(() => {
-      console.log('bind3')
-    }, 1000);
-
     this.subject3 = option;
   }
 
   bind4(option: string) {
-
-
-    setTimeout(() => {
-      console.log('bind4')
-    }, 1000);
 
     this.subject4 = option;
   }
@@ -153,20 +135,10 @@ export class AbitMainPageComponent implements OnInit {
     ];
 
 
-    this.mapSendSubject = new Map([
-      [this.subject1,this.subject1Subkect],
-      [this.subject2,this.subject2Subkect],
-      [this.subject3,this.subject3Subkect],
-      [this.subject4,this.subject4Subkect],
-    ]);
-
-
     this.mapTest.id = 11;
     this.reqq.subjs = subjs;
 
-
     // this.mapTest.subjs = subjs;
-
 
     console.log('mapTest' + stringify(this.mapTest));
     console.log('mapTest' + this.mapTest);
@@ -186,22 +158,26 @@ export class AbitMainPageComponent implements OnInit {
 
   addAbit() {
 
+    console.log(this.currentUser.id);
+
+    this.reqq.idAbitCode = this.currentUser.id;
+    this.reqq.username = this.currentUser.username;
+    this.reqq.surname = this.currentUser.surname;
 
 
-        this.httpClient.post('http://localhost:8081/addAbit', this.reqq)
-          .subscribe((success) => {
-              alert('success');
-            },
-            (error) => alert('error'));
+ /*   this.httpClient.post('http://localhost:8081/addAbit', this.reqq)
+      .subscribe((success) => {
+          alert('success');
+        },
+        (error) => alert('error'));*/
 
 
     // this.httpClient.post('http://localhost:8081/addAbit', a).map((res: Response) => res.json()).subscribe(
     this.ngOnInit();
-    const message = this.reqq.name;
+    const message = this.reqq.username;
     console.log(message);
     console.log(this.reqq);
 
   }
-
 
 }
