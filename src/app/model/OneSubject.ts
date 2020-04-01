@@ -1,4 +1,4 @@
 export class OneSubject {
-  UAName:string;
-  simpleName:string;
+  subject:string;
+  subjectMark:number;
 }

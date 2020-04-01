@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Abit} from '../model/Abit';
 import {log} from 'util';
-import {AbitutientServiceService} from './abitutient-service.service';
+import {AbitutientServiceService} from '../_services/abitutient-service.service';
 
 
 @Component({

@@ -1,12 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Abit} from '../model/Abit';
+import {ApplicationRef, Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {TestMapOnePredmet} from '../model/testMapOnePredmet';
-import {stringify} from 'querystring';
-import {MapTest} from '../model/mapTest';
-import {AbitutientServiceService} from '../abiturient/abitutient-service.service';
+import {AbitutientServiceService} from '../_services/abitutient-service.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {TokenStorageService} from '../_services/token-storage.service';
+import {JwtResponse} from '../model/jwtResponse';
+import {Abit} from '../model/Abit';
+import {TestMapOnePredmet} from '../model/testMapOnePredmet';
 
 
 const httpOptions = {
@@ -20,15 +19,15 @@ const httpOptions = {
 })
 export class AbitMainPageComponent implements OnInit {
 
-
-  reqq = new Abit();
+  currentUser: JwtResponse;
+  isFilled: boolean = false;
 
   reqq2 = new Abit();
 
-  currentUser: any;
+  private message: string;
 
-  isFilled : boolean;
 
+  reqq = new Abit();
   private subject1Subkect: number;
   private subject1: string;
 
@@ -41,45 +40,40 @@ export class AbitMainPageComponent implements OnInit {
   private subject4Subkect: number;
   private subject4: string;
 
-  mapTest = new MapTest();
-
-  list = ['UKR_MOVA', 'MATH', 'PHISIC', 'CHEMESTRY', 'ENGLISH', 'HISTORY','BOILOGY', 'GEOGRAPHY'];
+  list = ['UKR_MOVA', 'MATH', 'PHISIC', 'CHEMESTRY', 'ENGLISH', 'HISTORY', 'BOILOGY', 'GEOGRAPHY'];
 
 
-  private message: string;
-  private result: Abit[];
-
-  constructor(private httpClient: HttpClient, private abitutientServiceService: AbitutientServiceService,   private spinner: NgxSpinnerService, private token: TokenStorageService) {}
-
-
+  constructor(private httpClient: HttpClient, private abitutientServiceService: AbitutientServiceService, private spinner: NgxSpinnerService, private token: TokenStorageService, private appRef: ApplicationRef) {
+  }
 
   ngOnInit() {
 
-    this.currentUser = this.token.getUser();
 
-    console.log( 'usernameid: ' +this.currentUser.id);
+    if (!this.isFilled) {
 
-    this.currentUser = this.token.getUser();
-
-
-    this.abitutientServiceService.msg.subscribe(message => this.message = message);
+      this.currentUser = this.token.getUser();
 
 
-   /* this.httpClient.get<Abit[]>('http://localhost:8081/allAb').subscribe(
-      res => {
-        this.result = res;
-      });*/
+      console.log(" Before " + this.isFilled);
+      this.isFilled = this.abitutientServiceService.isFilledMeth();
 
-    this.httpClient.get<Abit>('http://localhost:8081/getById/' +this.currentUser.id, httpOptions).subscribe(
-      res => {
-        stringify(res);
-        console.log("res "+res.idAbitCode);
-        this.reqq2 = res;
-      });
+      console.log(" after " + this.isFilled);
 
-    console.log(this.reqq2);
+      this.httpClient.get<Abit>('http://localhost:8081/getById/' + this.currentUser.id, httpOptions).subscribe(
+        res => {
+          console.log(res);
+          this.reqq2 = res;
+
+          if (res.subjs.length > 0) {
+            this.isFilled = true;
+          }
+        });
+
+      console.log(this.appRef.isStable + "  ");
+
+    }
+
   }
-
 
 
   print(option: string, mark1: number) {
@@ -88,96 +82,66 @@ export class AbitMainPageComponent implements OnInit {
     }
 
     this.spinner.show();
-
     setTimeout(() => {
       this.spinner.hide();
     }, 1000);
-
 
     console.log(option + ':' + mark1);
   }
 
   bind1(option: string) {
-
     this.subject1 = option;
-
-    console.log(option + " " +this.subject1);
-
+    console.log(option + " " + this.subject1);
   }
 
   bind2(option: string) {
-
     this.subject2 = option;
   }
 
   bind3(option: string) {
-
     this.subject3 = option;
   }
 
   bind4(option: string) {
-
     this.subject4 = option;
   }
 
 
   subjj: {} = {};
-  sendSubkectsToServer(){
-
-    let testOne  = new TestMapOnePredmet(this.subject1, this.subject1Subkect);
-    let testOne2 = new TestMapOnePredmet(this.subject2, this.subject2Subkect);
-    let testOne3 = new TestMapOnePredmet(this.subject3, this.subject3Subkect);
-    let testOne4 = new TestMapOnePredmet(this.subject4, this.subject4Subkect);
-
-
-    let subjs = [
-      testOne, testOne2, testOne3, testOne4
-    ];
-
-
-    this.mapTest.id = 11;
-    this.reqq.subjs = subjs;
-
-    // this.mapTest.subjs = subjs;
-
-    console.log('mapTest' + stringify(this.mapTest));
-    console.log('mapTest' + this.mapTest);
-
-
-
-
-
-    // this.httpClient.post('http://localhost:8081/addTest', this.mapTest).subscribe(value => {
-    //   console.log('inside subscriber');
-    //   console.log(value);
-    //   console.log('mapTest' + this.mapTest);
-    // });
-
-  }
-
 
   addAbit() {
 
     console.log(this.currentUser.id);
 
+    let testOne = new TestMapOnePredmet(this.subject1, this.subject1Subkect);
+    let testOne2 = new TestMapOnePredmet(this.subject2, this.subject2Subkect);
+    let testOne3 = new TestMapOnePredmet(this.subject3, this.subject3Subkect);
+    let testOne4 = new TestMapOnePredmet(this.subject4, this.subject4Subkect);
+
+    this.reqq.subjs = [ testOne, testOne2, testOne3, testOne4 ];
+
     this.reqq.idAbitCode = this.currentUser.id;
     this.reqq.username = this.currentUser.username;
     this.reqq.surname = this.currentUser.surname;
 
+    this.abitutientServiceService.ifSubjFilled(this.currentUser.id);
 
- /*   this.httpClient.post('http://localhost:8081/addAbit', this.reqq)
+    this.httpClient.post('http://localhost:8081/addAbit', this.reqq)
       .subscribe((success) => {
-          alert('success');
+          // alert('success');
         },
-        (error) => alert('error'));*/
+        (error) => alert('error'));
 
-
-    // this.httpClient.post('http://localhost:8081/addAbit', a).map((res: Response) => res.json()).subscribe(
-    this.ngOnInit();
-    const message = this.reqq.username;
-    console.log(message);
-    console.log(this.reqq);
-
+    // this.ngOnInit();
+    // const message = this.reqq.username;
+    // console.log(message);
+    // console.log(this.reqq);
+    this.ngOnInit()
+    this.ngOnInit()
   }
+
+
+
+
 
 }

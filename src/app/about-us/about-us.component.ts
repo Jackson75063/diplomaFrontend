@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {AbitutientServiceService} from '../abiturient/abitutient-service.service';
+import {AbitutientServiceService} from '../_services/abitutient-service.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatSort, MatTable, MatTableDataSource} from '@angular/material';
 import {HttpClient} from '@angular/common/http';

@@ -1,13 +1,14 @@
 
 import { Faculties } from './Faculties';
+import {OneSubject} from './OneSubject';
 
 export class Abit {
-  idAbitCode: 0;
-  username: ' ';
-  surname: '';
+  idAbitCode: number;
+  username: string;
+  surname: string;
   avgDiplomaMark: number;
   faculties: Faculties[];
-  subjs: {  } = [];
+  subjs : OneSubject[] = [];
 
 
 }
