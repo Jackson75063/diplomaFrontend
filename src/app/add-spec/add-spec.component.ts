@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Specializations} from '../model/Specializations';
 import {ZNO_SUBJECTS} from '../model/ZNO_SUBJECTS';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AbitutientServiceService} from '../_services/abitutient-service.service';
+import {Abit} from '../model/Abit';
 
 
 @Component({
@@ -14,7 +16,11 @@ export class AddSpecComponent implements OnInit {
   mapValues: IterableIterator<number>;
   private allSpec: Specializations[];
 
-  constructor(private httpClient: HttpClient) { }
+  private reqq2:Abit;
+
+  constructor(private httpClient: HttpClient, private abitutientServiceService:AbitutientServiceService) {
+     this.reqq2 = this.abitutientServiceService.reqq2;
+  }
 
 
   requiredSubject = new Set<string>();
@@ -74,9 +80,9 @@ export class AddSpecComponent implements OnInit {
       'Content-Type': 'application/json'
     });
 
-    this.httpClient.post('http://localhost:8081/addSpec', JSON.stringify(this.sendSpecialis), { headers}).subscribe();
+    // this.httpClient.post('http://localhost:8081/addSpec', JSON.stringify(this.sendSpecialis), { headers}).subscribe();
 
-    this.ngOnInit();
+    // this.ngOnInit();
 
   }
 
@@ -84,10 +90,12 @@ export class AddSpecComponent implements OnInit {
 
 
   getAllSpec() {
-    this.httpClient.get<Specializations[]>('http://localhost:8081/allSpec').subscribe(value => {
+    this.httpClient.get<Specializations[]>('http://localhost:8081/allSpec/'+this.reqq2.idAbitCode.toString()).subscribe(value => {
       JSON.stringify(value);
       this.allSpec = value;
       console.log(value);
+      console.log("AHUET");
+      // this.reqq2.subjs.values();
     });
   }
 

@@ -2,9 +2,15 @@ import {ChangeDetectorRef, Component, OnInit, QueryList, ViewChild, ViewChildren
 import {AbitutientServiceService} from '../_services/abitutient-service.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatSort, MatTable, MatTableDataSource} from '@angular/material';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Faculties} from '../model/Faculties';
 import {Specializations} from '../model/Specializations';
+import {Abit} from '../model/Abit';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Component({
   selector: 'app-about-us',
@@ -22,6 +28,8 @@ export class AboutUsComponent implements OnInit {
 
   name: string;
   facult : Faculties[];
+  private idAbitCode: Abit;
+  private reqq2: Abit;
 
   constructor(private  abitutientServiceService: AbitutientServiceService, private cd: ChangeDetectorRef, private httpClient: HttpClient) { }
 
@@ -29,10 +37,13 @@ export class AboutUsComponent implements OnInit {
 
   ngOnInit() {
 
+     this.idAbitCode = this.abitutientServiceService.reqq2;
+    console.log("idAbitCode: " + this.idAbitCode.idAbitCode);
+
     this.abitutientServiceService.msg.subscribe(message => this.name = message);
 
 
-    this.httpClient.get<Faculties[]>('http://localhost:8081/allFa').subscribe(
+    this.httpClient.get<Faculties[]>('http://localhost:8081/allFa/'+3, httpOptions).subscribe(
       value => {
         this.facult = value;
         console.log(this.facult);
@@ -42,6 +53,13 @@ export class AboutUsComponent implements OnInit {
     console.log(this.facult);
     console.log();
     console.log(' aaaaaaaaaaaaaaaaaaaaaaaA ');
+
+    this.httpClient.get<Abit>('http://localhost:8081/getById/' + 2, httpOptions).subscribe(
+      res => {
+        console.log(res);
+        this.reqq2 = res;
+        // console.log(res.subjs.length + " " + this.reqq2.subjs.length);
+      });
 
 
     // this.httpClient.get<Facul2[]>('http://localhost:8081/allFa').subscribe(

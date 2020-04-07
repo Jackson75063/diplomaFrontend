@@ -136,7 +136,7 @@ export class AbitMainPageComponent implements OnInit {
     // const message = this.reqq.username;
     // console.log(message);
     // console.log(this.reqq);
-    this.ngOnInit()
+    this.ngOnInit();
     this.ngOnInit()
   }
 
