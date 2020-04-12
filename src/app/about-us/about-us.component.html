@@ -1,11 +1,6 @@
-<p>about-us works!</p>
 
 {{name}}
-
 <button (click)="newMsgg()">bbb</button>
-
-
-<!--<app-finish-map></app-finish-map>-->
 
 <table mat-table #outerSort="matSort" [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" matSort>
   <ng-container matColumnDef="{{column }}" *ngFor="let column  of columnsToDisplay ">
@@ -16,7 +11,6 @@
   <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
   <ng-container matColumnDef="expandedDetail">
     <td mat-cell *matCellDef="let element " [attr.colspan]="columnsToDisplay.length">
-<!--      <div class="example-element-detail" *ngIf="element.specializations.data.length" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">-->
       <div class="example-element-detail"  [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
         <div class="inner-table mat-elevation-z8" *ngIf="expandedElement">
 
@@ -32,7 +26,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{innerColumn  | renamer }} </th>
               <td mat-cell *matCellDef="let element"> {{element[innerColumn]    }}
 
-                <div *ngIf="innerColumn == 'requst' ">  <button class="btn btn-info">Подати заявку </button> </div>
+                <div *ngIf="innerColumn == 'requst' ">  <button (click)="printAll(element);" class="btn btn-info">Подати заявку </button> </div>
 
               </td>
 
@@ -58,4 +52,4 @@
 
 
 
-<a routerLink="/user"><button class="btn btn-success pull-right" > Add Customer</button></a>
+<!--<a routerLink="/user"><button class="btn btn-success pull-right" > Add Customer</button></a>-->

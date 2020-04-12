@@ -44,6 +44,9 @@ export class AbitMainPageComponent implements OnInit {
 
 
   constructor(private httpClient: HttpClient, private abitutientServiceService: AbitutientServiceService, private spinner: NgxSpinnerService, private token: TokenStorageService, private appRef: ApplicationRef) {
+
+    console.log("subjs.length " +this.reqq.subjs.length);
+
   }
 
   ngOnInit() {
@@ -73,6 +76,9 @@ export class AbitMainPageComponent implements OnInit {
 
     }
 
+    console.log("subjs.length " +this.reqq.subjs.length);
+
+
   }
 
 
@@ -86,12 +92,18 @@ export class AbitMainPageComponent implements OnInit {
       this.spinner.hide();
     }, 1000);
 
-    console.log(option + ':' + mark1);
+    console.log(this.list);
+
+    const index : number = this.list.indexOf(option);
+     if(index !==-1) {
+       this.list.splice(index,1);
+     }
   }
 
   bind1(option: string) {
     this.subject1 = option;
     console.log(option + " " + this.subject1);
+
   }
 
   bind2(option: string) {

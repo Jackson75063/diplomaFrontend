@@ -44,6 +44,8 @@
         <input style="margin-right : 5px;" type="text" class="form-control"    [(ngModel)] = "reqq.avgDiplomaMark"  name="avg" placeholder="Середній бал атестату" required>
       </div>
 
+<!--      TODO set readonly when subj is submmited-->
+
       <mat-form-field style="margin-right : 5px;">
         <mat-label>Оберіть предмет</mat-label>
         <mat-select >
@@ -55,11 +57,11 @@
 
       <mat-form-field class="example-full-width">
         <mat-label >Предмет №1</mat-label>
-        <input matInput placeholder="100"  [(ngModel)]="subject1Subkect"  name="subject1Subkect" value="">
+        <input matInput placeholder="100"  minlength="0" [maxLength]="2" [min]="1" [max]="12" [(ngModel)]="subject1Subkect"  name="subject1Subkect" value="">
       </mat-form-field>
 
 
-      <button class="btn btn-info" (click)="print(subject1, subject1Subkect)"> click </button>
+      <button class="btn btn-info" (click)="print(subject1, subject1Subkect)"> Підтвердити </button>
       <hr>
 
       <mat-form-field style="margin-right : 5px;">
@@ -77,7 +79,7 @@
       </mat-form-field>
 
 
-      <button class="btn btn-info" (click)="print(subject2, subject2Subkect)"> click </button>
+      <button class="btn btn-info" (click)="print(subject2, subject2Subkect)"> Підтвердити </button>
       <hr>
 
 
@@ -96,7 +98,7 @@
       </mat-form-field>
 
 
-      <button class="btn btn-info" (click)="print(subject3, subject3Subkect)"> click </button>
+      <button class="btn btn-info" (click)="print(subject3, subject3Subkect)"> Підтвердити </button>
       <hr>
 
 
@@ -119,7 +121,7 @@
                name="subject4Subkect" value="">
 
       </mat-form-field>
-      <button class="btn btn-info" (click)="print(subject4, subject4Subkect)"> click </button>
+      <button class="btn btn-info" (click)="print(subject4, subject4Subkect)"> Підтвердити </button>
 
       <button
         data-toggle=" modal" data-target="#exampleModalCenter"

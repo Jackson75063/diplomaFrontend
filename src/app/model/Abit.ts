@@ -1,6 +1,7 @@
 
 import { Faculties } from './Faculties';
 import {OneSubject} from './OneSubject';
+import {Specializations} from "./Specializations";
 
 export class Abit {
   idAbitCode: number;
@@ -9,8 +10,7 @@ export class Abit {
   avgDiplomaMark: number;
   faculties: Faculties[];
   subjs : OneSubject[] = [];
-
-
+  specializations : Specializations[] = [];
 }
 
 
