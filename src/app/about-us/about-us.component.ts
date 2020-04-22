@@ -36,28 +36,37 @@ export class AboutUsComponent implements OnInit {
   constructor(private  abitutientServiceService: AbitutientServiceService, private cd: ChangeDetectorRef, private httpClient: HttpClient) { }
 
 
+  @ViewChild('outerSort', { static: true }) sort: MatSort;
+
+  public initTable1:boolean = false;
+
   ngOnInit() {
+
 
     let item = window.localStorage.getItem("auth-user");
     let parse = JSON.parse(item);
 
     let id = parse.id;
-    this.httpClient.get<FacultiesDTO[]>('http://localhost:8081/allFa/'+ id, httpOptions).subscribe(
-      value => {
-        value.forEach(value1 =>  value1.specializations.forEach(value2 =>{ value2
-          for(let i = 0; i < this.abit.specializations.length; i++) {
-            if (this.abit.specializations[i].id == value2.id) {
-              value2.isChoosen = true;
-              break;
-            }
+    this.initTable();
+
+    this.abitutientServiceService.updateSpec.subscribe(
+      res=>{
+        if(res===true){
+          console.log("DWA");
+          this.abit.specializations.forEach(value => {value
+            this.changeChooseStatus(value, this.facult);
+          this.abitutientServiceService.updateSpec.next(false);
+
+          })
+          if(!this.initTable1) {
+            setTimeout(()=>{
+              this.printt();
+            },10)
+            this.initTable1 = true;
           }
-        }))
-
-
-        this.facult = value;
-
-        // TODO write filter if abit contain spec
-      })
+        }
+      }
+  );
 
 
 
@@ -106,19 +115,10 @@ export class AboutUsComponent implements OnInit {
     console.log(this.facult);
 
 
-    setTimeout(()=>{
       console.log("HELLO");
-      this.printt();
+      this.initTable()
 
-
-      this.facult.forEach((value) =>  value.specializations.forEach(value1 => {
-        console.log(value1);
-      }))
-
-    }, 1000);
   }
-
-  @ViewChild('outerSort', { static: true }) sort: MatSort;
   @ViewChildren('innerSort') innerSort: QueryList<MatSort>;
   @ViewChildren('innerTables') innerTables: QueryList<MatTable<Specializations>>;
 
@@ -184,6 +184,46 @@ export class AboutUsComponent implements OnInit {
   ifChoosen(element: SpecializationsDTO) {
     return element.isChoosen;
   }
+
+
+  initTable(){
+    let item = window.localStorage.getItem("auth-user");
+    let parse = JSON.parse(item);
+
+    let id = parse.id;
+
+    this.httpClient.get<FacultiesDTO[]>('http://localhost:8081/allFa/'+ id, httpOptions).subscribe(
+      value => {
+        if(value != null) {
+          this.facult = value;
+
+          setTimeout(()=>{
+            console.log("ODYN");
+            this.abitutientServiceService.updateSpec.next(true);
+          }, 10);
+
+
+        }
+      })
+  }
+
+
+  changeChooseStatus(value2: SpecializationsDTO, value: any){
+    value.forEach(value1 =>  value1.specializations.forEach(
+      value2 =>{
+        value2
+        // this.changeChooseStatus(value2)
+        for(let i = 0; i < this.abit.specializations.length; i++) {
+          if (this.abit.specializations[i].id == value2.id) {
+            value2.isChoosen = true;
+            break;
+          }
+        }
+
+      }))
+
+  }
+
 }
 
 

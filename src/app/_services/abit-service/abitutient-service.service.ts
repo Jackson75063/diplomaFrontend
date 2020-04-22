@@ -1,9 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Abit} from '../../model/Abit';
-import {stringify} from "querystring";
-import {JwtResponse} from '../../model/jwtResponse';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,15 +12,18 @@ const httpOptions = {
 })
 export class AbitutientServiceService {
 
+
   isFiiled : boolean = false;
 
   reqq2 = new Abit()  ;
   // reqq2: Abit;
 
+  public updateSpec  = new  BehaviorSubject<boolean>(false);
+  public updateTable  = new  BehaviorSubject<boolean>(false);
+
 
   private abit: Abit;
-
-  getLoggedUser(){
+getLoggedUser(){
 
     let item = window.localStorage.getItem("auth-user");
     let parse = JSON.parse(item);
@@ -57,6 +58,7 @@ export class AbitutientServiceService {
 
 
   constructor(private httpClient:HttpClient) {
+
 
   }
 
