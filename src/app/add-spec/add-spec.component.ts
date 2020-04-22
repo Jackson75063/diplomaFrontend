@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Specializations} from '../model/Specializations';
 import {ZNO_SUBJECTS} from '../model/ZNO_SUBJECTS';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {AbitutientServiceService} from '../_services/abitutient-service.service';
+import {AbitutientServiceService} from '../_services/abit-service/abitutient-service.service';
 import {Abit} from '../model/Abit';
 
 

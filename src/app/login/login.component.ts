@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
-import { TokenStorageService } from '../_services/token-storage.service';
+import { AuthService } from '../_services/auth-service/auth.service';
+import { TokenStorageService } from '../_services/token-storage-service/token-storage.service';
+import {FacultyService} from "../_services/faculty/faculty.service";
+import {UserService} from "../_services/user-service/user.service";
+import {AbitutientServiceService} from "../_services/abit-service/abitutient-service.service";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +17,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private facultyService: FacultyService, private abitutientServiceService:AbitutientServiceService) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -39,6 +42,16 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
       }
     );
+
+    // let data11 = localStorage.getItem('specs');
+    // if (data11 === null || data11.length){
+    //   let data2 = this.facultyService.getData(this.abitutientServiceService.currentUser.id);
+    //   localStorage.setItem('specs',  JSON.stringify(data2));
+    // } else {
+    //   console.log("WRONG")
+    // }
+
+
   }
 
   reloadPage() {

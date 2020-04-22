@@ -1,8 +1,8 @@
 import {ApplicationRef, Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {AbitutientServiceService} from '../_services/abitutient-service.service';
+import {AbitutientServiceService} from '../_services/abit-service/abitutient-service.service';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {TokenStorageService} from '../_services/token-storage.service';
+import {TokenStorageService} from '../_services/token-storage-service/token-storage.service';
 import {JwtResponse} from '../model/jwtResponse';
 import {Abit} from '../model/Abit';
 import {TestMapOnePredmet} from '../model/testMapOnePredmet';

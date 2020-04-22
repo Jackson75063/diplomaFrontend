@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Abit} from '../model/Abit';
+import {Abit} from '../../model/Abit';
 import {stringify} from "querystring";
-import {JwtResponse} from '../model/jwtResponse';
+import {JwtResponse} from '../../model/jwtResponse';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,14 +16,18 @@ export class AbitutientServiceService {
 
   isFiiled : boolean = false;
 
-  currentUser: JwtResponse;
-  reqq2 = new Abit();
+  reqq2 = new Abit()  ;
+  // reqq2: Abit;
 
-  private messageSource = new BehaviorSubject<string>('def value');
-  msg = this.messageSource.asObservable();
 
-  changeMsg(message: string) {
-    this.messageSource.next(message);
+  private abit: Abit;
+
+  getLoggedUser(){
+
+    let item = window.localStorage.getItem("auth-user");
+    let parse = JSON.parse(item);
+
+    return this.httpClient.get<Abit>('http://localhost:8081/getById/' + parse.id, httpOptions)
   }
 
 
@@ -41,7 +45,7 @@ export class AbitutientServiceService {
 
     if (Array.isArray(this.reqq2.subjs) && this.reqq2.subjs.length) {
       console.log("NE POROZHIY");
-         this.isFiiled = true;
+      this.isFiiled = true;
     }
 
     // if (Array(this.reqq2.subjs).() > 0) {

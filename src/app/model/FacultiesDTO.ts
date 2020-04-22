@@ -1,7 +1,7 @@
-import {Specializations} from 'src/app/model/Specializations';
+import {SpecializationsDTO} from "./SpecializationsDTO";
 
 export class FacultiesDTO {
       facultyIdl: number;
       facultyName: string;
-      specializations: Specializations[];
+      specializations: SpecializationsDTO[];
 }
