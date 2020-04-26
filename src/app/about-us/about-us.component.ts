@@ -8,7 +8,6 @@ import {Specializations} from '../model/Specializations';
 import {Abit} from '../model/Abit';
 import {SpecializationsDTO} from "../model/SpecializationsDTO";
 import {FacultiesDTO} from "../model/FacultiesDTO";
-import {log} from "util";
 
 
 const httpOptions = {
@@ -38,7 +37,7 @@ export class AboutUsComponent implements OnInit {
 
   @ViewChild('outerSort', { static: true }) sort: MatSort;
 
-  public initTable1:boolean = false;
+  public initTable1 = false;
 
   ngOnInit() {
 
@@ -51,72 +50,37 @@ export class AboutUsComponent implements OnInit {
 
     this.abitutientServiceService.updateSpec.subscribe(
       res=>{
-        if(res===true){
+        if(res===true && this.facult != null){
           console.log("DWA");
-          this.abit.specializations.forEach(value => {value
+          this.abit.specializations.forEach(value => {
+
             this.changeChooseStatus(value, this.facult);
-          this.abitutientServiceService.updateSpec.next(false);
+            this.abitutientServiceService.updateSpec.next(false);
 
           })
           if(!this.initTable1) {
             setTimeout(()=>{
               this.printt();
-            },10)
+            },30)
             this.initTable1 = true;
           }
         }
       }
-  );
-
-
-
-    // this.facult.forEach(value => value.specializations.forEach(value1 => value1.isChoosen  = true))
-
-
-    // this.facult.forEach((value) => {
-    //   value.specializations.forEach(value1 => {
-    //
-    //     this.abit.specializations.forEach(specs => {
-    //       if (specs.id === value1.id) {
-    //         value1.isChoosen = true;
-    //       }
-    //       value1.isChoosen = false;
-    //     })
-    //   });
-    // })
+    );
 
 
     console.log(this.facult);
-
-
-
 
 
     this.httpClient.get<Abit>('http://localhost:8081/getById/' + id, httpOptions).subscribe(
       res => {
         console.log(res);
         this.abit = res;
-        console.log(res.specializations);
-        // console.log(res.subjs.length + " " + this.reqq2.subjs.length);
       });
 
-
-
-
-// this.httpClient.get<Facul2[]>('http://localhost:8081/allFa').subscribe(
-//   value => {
-//     this.facult = value;
-//     console.log(value);
-//   });
-//
-
-    console.log();
-
     console.log(this.facult);
+    console.log("HELLO");
 
-
-      console.log("HELLO");
-      this.initTable()
 
   }
   @ViewChildren('innerSort') innerSort: QueryList<MatSort>;
@@ -132,12 +96,11 @@ export class AboutUsComponent implements OnInit {
     element.specializations && (element.specializations as MatTableDataSource<Specializations>).data.length ? (this.expandedElement = this.expandedElement === element ? null : element) : null;
     this.cd.detectChanges();
     this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Specializations>).sort = this.innerSort.toArray()[index]);
-
     console.log(element);
   }
 
   applyFilter(filterValue: string) {
-    this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Specializations>).filter = filterValue.trim().toLowerCase());
+    this.innerTables.forEach((table) => (table.dataSource as MatTableDataSource<Specializations>).filter = filterValue.trim().toLowerCase());
   }
 
 
@@ -145,43 +108,26 @@ export class AboutUsComponent implements OnInit {
   printt(){
     this.facult.forEach(user => {
       if (user.specializations && Array.isArray(user.specializations) && user.specializations.length) {
-        this.usersData = [...this.usersData, {...user, specializations: new MatTableDataSource(user.specializations)}];
+        this.usersData = [...this.usersData, {
+          ...user,
+          specializations: new MatTableDataSource(user.specializations)
+        }];
       } else {
         this.usersData = [...this.usersData, user];
       }
     });
     this.dataSource = new MatTableDataSource(this.usersData);
     this.dataSource.sort = this.sort;
+    this.initTable1 = false;
+
 
 
   }
-
-  constainElem(element: SpecializationsDTO) {
-
-    this.abit.specializations.forEach(value => {
-      if (element === value){
-        value.isChoosen = true;
-      }
-      value.isChoosen = false;
-    })
-  }
-
-
   printAll(element: any) {
-
     element.isChoosen = true;
-
-    let specializations = this.abit.specializations;
-    specializations.forEach(value => {
-      console.log(element === value);
-    })
-
-    console.log(element)
-    console.log(element.isChoosen);
-    console.log(element.isChoosen);
   }
 
-  ifChoosen(element: SpecializationsDTO) {
+  isChoosen(element: SpecializationsDTO) {
     return element.isChoosen;
   }
 
@@ -196,13 +142,10 @@ export class AboutUsComponent implements OnInit {
       value => {
         if(value != null) {
           this.facult = value;
-
+          console.log(value);
           setTimeout(()=>{
-            console.log("ODYN");
             this.abitutientServiceService.updateSpec.next(true);
-          }, 10);
-
-
+          }, 100);
         }
       })
   }
@@ -211,8 +154,7 @@ export class AboutUsComponent implements OnInit {
   changeChooseStatus(value2: SpecializationsDTO, value: any){
     value.forEach(value1 =>  value1.specializations.forEach(
       value2 =>{
-        value2
-        // this.changeChooseStatus(value2)
+        console.log(this.facult);
         for(let i = 0; i < this.abit.specializations.length; i++) {
           if (this.abit.specializations[i].id == value2.id) {
             value2.isChoosen = true;

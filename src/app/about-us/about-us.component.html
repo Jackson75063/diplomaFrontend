@@ -24,7 +24,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{innerColumn  | renamer }} </th>
               <td mat-cell *matCellDef="let element"> {{element[innerColumn]    }}
 
-                <div *ngIf="innerColumn == 'requst' ">  <button [disabled]="ifChoosen(element)" (click)="printAll(element);" class="btn btn-danger">Подати заявку </button> </div>
+                <div *ngIf="innerColumn == 'requst' ">  <button [disabled]="isChoosen(element)" (click)="printAll(element);" class="btn btn-danger">Подати заявку </button> </div>
 
               </td>
 

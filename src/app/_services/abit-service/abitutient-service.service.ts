@@ -18,6 +18,8 @@ export class AbitutientServiceService {
   reqq2 = new Abit()  ;
   // reqq2: Abit;
 
+
+
   public updateSpec  = new  BehaviorSubject<boolean>(false);
   public updateTable  = new  BehaviorSubject<boolean>(false);
 
