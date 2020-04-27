@@ -11,6 +11,7 @@ export class Abit {
   avgDiplomaMark: number;
   faculties: Faculties[];
   subjs : OneSubject[] = [];
+  requestCounter: number;
   specializations : SpecializationsDTO[] = [];
 }
 

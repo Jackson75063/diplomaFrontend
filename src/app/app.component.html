@@ -1,177 +1,131 @@
 
-<!--<mat-toolbar color="">-->
-<!--  <mat-toolbar-row>-->
-<!--    <button mat-icon-button>-->
-<!--      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>-->
-<!--    </button>-->
-<!--    <h5><span class="text-info" style="align-items: center; ">WELCOME</span></h5>-->
-<!--    <span class="menu-spacer"></span>-->
-<!--    <div style="font-size: 16px"  >-->
-<!--      <a  class="navbar-link" mat-button [routerLink]="''"> Абітурієнти </a>-->
-<!--      <a class="navbar-link" mat-button [routerLink]="'pass'"> Подати заявку </a>-->
-<!--      <a class="navbar-link" mat-button [routerLink]="'/fa'"> Факультети </a>-->
-<!--      <a class="navbar-link" mat-button [routerLink]="'/spec'"> Спеціальності </a>-->
-<!--      <a class="navbar-link" mat-button [routerLink]="'/about'"> Про нас </a>-->
-<!--    </div>-->
-
-<!--  </mat-toolbar-row>-->
 
 
-<!--</mat-toolbar>-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!--<router-outlet></router-outlet>-->
-<!--
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark secondary-color lighten-1">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
-          aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">Dropdown
-        </a>
-        <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto nav-flex-icons">
-      <li class="nav-item">
-        <a class="nav-link waves-effect waves-light">1
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-      <li class="nav-item avatar dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0"
-               alt="avatar image">
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
-             aria-labelledby="navbarDropdownMenuLink-55">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
+
+<div class="topnav" id="myTopnav">
+  <a href="/#" [class.active]>Home</a>
+  <div style="float: right"  *ngIf="!isLoggedIn">
+    <a href="/register" routerLink="register">Зареєструватись</a>
+    <a href="/login"    routerLink="login">Увійти</a>
   </div>
-</nav>-->
+
+  <div style="/*padding-left:16px;*/ float: right">
+
+
+    <span class="nav-item" *ngIf="showAdminBoard"> <a href="/admin" class="nav-link" routerLink="admin">Адмін панель</a></span>
+    <span class="nav-item" *ngIf="showModeratorBoard"><a href="/mod" class="nav-link" routerLink="mod">Панель Модератора</a></span>
+    <span class="nav-item"> <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Профіль</a> </span>
+    <span class="nav-item"> <a href="/request" class="nav-link" *ngIf="isLoggedIn" routerLink="request">Подати заяку</a></span>
+<!--    <span class="nav-item"> <a href="/facult" class="nav-link" *ngIf="isLoggedIn" routerLink="fac">Перегляд факультетів</a> </span>-->
+    <span class="nav-item"> <a href="/aboutUs" class="nav-link" *ngIf="isLoggedIn" routerLink="about">Перегляд факультетів</a>     </span>
+    <span class="nav-item"> <a href="/aboutUs2" class="nav-link" *ngIf="isLoggedIn" routerLink="about">Про нас</a>     </span>
+
+    <span></span>
+
+    <span class="nav-item">
+      <a href="/profile" class="nav-link active" routerLink="profile">{{ username }}</a>
+    </span>
+
+    <span *ngIf="isLoggedIn">
+
+      <span class="nav-item">
+        <a href class="navbar-expand" (click)="logout()">Вийти</a>
+      </span>
+    </span>
+
+
+  </div>
+
+
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" (click)="this.myFunction()">&#9776;</a>
+</div>
+
+
+<script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+</script>
 
 
 
 <ngx-spinner></ngx-spinner>
 
 
-<div id="app">
-
-<!--  navbar-expand navbar-dark bg-dark-->
-
-  <nav style="" class="navbar  fixed-top  navbar-expand-lg navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">Universitet</a>
-    <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Основна </a>
-      </li>
-      <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/admin" class="nav-link" routerLink="admin">Адмін панель</a>
-      </li>
-      <li class="nav-item" *ngIf="showModeratorBoard">
-        <a href="/mod" class="nav-link" routerLink="mod">Панель Модератора</a>
-      </li>
-      <li class="nav-item"> <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Профіль</a> </li>
-      <li class="nav-item"> <a href="/request" class="nav-link" *ngIf="isLoggedIn" routerLink="request">Подати заяку</a></li>
-      <li class="nav-item"> <a href="/facult" class="nav-link" *ngIf="isLoggedIn" routerLink="fac">Перегляд факультетів</a> </li>
-      <li class="nav-item"> <a href="/aboutUs" class="nav-link" *ngIf="isLoggedIn" routerLink="about">Перегляд факультетів2</a>     </li>
-      <li class="nav-item"> <a href="/aboutUs2" class="nav-link" *ngIf="isLoggedIn" routerLink="about">Про нас</a>     </li>
-    </ul>
-
-    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-      <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Зареєструватись</a>
-      </li>
-      <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Увійти</a>
-      </li>
-    </ul>
-
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-      <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
-      </li>
-      <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">Вийти</a>
-      </li>
-    </ul>
-
-
-  </nav>
-
-  <br>
-  <br>
-  <br>
-
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
 </div>
 
-<!--
-<div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">bezKoder</a>
-    <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home </a>
-      </li>
-      <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
-      </li>
-      <li class="nav-item" *ngIf="showModeratorBoard">
-        <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
-      </li>
-      <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
-      </li>
-    </ul>
 
-    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-      <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
-      </li>
-      <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Login</a>
-      </li>
-    </ul>
+<script>
 
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-      <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
-      </li>
-      <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">LogOut</a>
-      </li>
-    </ul>
-  </nav>
+  $('#header').prepend('<div id="menu-icon"><span class="first"></span><span class="second"></span><span class="third"></span></div>');
 
-  <div class="container">
-    <router-outlet></router-outlet>
+  $("#menu-icon").on("click", function(){
+    $("nav").slideToggle();
+    $(this).toggleClass("active");
+  });
+
+
+</script>
+
+<footer class="footer-distributed" style=" position: fixed; left: 0; bottom: 0; width: 100%; text-align: center;">
+  <div class="footer-left">
+    <h3> Наш<span> Університет</span></h3>
+    <p class="footer-links">
+      <a href="#" class="link-1">Головна</a>
+      <a href="#">Факультети</a>
+      <a href="#">Про нас</a>
+      <a href="#">Контакти</a>
+    </p>
+
+    <p class="footer-company-name">Наш Університет © 2020</p>
   </div>
-</div>
--->
+
+  <div class="footer-center">
+
+    <div>
+      <i class="fa fa-map-marker"></i>
+      <p><span>вул. Генерала Чупринки 122</span> м.Львів</p> <br>
+    </div>
+
+    <div style="padding-right: 68px">
+      <i class="fa fa-phone"></i>
+      <p>+380-765-43-21</p>
+    </div>
+
+    <div style="padding-right: 14px">
+<!--    <div >-->
+      <i class="fa fa-envelope"></i>
+      <p><a href="mailto:support@company.com">support@university.com</a></p> <br>
+    </div>
+
+  </div>
+
+  <div class="footer-right">
+
+    <p class="footer-company-about">
+      <span>Про нас</span>
+      Університет займається підготовкою спеціалістів з великим вибором спеціальностей
+    </p>
+
+    <div class="footer-icons">
+
+      <a href="#"><i class="fa fa-facebook"></i></a>
+      <a href="#"><i class="fa fa-twitter"></i></a>
+      <a href="#"><i class="fa fa-linkedin"></i></a>
+      <a href="#"><i class="fa fa-github"></i></a>
+
+    </div>
+  </div>
+</footer>
+
+

@@ -1,5 +1,11 @@
 
 
+
+<div *ngIf="this.counter != 0; else zero">
+<h3>Кількість допусних заявок: {{counter}} </h3>
+
+
+
 <table mat-table #outerSort="matSort" [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" matSort>
   <ng-container matColumnDef="{{column }}" *ngFor="let column  of columnsToDisplay ">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column | renamer}} </th>
@@ -47,7 +53,11 @@
 
 <hr>
 
+</div>
 
 
+<ng-template #zero>
+  <h3>У вас не залишилось запитів очікуйте на результати</h3>
+</ng-template>
 
 <!--<a routerLink="/user"><button class="btn btn-success pull-right" > Add Customer</button></a>-->

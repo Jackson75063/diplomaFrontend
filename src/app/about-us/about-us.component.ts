@@ -32,6 +32,11 @@ export class AboutUsComponent implements OnInit {
   facult : FacultiesDTO[];
   abit = new Abit();
 
+  private FacultyPassElement = new FacultiesDTO();
+  private counter: number;
+  private number = 3;
+
+
   constructor(private  abitutientServiceService: AbitutientServiceService, private cd: ChangeDetectorRef, private httpClient: HttpClient) { }
 
 
@@ -76,6 +81,7 @@ export class AboutUsComponent implements OnInit {
       res => {
         console.log(res);
         this.abit = res;
+        this.counter = res.requestCounter;
       });
 
     console.log(this.facult);
@@ -119,13 +125,40 @@ export class AboutUsComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.usersData);
     this.dataSource.sort = this.sort;
     this.initTable1 = false;
-
-
-
   }
+
+
+  decreaseCounter(){
+    this.counter--;
+  }
+
+
   printAll(element: any) {
     element.isChoosen = true;
+
+
+
+
+    let item = window.localStorage.getItem("auth-user");
+    let parse = JSON.parse(item);
+
+    let id = parse.id;
+
+
+    let element1 = element;
+
+    let specc  : SpecializationsDTO[] = [];
+    specc.push(element1);
+    this.FacultyPassElement.specializations = specc;
+
+    this.httpClient.put("http://localhost:8081/setFaculty/"+id,
+      this.FacultyPassElement, httpOptions).subscribe(
+      value => {
+        console.log(value);
+      });
+    this.decreaseCounter();
   }
+
 
   isChoosen(element: SpecializationsDTO) {
     return element.isChoosen;
@@ -166,6 +199,9 @@ export class AboutUsComponent implements OnInit {
 
   }
 
+  decr() {
+    this.number--;
+  }
 }
 
 
