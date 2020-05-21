@@ -1,0 +1,33 @@
+
+<mat-drawer-container [ngClass]="visibleclass"  style="visibility: hidden;
+ background: white;
+  width: 300px;
+  float: right;
+  position: fixed;
+  right: 5px;
+  top: 10%;
+  height:50%;
+  display: block;
+  z-index:99999999;" >
+
+  <button class="btn btn-info " style="visibility: visible" [ngClass]="bntStyle" (click)="change(drawer)">
+        Кроки
+  </button>
+
+
+
+  <mat-drawer   style=" background: white; top: 50%; right: 0; float: right; height: 600px; " #drawer position="end" class="example-sidenav" mode="side" >
+    <div class="wrapper">
+      <ul class="StepProgress">
+        <li class="StepProgress-item is-done"  >  <a href="" routerLink="/" >         <strong> Ознайомтесь з <br> спеціальностями </strong> </a> <strong> </strong></li>
+
+
+        <li class="StepProgress-item {{isDone}}" > <a href="" routerLink="/request">   <strong>Заповнити данні</strong> </a> Середній бал атестату та ЗНО </li>
+
+        <li class="StepProgress-item {{subjWasFilled}}"> <a href="" routerLink="/faculties"> <strong>Подати заяку</strong>    </a> </li>
+        <li class="StepProgress-item current"> <strong>Очікувати результати </strong> </li>
+      </ul>
+    </div>
+  </mat-drawer>
+
+</mat-drawer-container>

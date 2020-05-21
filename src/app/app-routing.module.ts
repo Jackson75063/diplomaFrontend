@@ -41,6 +41,7 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import {AboutUsComponent} from './about-us/about-us.component';
 import {AddFacultComponent} from './add-facult/add-facult.component';
 import {AbitMainPageComponent} from './abit-main-page/abit-main-page.component';
+import {HelpBotComponent} from "./help-bot/help-bot.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -50,10 +51,11 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: 'about', component: AboutUsComponent },
+  { path: 'faculties', component: AboutUsComponent },
+  // { path: 'about', component: HelpBotComponent },
   { path: 'fac', component: AddFacultComponent },
   { path: 'request', component: AbitMainPageComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
 @NgModule({

@@ -8,6 +8,7 @@ import {Specializations} from '../model/Specializations';
 import {Abit} from '../model/Abit';
 import {SpecializationsDTO} from "../model/SpecializationsDTO";
 import {FacultiesDTO} from "../model/FacultiesDTO";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 
 const httpOptions = {
@@ -34,10 +35,18 @@ export class AboutUsComponent implements OnInit {
 
   private FacultyPassElement = new FacultiesDTO();
   private counter: number;
-  private number = 3;
 
+  options: FormGroup;
+  private reqq2: Abit;
 
-  constructor(private  abitutientServiceService: AbitutientServiceService, private cd: ChangeDetectorRef, private httpClient: HttpClient) { }
+  constructor(fb: FormBuilder,private  abitutientServiceService: AbitutientServiceService, private cd: ChangeDetectorRef, private httpClient: HttpClient) {
+
+    this.options = fb.group({
+      bottom: 0,
+      fixed: false,
+      top: 0
+    });
+  }
 
 
   @ViewChild('outerSort', { static: true }) sort: MatSort;
@@ -45,6 +54,7 @@ export class AboutUsComponent implements OnInit {
   public initTable1 = false;
 
   ngOnInit() {
+
 
 
     let item = window.localStorage.getItem("auth-user");
@@ -88,7 +98,9 @@ export class AboutUsComponent implements OnInit {
     console.log("HELLO");
 
 
+
   }
+
   @ViewChildren('innerSort') innerSort: QueryList<MatSort>;
   @ViewChildren('innerTables') innerTables: QueryList<MatTable<Specializations>>;
 
@@ -97,6 +109,8 @@ export class AboutUsComponent implements OnInit {
   columnsToDisplay = ['facultyIdl', 'facultyName'  ]  ;
   innerDisplayedColumns = ['id', 'specializationCode', 'specializationName', 'requst'];
   expandedElement: Faculties | null;
+
+  private isOpen: boolean = false;
 
   toggleRow(element: Faculties) {
     element.specializations && (element.specializations as MatTableDataSource<Specializations>).data.length ? (this.expandedElement = this.expandedElement === element ? null : element) : null;
@@ -199,8 +213,34 @@ export class AboutUsComponent implements OnInit {
 
   }
 
-  decr() {
-    this.number--;
+  test() {
+
+    // console.log(document.getElementsByName('mat-table'));
+    console.log(document.getElementsByName('mat-table'));
+
+    let elementById = document.getElementById('q1');
+
+    let elementsByTagName = elementById.getElementsByTagName('div');
+    console.log(elementsByTagName);
+    console.log(elementById);
+
+
+    console.log(elementById.getAttributeNames());
+
+
+
+    console.log(elementsByTagName.namedItem('h3'));
+
+    console.log(elementById.getAttribute("ngcontent-syt-c6"));
+
+
+    console.log(elementById.getElementsByTagName('<mat-row>'));
+    let elementsByTagName1 = elementById.getElementsByTagName("td");
+    console.log(elementsByTagName1);
+
+
+    // ТУТ РЕЛОАД БУДЕ
+
   }
 }
 

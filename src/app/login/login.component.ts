@@ -4,6 +4,7 @@ import { TokenStorageService } from '../_services/token-storage-service/token-st
 import {FacultyService} from "../_services/faculty/faculty.service";
 import {UserService} from "../_services/user-service/user.service";
 import {AbitutientServiceService} from "../_services/abit-service/abitutient-service.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,9 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private facultyService: FacultyService, private abitutientServiceService:AbitutientServiceService) { }
+  private returnUrl: any;
+
+  constructor( private router: Router, private route: ActivatedRoute, private authService: AuthService, private tokenStorage: TokenStorageService, private facultyService: FacultyService, private abitutientServiceService:AbitutientServiceService) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -35,7 +38,10 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
+
         this.reloadPage();
+        window.location.href = '/home';
+
       },
       err => {
         this.errorMessage = err.error.message;

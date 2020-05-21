@@ -41,6 +41,10 @@ export class AbitMainPageComponent implements OnInit {
   private subject4: string;
 
   list = ['UKR_MOVA', 'MATH', 'PHISIC', 'CHEMESTRY', 'ENGLISH', 'HISTORY', 'BOILOGY', 'GEOGRAPHY'];
+  subjectCounter = 2;
+  private checked1 = false;
+  checked2: false;
+  checked3: false;
 
 
   constructor(private httpClient: HttpClient, private abitutientServiceService: AbitutientServiceService, private spinner: NgxSpinnerService, private token: TokenStorageService, private appRef: ApplicationRef) {
@@ -95,31 +99,37 @@ export class AbitMainPageComponent implements OnInit {
     console.log(this.list);
 
     const index : number = this.list.indexOf(option);
-     if(index !==-1) {
-       this.list.splice(index,1);
-     }
+    if(index !==-1) {
+      this.list.splice(index,1);
+    }
+    this.increaseSubjectCounter()
+
+    this.checked1 = true;
   }
 
   bind1(option: string) {
     this.subject1 = option;
     console.log(option + " " + this.subject1);
-
   }
 
   bind2(option: string) {
     this.subject2 = option;
+
   }
 
   bind3(option: string) {
     this.subject3 = option;
+
   }
 
   bind4(option: string) {
     this.subject4 = option;
   }
 
-
   subjj: {} = {};
+
+
+  // це все на клык йде треба дописати нижче комента
 
   addAbit() {
 
@@ -141,6 +151,8 @@ export class AbitMainPageComponent implements OnInit {
     this.httpClient.post('http://localhost:8081/addAbit', this.reqq)
       .subscribe((success) => {
           // alert('success');
+
+          this.abitutientServiceService.isDone.next(true);
         },
         (error) => alert('error'));
 
@@ -149,11 +161,18 @@ export class AbitMainPageComponent implements OnInit {
     // console.log(message);
     // console.log(this.reqq);
     this.ngOnInit();
-    this.ngOnInit()
+    this.ngOnInit();
+
+
+  //  ТУТ КЛІК ДОПИСАТИ ЗМІНУ ЗНАЧЕННЯ
+
   }
 
 
 
+  increaseSubjectCounter() {
+    this.subjectCounter++
+  }
 
 
 }

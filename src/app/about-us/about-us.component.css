@@ -1,3 +1,26 @@
+
+
+
+/*.example-container {*/
+/*  width: 500px;*/
+/*  height: 300px;*/
+/*  border: 1px solid rgba(0, 0, 0, 0.5);*/
+/*}*/
+
+/*.example-sidenav-content {*/
+/*  display: flex;*/
+/*  height: 100%;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*}*/
+
+/*.example-sidenav {*/
+/*  padding: 20px;*/
+/*}*/
+
+
+
+
 table {
   width: 100%;
 }
@@ -53,4 +76,9 @@ tr.example-element-row:not(.example-expanded-row):active {
 .inner-table mat-form-field {
   margin-top: 15px;
   width: 100%;
+}
+
+[disabled]{
+  color: grey;
+  background: black;
 }

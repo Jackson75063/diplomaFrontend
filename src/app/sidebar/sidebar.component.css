@@ -1,0 +1,170 @@
+
+
+.example-container {
+  position: absolute;
+  top: 60px;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+}
+
+.example-sidenav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  background: rgba(255, 0, 0, 0);
+}
+
+/*.example-header {*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*}*/
+
+/*.example-footer {*/
+/*  position: fixed;*/
+/*  bottom: 0;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*}*/
+
+
+.wrapper {
+  width: 330px;
+  font-family: "Helvetica";
+  font-size: 14px;
+  border: 1px solid #ffffff;
+}
+
+.StepProgress {
+  position: relative;
+  padding-left: 45px;
+  list-style: none;
+}
+
+.StepProgress::before {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15px;
+  width: 10px;
+  height: 100%;
+  border-left: 2px solid #ccc;
+}
+
+.StepProgress-item {
+  position: relative;
+  counter-increment: list;
+}
+
+.StepProgress-item:not(:last-child) {
+  padding-bottom: 20px;
+}
+
+.StepProgress-item::before {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  left: -30px;
+  height: 100%;
+  width: 10px;
+}
+
+.StepProgress-item::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: -39px;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.StepProgress-item.is-done::before {
+  border-left: 2px solid green;
+}
+
+.StepProgress-item.is-done::after {
+  content: "✔";
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  border: 2px solid green;
+  background-color: green;
+}
+
+.StepProgress-item.current::before {
+  border-left: 2px solid green;
+}
+
+.StepProgress-item.current::after {
+  content: counter(list);
+  padding-top: 0px;
+  width: 24px;
+  height: 24px;
+  top: -2px;
+  left: -40px;
+  font-size: 16px;
+  text-align: center;
+  color: green;
+  border: 2px solid green;
+  background-color: white;
+}
+
+.StepProgress strong {
+  display: block;
+}
+
+
+.test2{
+  position: fixed;
+  top: 30%;
+  right: 0;
+  background: #4CAF50;
+}
+
+.test2-changed{
+  background: red;
+  position: fixed;
+  top: 50%;
+  right: 0;
+  /*right: 0;*/
+  /*top: 0;*/
+  /*position: absolute;*/
+  /*z-index: 9999;*/
+}
+
+
+
+.c  {
+  display: block;
+  position: fixed;
+  right:6px;
+  top: 32%;
+  height:160px;
+  width:33px;
+  line-height:50px;
+  transition:all .4s ease-out;
+  border: 1px solid #333;
+  border-radius: 2em;
+}
+
+.click2 {
+  position: fixed;
+  right: 5px;
+  top: 32%;
+  width:347px;
+  height:160px;
+  display: block;
+}
+
+
+.visClass{
+ visibility: visible;
+}

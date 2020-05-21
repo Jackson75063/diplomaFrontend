@@ -1,63 +1,105 @@
 
 
-
-<div *ngIf="this.counter != 0; else zero">
-<h3>Кількість допусних заявок: {{counter}} </h3>
+<div class="container" >
 
 
+  <div *ngIf="abit.subjs<=0; else form">
 
-<table mat-table #outerSort="matSort" [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" matSort>
-  <ng-container matColumnDef="{{column }}" *ngFor="let column  of columnsToDisplay ">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column | renamer}} </th>
-    <td mat-cell *matCellDef="let element"> {{element[column] | renamer }} </td>
-  </ng-container>
+    <h1 style="top:40%;">Заповність дані про ЗНО</h1>
+    <a href="" routerLink="/request">   <strong>Заповнити данні</strong> </a>
 
-  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-  <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let element " [attr.colspan]="columnsToDisplay.length">
-      <div class="example-element-detail"  [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-        <div class="inner-table mat-elevation-z8" *ngIf="expandedElement">
+  </div>
 
-          <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-          </mat-form-field>
+  <ng-template #form>
+    <div *ngIf="this.counter != 0; else zero" style="margin-top: 5%">
+      <h3>Кількість допусних заявок: {{counter}} </h3>
 
-          <table #innerTables mat-table #innerSort="matSort" [dataSource]="element.specializations" matSort>
+      <table mat-table #outerSort="matSort" [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" matSort>
+        <ng-container matColumnDef="{{column }}" *ngFor="let column  of columnsToDisplay ">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column | renamer}} </th>
+          <td mat-cell *matCellDef="let element"> {{element[column] | renamer }} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="{{innerColumn }}" *ngFor="let innerColumn of innerDisplayedColumns">
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element " [attr.colspan]="columnsToDisplay.length">
+            <div class="example-element-detail"  [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <div class="inner-table mat-elevation-z8" *ngIf="expandedElement">
+
+                <mat-form-field>
+                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+
+                <table #innerTables mat-table #innerSort="matSort" [dataSource]="element.specializations" matSort>
+
+                  <ng-container matColumnDef="{{innerColumn }}" *ngFor="let innerColumn of innerDisplayedColumns">
 
 
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{innerColumn  | renamer }} </th>
-              <td mat-cell *matCellDef="let element"> {{element[innerColumn]    }}
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{innerColumn  | renamer }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element[innerColumn]    }}
 
-                <div *ngIf="innerColumn == 'requst' ">  <button [disabled]="isChoosen(element)" (click)="printAll(element);" class="btn btn-danger">Подати заявку </button> </div>
+                      <div *ngIf="innerColumn == 'requst' ">
+                        <button [disabled]="isChoosen(element)"  (click)="printAll(element);" class="btn btn-info">Подати заявку </button>
+                      </div>
 
-              </td>
+                    </td>
 
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="innerDisplayedColumns"></tr>
-            <tr  mat-row  *matRowDef="let row; columns: innerDisplayedColumns;">  </tr>
-          </table>
-        </div>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="innerDisplayedColumns"></tr>
+                  <tr  mat-row  *matRowDef="let row; columns: innerDisplayedColumns;">  </tr>
+                </table>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay "></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" [class.example-element-row]="element.Specializations?.data.length"
+            [class.example-expanded-row]="expandedElement === element" (click)="toggleRow(element)">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      </table>
+      <hr>
+    </div>
+
+
+    <ng-template #zero >
+      <div style="margin-top: 10%; align-content: center">
+        <h3>У вас не залишилось запитів очікуйте на результати вступної кампанії</h3>
+        <h5> Ви буде проінформовані листом на пошту або телефоним дзвінком </h5>
+        <h6>Дякую що вибрали наш університет</h6>
       </div>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay "></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" [class.example-element-row]="element.Specializations?.data.length"
-      [class.example-expanded-row]="expandedElement === element" (click)="toggleRow(element)">
-  </tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table>
-
-
-<hr>
+    </ng-template>
+  </ng-template>
 
 </div>
 
 
-<ng-template #zero>
-  <h3>У вас не залишилось запитів очікуйте на результати</h3>
-</ng-template>
+<div style=" clear: both;  bottom:0; left:0; width: 100%; top: 70%; position: absolute; z-index: -999999">
+  <footer  class="footer text-center">
+    <div class="container">
+      <div class="row">
+        <!-- Footer Location-->
+        <div class="col-lg-4 mb-5 mb-lg-0">
+          <h4 class="mb-4">LOCATION</h4>
+          <p class="pre-wrap lead mb-0">2215 John Daniel Drive
+            Clark, MO 65243</p>
+        </div>
+        <!-- Footer Social Icons-->
+        <div class="col-lg-4 mb-5 mb-lg-0">
+          <h4 class="mb-4">AROUND THE WEB</h4><a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/StartBootstrap"><i class="fab fa-fw fa-facebook-f"></i></a><a class="btn btn-outline-light btn-social mx-1" href="https://www.twitter.com/sbootstrap"><i class="fab fa-fw fa-twitter"></i></a><a class="btn btn-outline-light btn-social mx-1" href="https://www.linkedin.com/in/startbootstrap"><i class="fab fa-fw fa-linkedin-in"></i></a><a class="btn btn-outline-light btn-social mx-1" href="https://www.dribble.com/startbootstrap"><i class="fab fa-fw fa-dribbble"></i></a>
+        </div>
+        <!-- Footer About Text-->
+        <div class="col-lg-4">
+          <h4 class="mb-4">ABOUT FREELANCER</h4>
+          <p class="pre-wrap lead mb-0">Freelance is a free to use, MIT licensed Bootstrap theme created by Start Bootstrap</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
 
-<!--<a routerLink="/user"><button class="btn btn-success pull-right" > Add Customer</button></a>-->
+
+
+

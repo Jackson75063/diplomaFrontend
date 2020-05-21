@@ -1,158 +1,385 @@
+<br>
+<br>
 
-<div class="container">
 
-  <div *ngIf="isFilled; else fill" class="">
-    <div class="card card-body">
-      <h2></h2>
-      <form #formCtrl="ngForm">
 
-        <div >
-          <div >
-            <h1>isFilled</h1>
-          </div>
-        </div>
-        <strong> Ім'я:     {{ currentUser.username }}</strong> <br>
-        <strong> Прізвище: {{ currentUser.surname }}</strong> <br>
-        <strong> токен: {{ currentUser.token }}</strong> <br>
-        <strong> тип: {{ currentUser.type }}</strong> <br>
-        <strong> роль: {{ currentUser.roles }}</strong> <br>
-        <strong> мейл: {{ currentUser.email }}</strong> <br>
-        <!-- <div *ngIf="currentUser.subjs !== 0">
-           <h1>length !0</h1>
-         </div>-->
+<div class="container" >
 
-        <div *ngFor="let option of reqq2.subjs">
-          <h3> Предмет {{option.subject}}</h3>
-          <h3> Бали:  {{option.subjectMark}}</h3>
-        </div>
+  <div *ngIf="isFilled; else fill" >
+<!--    <div class="card card-body">-->
+<!--      <h2></h2>-->
 
-        <!--          TODO set currentUser.requsts counter-->
-        <strong>Кількість запитів: 5</strong>
-      </form>
-    </div>
+<!--      <strong> Ім'я:     {{ currentUser.username }}</strong> <br>-->
+<!--      <strong> Прізвище: {{ currentUser.surname }}</strong> <br>-->
+<!--      <strong> Пошта:     {{ currentUser.email }}</strong> <br>-->
+
+<!--      <div *ngFor="let option of reqq2.subjs">-->
+<!--        <h3> Предмет {{option.subject | renamer}}</h3>-->
+<!--        <h3> Бали:  {{option.subjectMark}}</h3>-->
+<!--      </div>-->
+<!--      <strong>Кількість запитів: {{reqq2.requestCounter}}</strong>-->
+<!--    </div>-->
+    <app-about-us></app-about-us>
   </div>
 </div>
 
-<ng-template #fill>
-  <h1>is NOT  Filled</h1>
-  <form #formCtrl="ngForm">
 
-    <div >
+<ng-template  #fill>
+  <div class="container py-3">
+    <div class="row">
+      <div class="mx-auto col-sm-9">
+        <!-- form user info -->
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Ваші данні</h4>
+          </div>
+          <div class="card-body">
+            <form class="form" role="form" autocomplete="off">
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Середній бал атестату:</label>
+                <div class="col-lg-9">
+                  <input class="form-control" type="text" [(ngModel)] = "reqq.avgDiplomaMark">
+                </div>
+              </div>
 
-      <div class="form-group">
-        <label>Середній бал атестата:</label>
-        <input style="margin-right : 5px;" type="text" class="form-control"    [(ngModel)] = "reqq.avgDiplomaMark"  name="avg" placeholder="Середній бал атестату" required>
-      </div>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label"></label>
+                <div class="col-lg-9">
 
-<!--      TODO set readonly when subj is submmited-->
+                  <div >
+                    <!--        1 block-->
+                    <div *ngIf="this.subjectCounter <= 2; else subj1" >
+                      <mat-form-field style="margin-right : 5px;">
+                        <mat-label>Оберіть предмет</mat-label>
+                        <mat-select >
+                          <mat-option *ngFor="let option of list"  [value]="option">
+                            <option (click)="bind1(option)"> {{ option | renamer}} </option>
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
 
-      <mat-form-field style="margin-right : 5px;">
-        <mat-label>Оберіть предмет</mat-label>
-        <mat-select >
-          <mat-option *ngFor="let option of list"  [value]="option">
-            <option (click)="bind1(option)"> {{ option | renamer}} </option>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+                      <mat-form-field class="example-full-width">
+                        <mat-label >Предмет №1</mat-label>
+                        <input matInput placeholder="100"  minlength="0" [maxLength]="2" [min]="1" [max]="12" [(ngModel)]="subject1Subkect"  name="subject1Subkect" value="" required>
+                      </mat-form-field>
 
-      <mat-form-field class="example-full-width">
-        <mat-label >Предмет №1</mat-label>
-        <input matInput placeholder="100"  minlength="0" [maxLength]="2" [min]="1" [max]="12" [(ngModel)]="subject1Subkect"  name="subject1Subkect" value="">
-      </mat-form-field>
+                      <button class="btn btn-info" (click)="print(subject1, subject1Subkect)"> Підтвердити </button>
+                      <!--                    <hr>-->
+                    </div>
 
+                    <ng-template #subj1 >
 
-      <button class="btn btn-info" (click)="print(subject1, subject1Subkect)"> Підтвердити </button>
-      <hr>
+                      <h4> 1 {{subject1 | renamer}} : {{subject1Subkect}}</h4>
+                    </ng-template>
 
-      <mat-form-field style="margin-right : 5px;">
-        <mat-label>Оберіть предмет</mat-label>
-        <mat-select >
-          <mat-option *ngFor="let option of list "  [value]="list">
-            <option (click)="bind2(option)"> {{ option | renamer }} </option>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+                    <!-- end 1 block-->
 
-      <mat-form-field class="example-full-width" style="margin-right : 5px;">
-        <mat-label>Предмет №2</mat-label>
-        <input matInput placeholder="100" [(ngModel)]="subject2Subkect" name="subject2Subkect" [min]="100" max="200" value="">
-      </mat-form-field>
-
-
-      <button class="btn btn-info" (click)="print(subject2, subject2Subkect)"> Підтвердити </button>
-      <hr>
-
-
-      <mat-form-field>
-        <mat-label>Оберіть предмет</mat-label>
-        <mat-select >
-          <mat-option *ngFor="let option of list "  [value]="option">
-            <option (click)="bind3(option)"> {{ option | renamer}} </option>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field  style= "margin-right : 5px;">
-        <mat-label>Предмет №3</mat-label>
-        <input matInput placeholder="100" [(ngModel)]="subject3Subkect" name="subject3Subkect" [min]="100" max="200" value="">
-      </mat-form-field>
+                    <!--   2 block-->
 
 
-      <button class="btn btn-info" (click)="print(subject3, subject3Subkect)"> Підтвердити </button>
-      <hr>
+                    <div *ngIf="this.subjectCounter <= 3; else subj2 ">
+                      <div [hidden]="this.subjectCounter <= 2" >
+                        <mat-form-field style="margin-right : 5px;">
+                          <mat-label>Оберіть предмет</mat-label>
+                          <mat-select >
+                            <mat-option *ngFor="let option of list "  [value]="list">
+                              <option (click)="bind2(option)"> {{ option | renamer }} </option>
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" style="margin-right : 5px;">
+                          <mat-label>Предмет №2</mat-label>
+                          <input matInput placeholder="100" [(ngModel)]="subject2Subkect" name="subject2Subkect" [min]="100" max="200" value=""  required>
+                        </mat-form-field>
+
+                        <button class="btn btn-info" (click)="print(subject2, subject2Subkect)"> Підтвердити </button>
+                        <!--                      <hr>-->
+
+                      </div>
+                    </div>
+
+                    <ng-template #subj2 >
+                      <h4> 2 {{subject2 | renamer}} : {{subject2Subkect}}</h4>
+                    </ng-template>
+
+                    <!-- end 2 block-->
+
+                    <!-- 3 block-->
 
 
-      <mat-form-field>
-        <mat-label>Оберіть предмет</mat-label>
-        <mat-select >
-          <mat-option *ngFor="let option of list "    [value]="subjj">
-            <option (click)="bind4(option)"  > {{ option | renamer}} </option>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+                    <div *ngIf="this.subjectCounter <= 4; else subj3"  required>
+                      <div [hidden]="this.subjectCounter <= 3">
+                        <mat-form-field style="margin-right : 5px;" required>
+                          <mat-label>Оберіть предмет</mat-label>
+                          <mat-select >
+                            <mat-option *ngFor="let option of list "  [value]="option">
+                              <option (click)="bind3(option)"> {{ option | renamer}} </option>
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Предмет №4</mat-label>
-        <input matInput type="number"
-               placeholder="100"
-               [(ngModel)]="subject4Subkect"
-               [min]="100"
-               [max]="200"
-               name="subject4Subkect" value="">
+                        <mat-form-field  style= "margin-right : 5px;">
+                          <mat-label>Предмет №3</mat-label>
+                          <input matInput placeholder="100" [(ngModel)]="subject3Subkect" name="subject3Subkect" [min]="100" max="200" value="" required>
+                        </mat-form-field>
 
-      </mat-form-field>
-      <button class="btn btn-info" (click)="print(subject4, subject4Subkect)"> Підтвердити </button>
 
-      <button
-        data-toggle=" modal" data-target="#exampleModalCenter"
-        class="btn btn-success" aria-disabled="false"
-        [disabled]="!formCtrl.form.valid"
-        (click)="addAbit ()"
-        [ngClass] = "{'btn-dark': !formCtrl.form.valid}"
-      >Відправити
-      </button>
+                        <button class="btn btn-info" (click)="print(subject3, subject3Subkect)"> Підтвердити </button>
+                        <!--                      <hr>-->
 
-      <div class="modal fade" id="exampleModalC761634enter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
+                      </div>
+                    </div>
+                    <ng-template #subj3 >
 
-            <div class="modal-body">
-              Підтвердити відправлення
-            </div>
+                      <h4> 3 {{subject3 | renamer}} : {{subject3Subkect}}</h4>
+                    </ng-template>
 
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Так</button>
-              <button type="button" class="btn btn-danger"  data-dismiss="modal">Ні</button>
-            </div>
+                    <!-- end 3 block-->
+
+
+
+                    <div *ngIf="this.subjectCounter <= 5; else subj4" >
+
+                      <div [hidden]="this.subjectCounter<=4">
+
+                        <mat-form-field style="margin-right : 5px;">
+                          <mat-label>Оберіть предмет</mat-label>
+                          <mat-select >
+                            <mat-option *ngFor="let option of list "    [value]="subjj">
+                              <option (click)="bind4(option)"  > {{ option | renamer}} </option>
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Предмет №4</mat-label>
+                          <input matInput type="number"
+                                 placeholder="100"
+                                 [(ngModel)]="subject4Subkect"
+                                 [min]="100"
+                                 [max]="200"
+                                 name="subject4Subkect" value="">
+
+                        </mat-form-field>
+                        <button class="btn btn-info" (click)="print(subject4, subject4Subkect)"> Підтвердити </button>
+
+                      </div>
+                    </div>
+
+                    <ng-template #subj4>
+                      <h4> 4 {{subject4 | renamer}} : {{subject4Subkect}}</h4>
+                    </ng-template>
+
+
+                    <button
+                      data-toggle=" modal" data-target="#exampleModalCenter"
+                      class="btn btn-success" aria-disabled="false"
+                      [disabled]="this.subjectCounter<=4"
+                      (click)="addAbit()"
+                      [ngClass] = "{'btn-dark': this.subjectCounter <= 4}">Відправити</button>
+
+                    <div class="modal fade" id="exampleModalC761634enter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                            Підтвердити відправлення
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Так</button>
+                            <button type="button" class="btn btn-danger"  data-dismiss="modal">Ні</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </form>
+  </div>
 </ng-template>
+
+
+
+<!--<ng-template  #fill>-->
+<!--  &lt;!&ndash;    <form class="text-center input-center">&ndash;&gt;-->
+
+<!--  <div >-->
+<!--    &lt;!&ndash;        <div class="form-group">&ndash;&gt;-->
+<!--    &lt;!&ndash;          <label>Середній бал атестату:</label>&ndash;&gt;-->
+<!--    &lt;!&ndash;          <input class="form-control " style=" margin-right : 5px; width: 10%; display: inline"&ndash;&gt;-->
+<!--    &lt;!&ndash;                 type="text"&ndash;&gt;-->
+<!--    &lt;!&ndash;                 [(ngModel)] = "reqq.avgDiplomaMark"&ndash;&gt;-->
+<!--    &lt;!&ndash;                 name="avg"&ndash;&gt;-->
+<!--    &lt;!&ndash;                 required>&ndash;&gt;-->
+<!--    &lt;!&ndash;          &lt;!&ndash;                 placeholder="Середній бал атестату"&ndash;&gt;&ndash;&gt;-->
+
+<!--    &lt;!&ndash;        </div>&ndash;&gt;-->
+
+<!--    &lt;!&ndash;        1 block&ndash;&gt;-->
+<!--    <div *ngIf="this.subjectCounter <= 2; else subj1" >-->
+<!--      <mat-form-field style="margin-right : 5px;">-->
+<!--        <mat-label>Оберіть предмет</mat-label>-->
+<!--        <mat-select >-->
+<!--          <mat-option *ngFor="let option of list"  [value]="option">-->
+<!--            <option (click)="bind1(option)"> {{ option | renamer}} </option>-->
+<!--          </mat-option>-->
+<!--        </mat-select>-->
+<!--      </mat-form-field>-->
+
+<!--      <mat-form-field class="example-full-width">-->
+<!--        <mat-label >Предмет №1</mat-label>-->
+<!--        <input matInput placeholder="100"  minlength="0" [maxLength]="2" [min]="1" [max]="12" [(ngModel)]="subject1Subkect"  name="subject1Subkect" value="" required>-->
+<!--      </mat-form-field>-->
+
+<!--      <button class="btn btn-info" (click)="print(subject1, subject1Subkect)"> Підтвердити </button>-->
+<!--      &lt;!&ndash;                    <hr>&ndash;&gt;-->
+<!--    </div>-->
+
+<!--    <ng-template #subj1 >-->
+
+<!--      <h4> 1 {{subject1 | renamer}} : {{subject1Subkect}}</h4>-->
+<!--    </ng-template>-->
+
+<!--    &lt;!&ndash; end 1 block&ndash;&gt;-->
+
+<!--    &lt;!&ndash;   2 block&ndash;&gt;-->
+
+
+<!--    <div *ngIf="this.subjectCounter <= 3; else subj2 ">-->
+<!--      <div [hidden]="this.subjectCounter <= 2" >-->
+<!--        <mat-form-field style="margin-right : 5px;">-->
+<!--          <mat-label>Оберіть предмет</mat-label>-->
+<!--          <mat-select >-->
+<!--            <mat-option *ngFor="let option of list "  [value]="list">-->
+<!--              <option (click)="bind2(option)"> {{ option | renamer }} </option>-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field class="example-full-width" style="margin-right : 5px;">-->
+<!--          <mat-label>Предмет №2</mat-label>-->
+<!--          <input matInput placeholder="100" [(ngModel)]="subject2Subkect" name="subject2Subkect" [min]="100" max="200" value=""  required>-->
+<!--        </mat-form-field>-->
+
+<!--        <button class="btn btn-info" (click)="print(subject2, subject2Subkect)"> Підтвердити </button>-->
+<!--        &lt;!&ndash;                      <hr>&ndash;&gt;-->
+
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <ng-template #subj2 >-->
+<!--      <h4> 2 {{subject2 | renamer}} : {{subject2Subkect}}</h4>-->
+<!--    </ng-template>-->
+
+<!--    &lt;!&ndash; end 2 block&ndash;&gt;-->
+
+<!--    &lt;!&ndash; 3 block&ndash;&gt;-->
+
+
+<!--    <div *ngIf="this.subjectCounter <= 4; else subj3"  required>-->
+<!--      <div [hidden]="this.subjectCounter <= 3">-->
+<!--        <mat-form-field style="margin-right : 5px;" required>-->
+<!--          <mat-label>Оберіть предмет</mat-label>-->
+<!--          <mat-select >-->
+<!--            <mat-option *ngFor="let option of list "  [value]="option">-->
+<!--              <option (click)="bind3(option)"> {{ option | renamer}} </option>-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field  style= "margin-right : 5px;">-->
+<!--          <mat-label>Предмет №3</mat-label>-->
+<!--          <input matInput placeholder="100" [(ngModel)]="subject3Subkect" name="subject3Subkect" [min]="100" max="200" value="" required>-->
+<!--        </mat-form-field>-->
+
+
+<!--        <button class="btn btn-info" (click)="print(subject3, subject3Subkect)"> Підтвердити </button>-->
+<!--        &lt;!&ndash;                      <hr>&ndash;&gt;-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--    <ng-template #subj3 >-->
+
+<!--      <h4> 3 {{subject3 | renamer}} : {{subject3Subkect}}</h4>-->
+<!--    </ng-template>-->
+
+<!--    &lt;!&ndash; end 3 block&ndash;&gt;-->
+
+
+
+<!--    <div *ngIf="this.subjectCounter <= 5; else subj4" >-->
+
+<!--      <div [hidden]="this.subjectCounter<=4">-->
+
+<!--        <mat-form-field style="margin-right : 5px;">-->
+<!--          <mat-label>Оберіть предмет</mat-label>-->
+<!--          <mat-select >-->
+<!--            <mat-option *ngFor="let option of list "    [value]="subjj">-->
+<!--              <option (click)="bind4(option)"  > {{ option | renamer}} </option>-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field class="example-full-width">-->
+<!--          <mat-label>Предмет №4</mat-label>-->
+<!--          <input matInput type="number"-->
+<!--                 placeholder="100"-->
+<!--                 [(ngModel)]="subject4Subkect"-->
+<!--                 [min]="100"-->
+<!--                 [max]="200"-->
+<!--                 name="subject4Subkect" value="">-->
+
+<!--        </mat-form-field>-->
+<!--        <button class="btn btn-info" (click)="print(subject4, subject4Subkect)"> Підтвердити </button>-->
+
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <ng-template #subj4>-->
+<!--      <h4> 4 {{subject4 | renamer}} : {{subject4Subkect}}</h4>-->
+<!--    </ng-template>-->
+
+
+<!--    <button-->
+<!--      data-toggle=" modal" data-target="#exampleModalCenter"-->
+<!--      class="btn btn-success" aria-disabled="false"-->
+<!--      [disabled]="this.subjectCounter<=4"-->
+<!--      (click)="addAbit()"-->
+<!--      [ngClass] = "{'btn-dark': this.subjectCounter <= 4}">Відправити</button>-->
+
+<!--    <div class="modal fade" id="exampleModalC761634enter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
+<!--      <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>-->
+<!--            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--              <span aria-hidden="true">&times;</span>-->
+<!--            </button>-->
+<!--          </div>-->
+
+<!--          <div class="modal-body">-->
+<!--            Підтвердити відправлення-->
+<!--          </div>-->
+
+<!--          <div class="modal-footer">-->
+<!--            <button type="button" class="btn btn-success" data-dismiss="modal">Так</button>-->
+<!--            <button type="button" class="btn btn-danger"  data-dismiss="modal">Ні</button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</ng-template>-->

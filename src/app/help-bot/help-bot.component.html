@@ -1,0 +1,44 @@
+
+
+<button class="open-button" (click)="openForm()">Маєте запитання?</button>
+<div style="font-size: 12px; overflow-y: scroll; height:450px;"
+     class="chat-popup" id="myForm">
+  <div  class="form-container">
+
+    <div style="width: 90%; height: 80%" class="from-me">Оберіть ваше запитання...
+
+      <ol>
+        <li (click)="lol('Час подачі заявок')">  Час подачі заявок  </li>
+        <li (click)="lol('Найпопулярніший факультет')"> Найпопулярніший факультет </li>
+        <li (click)="lol('Найпопулярніша спеціальність')">   Найпопулярніша спеціальність </li>
+        <li (click)="lol('Потрібний гуртожиток')"> Потрібний гуртожиток </li>
+        <li (click)="lol('Оплата за навчання')"> Оплата за навчання   </li>
+        <li> Якщо  вашого питання немає опишіть його нижче і очікуйте відповіді на e-mail </li>
+      </ol>
+    </div>
+
+    <div *ngIf="MSG === 'empty'; else bla">
+
+    </div>
+
+    <ng-template #bla>
+<!--      <p class="from-them"> {{MSG}} </p>-->
+      <p  class="from-them" [innerHTML]="this.MSG"></p>
+    </ng-template>
+
+    <!--    <input  type="text" placeholder="Задайте ваше питання" [(ngModel)]="MSG">-->
+    <input matInput  style="border-style: solid; border-color: grey" placeholder="Задайте ваше питання" [(ngModel)]="this.question">
+
+    <button type="submit"  class="btn" (click)="answer(this.question)">Відправити</button>
+    <button type="button" class="btn cancel" (click)="closeForm()">Закрити</button>
+  </div>
+
+
+
+</div>
+
+
+<style>
+  body {font-family: Arial, Helvetica, sans-serif;}
+
+</style>

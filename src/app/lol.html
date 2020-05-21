@@ -1,0 +1,1690 @@
+
+<!--&lt;!&ndash;<html lang="en">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;  <meta charset="utf-8">&ndash;&gt;-->
+
+<!--&lt;!&ndash;  <title>The HTML5 Herald</title>&ndash;&gt;-->
+<!--&lt;!&ndash;  <meta name="description" content="The HTML5 Herald">&ndash;&gt;-->
+<!--&lt;!&ndash;  <meta name="author" content="SitePoint">&ndash;&gt;-->
+
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<style>&ndash;&gt;-->
+
+<!--&lt;!&ndash;  html, body {&ndash;&gt;-->
+<!--&lt;!&ndash;    background: #efefef;&ndash;&gt;-->
+<!--&lt;!&ndash;    height:100%;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  #center-text {&ndash;&gt;-->
+<!--&lt;!&ndash;    display: flex;&ndash;&gt;-->
+<!--&lt;!&ndash;    flex: 1;&ndash;&gt;-->
+<!--&lt;!&ndash;    flex-direction:column;&ndash;&gt;-->
+<!--&lt;!&ndash;    justify-content: center;&ndash;&gt;-->
+<!--&lt;!&ndash;    align-items: center;&ndash;&gt;-->
+<!--&lt;!&ndash;    height:100%;&ndash;&gt;-->
+
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  #chat-circle {&ndash;&gt;-->
+<!--&lt;!&ndash;    position: fixed;&ndash;&gt;-->
+<!--&lt;!&ndash;    bottom: 50px;&ndash;&gt;-->
+<!--&lt;!&ndash;    right: 50px;&ndash;&gt;-->
+<!--&lt;!&ndash;    background: #5A5EB9;&ndash;&gt;-->
+<!--&lt;!&ndash;    width: 80px;&ndash;&gt;-->
+<!--&lt;!&ndash;    height: 80px;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-radius: 50%;&ndash;&gt;-->
+<!--&lt;!&ndash;    color: white;&ndash;&gt;-->
+<!--&lt;!&ndash;    padding: 28px;&ndash;&gt;-->
+<!--&lt;!&ndash;    cursor: pointer;&ndash;&gt;-->
+<!--&lt;!&ndash;    box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.6), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+
+<!--&lt;!&ndash;  .btn#my-btn {&ndash;&gt;-->
+<!--&lt;!&ndash;    background: white;&ndash;&gt;-->
+<!--&lt;!&ndash;    padding-top: 13px;&ndash;&gt;-->
+<!--&lt;!&ndash;    padding-bottom: 12px;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-radius: 45px;&ndash;&gt;-->
+<!--&lt;!&ndash;    padding-right: 40px;&ndash;&gt;-->
+<!--&lt;!&ndash;    padding-left: 40px;&ndash;&gt;-->
+<!--&lt;!&ndash;    color: #5865C3;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  #chat-overlay {&ndash;&gt;-->
+<!--&lt;!&ndash;    background: rgba(255,255,255,0.1);&ndash;&gt;-->
+<!--&lt;!&ndash;    position: absolute;&ndash;&gt;-->
+<!--&lt;!&ndash;    top: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;    left: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;    width: 100%;&ndash;&gt;-->
+<!--&lt;!&ndash;    height: 100%;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-radius: 50%;&ndash;&gt;-->
+<!--&lt;!&ndash;    display: none;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;  .chat-box {&ndash;&gt;-->
+<!--&lt;!&ndash;    display:none;&ndash;&gt;-->
+<!--&lt;!&ndash;    background: #efefef;&ndash;&gt;-->
+<!--&lt;!&ndash;    position:fixed;&ndash;&gt;-->
+<!--&lt;!&ndash;    right:30px;&ndash;&gt;-->
+<!--&lt;!&ndash;    bottom:50px;&ndash;&gt;-->
+<!--&lt;!&ndash;    width:350px;&ndash;&gt;-->
+<!--&lt;!&ndash;    max-width: 85vw;&ndash;&gt;-->
+<!--&lt;!&ndash;    max-height:100vh;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-radius:5px;&ndash;&gt;-->
+<!--&lt;!&ndash;    /*   box-shadow: 0px 5px 35px 9px #464a92; */&ndash;&gt;-->
+<!--&lt;!&ndash;    box-shadow: 0px 5px 35px 9px #ccc;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .chat-box-toggle {&ndash;&gt;-->
+<!--&lt;!&ndash;    float:right;&ndash;&gt;-->
+<!--&lt;!&ndash;    margin-right:15px;&ndash;&gt;-->
+<!--&lt;!&ndash;    cursor:pointer;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .chat-box-header {&ndash;&gt;-->
+<!--&lt;!&ndash;    background: #5A5EB9;&ndash;&gt;-->
+<!--&lt;!&ndash;    height:70px;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-top-left-radius:5px;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-top-right-radius:5px;&ndash;&gt;-->
+<!--&lt;!&ndash;    color:white;&ndash;&gt;-->
+<!--&lt;!&ndash;    text-align:center;&ndash;&gt;-->
+<!--&lt;!&ndash;    font-size:20px;&ndash;&gt;-->
+<!--&lt;!&ndash;    padding-top:17px;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .chat-box-body {&ndash;&gt;-->
+<!--&lt;!&ndash;    position: relative;&ndash;&gt;-->
+<!--&lt;!&ndash;    height:370px;&ndash;&gt;-->
+<!--&lt;!&ndash;    height:auto;&ndash;&gt;-->
+<!--&lt;!&ndash;    border:1px solid #ccc;&ndash;&gt;-->
+<!--&lt;!&ndash;    overflow: hidden;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .chat-box-body:after {&ndash;&gt;-->
+<!--&lt;!&ndash;    content: "";&ndash;&gt;-->
+<!--&lt;!&ndash;    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAgOCkiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGNpcmNsZSBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIgY3g9IjE3NiIgY3k9IjEyIiByPSI0Ii8+PHBhdGggZD0iTTIwLjUuNWwyMyAxMW0tMjkgODRsLTMuNzkgMTAuMzc3TTI3LjAzNyAxMzEuNGw1Ljg5OCAyLjIwMy0zLjQ2IDUuOTQ3IDYuMDcyIDIuMzkyLTMuOTMzIDUuNzU4bTEyOC43MzMgMzUuMzdsLjY5My05LjMxNiAxMC4yOTIuMDUyLjQxNi05LjIyMiA5LjI3NC4zMzJNLjUgNDguNXM2LjEzMSA2LjQxMyA2Ljg0NyAxNC44MDVjLjcxNSA4LjM5My0yLjUyIDE0LjgwNi0yLjUyIDE0LjgwNk0xMjQuNTU1IDkwcy03LjQ0NCAwLTEzLjY3IDYuMTkyYy02LjIyNyA2LjE5Mi00LjgzOCAxMi4wMTItNC44MzggMTIuMDEybTIuMjQgNjguNjI2cy00LjAyNi05LjAyNS0xOC4xNDUtOS4wMjUtMTguMTQ1IDUuNy0xOC4xNDUgNS43IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTg1LjcxNiAzNi4xNDZsNS4yNDMtOS41MjFoMTEuMDkzbDUuNDE2IDkuNTIxLTUuNDEgOS4xODVIOTAuOTUzbC01LjIzNy05LjE4NXptNjMuOTA5IDE1LjQ3OWgxMC43NXYxMC43NWgtMTAuNzV6IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIvPjxjaXJjbGUgZmlsbD0iIzAwMCIgY3g9IjcxLjUiIGN5PSI3LjUiIHI9IjEuNSIvPjxjaXJjbGUgZmlsbD0iIzAwMCIgY3g9IjE3MC41IiBjeT0iOTUuNSIgcj0iMS41Ii8+PGNpcmNsZSBmaWxsPSIjMDAwIiBjeD0iODEuNSIgY3k9IjEzNC41IiByPSIxLjUiLz48Y2lyY2xlIGZpbGw9IiMwMDAiIGN4PSIxMy41IiBjeT0iMjMuNSIgcj0iMS41Ii8+PHBhdGggZmlsbD0iIzAwMCIgZD0iTTkzIDcxaDN2M2gtM3ptMzMgODRoM3YzaC0zem0tODUgMThoM3YzaC0zeiIvPjxwYXRoIGQ9Ik0zOS4zODQgNTEuMTIybDUuNzU4LTQuNDU0IDYuNDUzIDQuMjA1LTIuMjk0IDcuMzYzaC03Ljc5bC0yLjEyNy03LjExNHpNMTMwLjE5NSA0LjAzbDEzLjgzIDUuMDYyLTEwLjA5IDcuMDQ4LTMuNzQtMTIuMTF6bS04MyA5NWwxNC44MyA1LjQyOS0xMC44MiA3LjU1Ny00LjAxLTEyLjk4N3pNNS4yMTMgMTYxLjQ5NWwxMS4zMjggMjAuODk3TDIuMjY1IDE4MGwyLjk0OC0xOC41MDV6IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIvPjxwYXRoIGQ9Ik0xNDkuMDUgMTI3LjQ2OHMtLjUxIDIuMTgzLjk5NSAzLjM2NmMxLjU2IDEuMjI2IDguNjQyLTEuODk1IDMuOTY3LTcuNzg1LTIuMzY3LTIuNDc3LTYuNS0zLjIyNi05LjMzIDAtNS4yMDggNS45MzYgMCAxNy41MSAxMS42MSAxMy43MyAxMi40NTgtNi4yNTcgNS42MzMtMjEuNjU2LTUuMDczLTIyLjY1NC02LjYwMi0uNjA2LTE0LjA0MyAxLjc1Ni0xNi4xNTcgMTAuMjY4LTEuNzE4IDYuOTIgMS41ODQgMTcuMzg3IDEyLjQ1IDIwLjQ3NiAxMC44NjYgMy4wOSAxOS4zMzEtNC4zMSAxOS4zMzEtNC4zMSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuMjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvZz48L3N2Zz4=');&ndash;&gt;-->
+<!--&lt;!&ndash;    opacity: 0.1;&ndash;&gt;-->
+<!--&lt;!&ndash;    top: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;    left: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;    bottom: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;    right: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;    height:100%;&ndash;&gt;-->
+<!--&lt;!&ndash;    position: absolute;&ndash;&gt;-->
+<!--&lt;!&ndash;    z-index: -1;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  #chat-input {&ndash;&gt;-->
+<!--&lt;!&ndash;    background: #f4f7f9;&ndash;&gt;-->
+<!--&lt;!&ndash;    width:100%;&ndash;&gt;-->
+<!--&lt;!&ndash;    position:relative;&ndash;&gt;-->
+<!--&lt;!&ndash;    height:47px;&ndash;&gt;-->
+<!--&lt;!&ndash;    padding-top:10px;&ndash;&gt;-->
+<!--&lt;!&ndash;    padding-right:50px;&ndash;&gt;-->
+<!--&lt;!&ndash;    padding-bottom:10px;&ndash;&gt;-->
+<!--&lt;!&ndash;    padding-left:15px;&ndash;&gt;-->
+<!--&lt;!&ndash;    border:none;&ndash;&gt;-->
+<!--&lt;!&ndash;    resize:none;&ndash;&gt;-->
+<!--&lt;!&ndash;    outline:none;&ndash;&gt;-->
+<!--&lt;!&ndash;    border:1px solid #ccc;&ndash;&gt;-->
+<!--&lt;!&ndash;    color:#888;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-top:none;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-bottom-right-radius:5px;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-bottom-left-radius:5px;&ndash;&gt;-->
+<!--&lt;!&ndash;    overflow:hidden;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .chat-input > form {&ndash;&gt;-->
+<!--&lt;!&ndash;    margin-bottom: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  #chat-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */&ndash;&gt;-->
+<!--&lt;!&ndash;    color: #ccc;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  #chat-input::-moz-placeholder { /* Firefox 19+ */&ndash;&gt;-->
+<!--&lt;!&ndash;    color: #ccc;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  #chat-input:-ms-input-placeholder { /* IE 10+ */&ndash;&gt;-->
+<!--&lt;!&ndash;    color: #ccc;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  #chat-input:-moz-placeholder { /* Firefox 18- */&ndash;&gt;-->
+<!--&lt;!&ndash;    color: #ccc;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .chat-submit {&ndash;&gt;-->
+<!--&lt;!&ndash;    position:absolute;&ndash;&gt;-->
+<!--&lt;!&ndash;    bottom:3px;&ndash;&gt;-->
+<!--&lt;!&ndash;    right:10px;&ndash;&gt;-->
+<!--&lt;!&ndash;    background: transparent;&ndash;&gt;-->
+<!--&lt;!&ndash;    box-shadow:none;&ndash;&gt;-->
+<!--&lt;!&ndash;    border:none;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-radius:50%;&ndash;&gt;-->
+<!--&lt;!&ndash;    color:#5A5EB9;&ndash;&gt;-->
+<!--&lt;!&ndash;    width:35px;&ndash;&gt;-->
+<!--&lt;!&ndash;    height:35px;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .chat-logs {&ndash;&gt;-->
+<!--&lt;!&ndash;    padding:15px;&ndash;&gt;-->
+<!--&lt;!&ndash;    height:370px;&ndash;&gt;-->
+<!--&lt;!&ndash;    overflow-y:scroll;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+
+<!--&lt;!&ndash;  .chat-logs::-webkit-scrollbar-track&ndash;&gt;-->
+<!--&lt;!&ndash;  {&ndash;&gt;-->
+<!--&lt;!&ndash;    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);&ndash;&gt;-->
+<!--&lt;!&ndash;    background-color: #F5F5F5;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+
+<!--&lt;!&ndash;  .chat-logs::-webkit-scrollbar&ndash;&gt;-->
+<!--&lt;!&ndash;  {&ndash;&gt;-->
+<!--&lt;!&ndash;    width: 5px;&ndash;&gt;-->
+<!--&lt;!&ndash;    background-color: #F5F5F5;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+
+<!--&lt;!&ndash;  .chat-logs::-webkit-scrollbar-thumb&ndash;&gt;-->
+<!--&lt;!&ndash;  {&ndash;&gt;-->
+<!--&lt;!&ndash;    background-color: #5A5EB9;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+
+
+
+<!--&lt;!&ndash;  @media only screen and (max-width: 500px) {&ndash;&gt;-->
+<!--&lt;!&ndash;    .chat-logs {&ndash;&gt;-->
+<!--&lt;!&ndash;      height:40vh;&ndash;&gt;-->
+<!--&lt;!&ndash;    }&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+
+<!--&lt;!&ndash;  .chat-msg.user > .msg-avatar img {&ndash;&gt;-->
+<!--&lt;!&ndash;    width:45px;&ndash;&gt;-->
+<!--&lt;!&ndash;    height:45px;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-radius:50%;&ndash;&gt;-->
+<!--&lt;!&ndash;    float:left;&ndash;&gt;-->
+<!--&lt;!&ndash;    width:15%;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .chat-msg.self > .msg-avatar img {&ndash;&gt;-->
+<!--&lt;!&ndash;    width:45px;&ndash;&gt;-->
+<!--&lt;!&ndash;    height:45px;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-radius:50%;&ndash;&gt;-->
+<!--&lt;!&ndash;    float:right;&ndash;&gt;-->
+<!--&lt;!&ndash;    width:15%;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .cm-msg-text {&ndash;&gt;-->
+<!--&lt;!&ndash;    background:white;&ndash;&gt;-->
+<!--&lt;!&ndash;    padding:10px 15px 10px 15px;&ndash;&gt;-->
+<!--&lt;!&ndash;    color:#666;&ndash;&gt;-->
+<!--&lt;!&ndash;    max-width:75%;&ndash;&gt;-->
+<!--&lt;!&ndash;    float:left;&ndash;&gt;-->
+<!--&lt;!&ndash;    margin-left:10px;&ndash;&gt;-->
+<!--&lt;!&ndash;    position:relative;&ndash;&gt;-->
+<!--&lt;!&ndash;    margin-bottom:20px;&ndash;&gt;-->
+<!--&lt;!&ndash;    border-radius:30px;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .chat-msg {&ndash;&gt;-->
+<!--&lt;!&ndash;    clear:both;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .chat-msg.self > .cm-msg-text {&ndash;&gt;-->
+<!--&lt;!&ndash;    float:right;&ndash;&gt;-->
+<!--&lt;!&ndash;    margin-right:10px;&ndash;&gt;-->
+<!--&lt;!&ndash;    background: #5A5EB9;&ndash;&gt;-->
+<!--&lt;!&ndash;    color:white;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .cm-msg-button>ul>li {&ndash;&gt;-->
+<!--&lt;!&ndash;    list-style:none;&ndash;&gt;-->
+<!--&lt;!&ndash;    float:left;&ndash;&gt;-->
+<!--&lt;!&ndash;    width:50%;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+<!--&lt;!&ndash;  .cm-msg-button {&ndash;&gt;-->
+<!--&lt;!&ndash;    clear: both;&ndash;&gt;-->
+<!--&lt;!&ndash;    margin-bottom: 70px;&ndash;&gt;-->
+<!--&lt;!&ndash;  }&ndash;&gt;-->
+
+<!--&lt;!&ndash;</style>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<script src="js/scripts.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<script>&ndash;&gt;-->
+
+<!--&lt;!&ndash;  $(function() {&ndash;&gt;-->
+<!--&lt;!&ndash;    var INDEX = 0;&ndash;&gt;-->
+<!--&lt;!&ndash;    $("#chat-submit").click(function(e) {&ndash;&gt;-->
+<!--&lt;!&ndash;      e.preventDefault();&ndash;&gt;-->
+<!--&lt;!&ndash;      var msg = $("#chat-input").val();&ndash;&gt;-->
+<!--&lt;!&ndash;      if(msg.trim() == ''){&ndash;&gt;-->
+<!--&lt;!&ndash;        return false;&ndash;&gt;-->
+<!--&lt;!&ndash;      }&ndash;&gt;-->
+<!--&lt;!&ndash;      generate_message(msg, 'self');&ndash;&gt;-->
+<!--&lt;!&ndash;      var buttons = [&ndash;&gt;-->
+<!--&lt;!&ndash;        {&ndash;&gt;-->
+<!--&lt;!&ndash;          name: 'Existing User',&ndash;&gt;-->
+<!--&lt;!&ndash;          value: 'existing'&ndash;&gt;-->
+<!--&lt;!&ndash;        },&ndash;&gt;-->
+<!--&lt;!&ndash;        {&ndash;&gt;-->
+<!--&lt;!&ndash;          name: 'New User',&ndash;&gt;-->
+<!--&lt;!&ndash;          value: 'new'&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;      ];&ndash;&gt;-->
+<!--&lt;!&ndash;      setTimeout(function() {&ndash;&gt;-->
+<!--&lt;!&ndash;        generate_message(msg, 'user');&ndash;&gt;-->
+<!--&lt;!&ndash;      }, 1000)&ndash;&gt;-->
+
+<!--&lt;!&ndash;    })&ndash;&gt;-->
+
+<!--&lt;!&ndash;    function generate_message(msg, type) {&ndash;&gt;-->
+<!--&lt;!&ndash;      INDEX++;&ndash;&gt;-->
+<!--&lt;!&ndash;      var str="";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg "+type+"\">";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "          <span class=\"msg-avatar\">";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "            <img src=\"https:\/\/image.crisp.im\/avatar\/operator\/196af8cc-f6ad-4ef7-afd1-c45d5231387c\/240\/?1483361727745\">";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "          <\/span>";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "          <div class=\"cm-msg-text\">";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += msg;&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "          <\/div>";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "        <\/div>";&ndash;&gt;-->
+<!--&lt;!&ndash;      $(".chat-logs").append(str);&ndash;&gt;-->
+<!--&lt;!&ndash;      $("#cm-msg-"+INDEX).hide().fadeIn(300);&ndash;&gt;-->
+<!--&lt;!&ndash;      if(type == 'self'){&ndash;&gt;-->
+<!--&lt;!&ndash;        $("#chat-input").val('');&ndash;&gt;-->
+<!--&lt;!&ndash;      }&ndash;&gt;-->
+<!--&lt;!&ndash;      $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);&ndash;&gt;-->
+<!--&lt;!&ndash;    }&ndash;&gt;-->
+
+<!--&lt;!&ndash;    function generate_button_message(msg, buttons){&ndash;&gt;-->
+<!--&lt;!&ndash;      /* Buttons should be object array&ndash;&gt;-->
+<!--&lt;!&ndash;        [&ndash;&gt;-->
+<!--&lt;!&ndash;          {&ndash;&gt;-->
+<!--&lt;!&ndash;            name: 'Existing User',&ndash;&gt;-->
+<!--&lt;!&ndash;            value: 'existing'&ndash;&gt;-->
+<!--&lt;!&ndash;          },&ndash;&gt;-->
+<!--&lt;!&ndash;          {&ndash;&gt;-->
+<!--&lt;!&ndash;            name: 'New User',&ndash;&gt;-->
+<!--&lt;!&ndash;            value: 'new'&ndash;&gt;-->
+<!--&lt;!&ndash;          }&ndash;&gt;-->
+<!--&lt;!&ndash;        ]&ndash;&gt;-->
+<!--&lt;!&ndash;      */&ndash;&gt;-->
+<!--&lt;!&ndash;      INDEX++;&ndash;&gt;-->
+<!--&lt;!&ndash;      var btn_obj = buttons.map(function(button) {&ndash;&gt;-->
+<!--&lt;!&ndash;        return  "              <li class=\"button\"><a href=\"javascript:;\" class=\"btn btn-primary chat-btn\" chat-value=\""+button.value+"\">"+button.name+"<\/a><\/li>";&ndash;&gt;-->
+<!--&lt;!&ndash;      }).join('');&ndash;&gt;-->
+<!--&lt;!&ndash;      var str="";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg user\">";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "          <span class=\"msg-avatar\">";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "            <img src=\"https:\/\/image.crisp.im\/avatar\/operator\/196af8cc-f6ad-4ef7-afd1-c45d5231387c\/240\/?1483361727745\">";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "          <\/span>";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "          <div class=\"cm-msg-text\">";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += msg;&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "          <\/div>";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "          <div class=\"cm-msg-button\">";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "            <ul>";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += btn_obj;&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "            <\/ul>";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "          <\/div>";&ndash;&gt;-->
+<!--&lt;!&ndash;      str += "        <\/div>";&ndash;&gt;-->
+<!--&lt;!&ndash;      $(".chat-logs").append(str);&ndash;&gt;-->
+<!--&lt;!&ndash;      $("#cm-msg-"+INDEX).hide().fadeIn(300);&ndash;&gt;-->
+<!--&lt;!&ndash;      $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);&ndash;&gt;-->
+<!--&lt;!&ndash;      $("#chat-input").attr("disabled", true);&ndash;&gt;-->
+<!--&lt;!&ndash;    }&ndash;&gt;-->
+
+<!--&lt;!&ndash;    $(document).delegate(".chat-btn", "click", function() {&ndash;&gt;-->
+<!--&lt;!&ndash;      var value = $(this).attr("chat-value");&ndash;&gt;-->
+<!--&lt;!&ndash;      var name = $(this).html();&ndash;&gt;-->
+<!--&lt;!&ndash;      $("#chat-input").attr("disabled", false);&ndash;&gt;-->
+<!--&lt;!&ndash;      generate_message(name, 'self');&ndash;&gt;-->
+<!--&lt;!&ndash;    })&ndash;&gt;-->
+
+<!--&lt;!&ndash;    $("#chat-circle").click(function() {&ndash;&gt;-->
+<!--&lt;!&ndash;      $("#chat-circle").toggle('scale');&ndash;&gt;-->
+<!--&lt;!&ndash;      $(".chat-box").toggle('scale');&ndash;&gt;-->
+<!--&lt;!&ndash;    })&ndash;&gt;-->
+
+<!--&lt;!&ndash;    $(".chat-box-toggle").click(function() {&ndash;&gt;-->
+<!--&lt;!&ndash;      $("#chat-circle").toggle('scale');&ndash;&gt;-->
+<!--&lt;!&ndash;      $(".chat-box").toggle('scale');&ndash;&gt;-->
+<!--&lt;!&ndash;    })&ndash;&gt;-->
+
+<!--&lt;!&ndash;  })&ndash;&gt;-->
+<!--&lt;!&ndash;</script>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<div id="center-text">&ndash;&gt;-->
+<!--&lt;!&ndash;  <h2>ChatBox UI</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;  <p>Message send and scroll to bottom enabled </p>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div id="body">&ndash;&gt;-->
+
+<!--&lt;!&ndash;  <div id="chat-circle" class="btn btn-raised">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div id="chat-overlay"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <i class="material-icons">speaker_phone</i>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;  <div class="chat-box">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="chat-box-header">&ndash;&gt;-->
+<!--&lt;!&ndash;      ChatBot&ndash;&gt;-->
+<!--&lt;!&ndash;      <span class="chat-box-toggle"><i class="material-icons">close</i></span>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="chat-box-body">&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="chat-box-overlay">&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="chat-logs">&ndash;&gt;-->
+
+<!--&lt;!&ndash;      </div>&lt;!&ndash;chat-log &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="chat-input">&ndash;&gt;-->
+<!--&lt;!&ndash;      <form>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="text" id="chat-input" placeholder="Send a message..."/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <button type="submit" class="chat-submit" id="chat-submit"><i class="material-icons">send</i></button>&ndash;&gt;-->
+<!--&lt;!&ndash;      </form>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+
+
+
+
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+
+
+
+
+<!--&lt;!&ndash;-->
+<!--Copyright 2017 Google Inc. All rights reserved.-->
+<!--Licensed under the Apache License, Version 2.0 (the "License");-->
+<!--you may not use this file except in compliance with the License.-->
+<!--You may obtain a copy of the License at-->
+<!--    http://www.apache.org/licenses/LICENSE-2.0-->
+<!--Unless required by applicable law or agreed to in writing, software-->
+<!--distributed under the License is distributed on an "AS IS" BASIS,-->
+<!--WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.-->
+<!--See the License for the specific language governing permissions and-->
+<!--limitations under the License.-->
+<!--&ndash;&gt;-->
+
+<!--<html>-->
+<!--<!doctype html>-->
+<!--<head>-->
+<!--  <meta charset="utf-8">-->
+<!--  <meta name="author" content="Paul Lewis" />-->
+<!--  <meta name="viewport" content="width=device-width,minimum-scale=1.0">-->
+<!--  <title></title>-->
+<!--  <link rel="stylesheet" href="expando.css">-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<style>-->
+
+<!--  /**-->
+<!-- *-->
+<!-- * Copyright 2017 Google Inc. All rights reserved.-->
+<!-- *-->
+<!-- * Licensed under the Apache License, Version 2.0 (the "License");-->
+<!-- * you may not use this file except in compliance with the License.-->
+<!-- * You may obtain a copy of the License at-->
+<!-- *-->
+<!-- *     http://www.apache.org/licenses/LICENSE-2.0-->
+<!-- *-->
+<!-- * Unless required by applicable law or agreed to in writing, software-->
+<!-- * distributed under the License is distributed on an "AS IS" BASIS,-->
+<!-- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.-->
+<!-- * See the License for the specific language governing permissions and-->
+<!-- * limitations under the License.-->
+<!-- */-->
+
+<!--  * {-->
+<!--    box-sizing: border-box;-->
+<!--  }-->
+
+<!--  html, body {-->
+<!--    margin: 0;-->
+<!--    padding: 0;-->
+<!--    font-family: Arial, Helvetica, sans-serif;-->
+<!--  }-->
+
+
+<!--  .expando {-->
+<!--    border-radius: 2px;-->
+<!--    overflow: hidden;-->
+<!--    position: fixed;-->
+<!--    top: 20px;-->
+<!--    left: 20px;-->
+<!--    will-change: transform;-->
+<!--  }-->
+
+<!--  .expando__inner {-->
+<!--    top: 10px;-->
+<!--    left: 10px;-->
+<!--    border-radius: 50%;-->
+<!--    overflow: hidden;-->
+<!--    background: #FFF;-->
+<!--    position: absolute;-->
+<!--    will-change: transform;-->
+<!--  }-->
+
+<!--  .expando__inner-inverter {-->
+<!--    will-change: transform;-->
+<!--  }-->
+
+<!--  .expando__btn {-->
+<!--    width: 48px;-->
+<!--    height: 48px;-->
+<!--    position: absolute;-->
+<!--    top: 0;-->
+<!--    left: 0;-->
+<!--    background: none;-->
+<!--    border: none;-->
+<!--    outline: none;-->
+<!--    pointer-events: auto;-->
+<!--    cursor: pointer;-->
+<!--    will-change: transform;-->
+<!--    transition:-->
+<!--      transform 0.1s cubic-bezier(0, 0, 0.31, 1),-->
+<!--      opacity 0.2s cubic-bezier(0, 0, 0.31, 1);-->
+<!--  }-->
+
+<!--  .expando__content {-->
+<!--    position: absolute;-->
+<!--    left: -10px;-->
+<!--    top: -10px;-->
+<!--    pointer-events: none;-->
+<!--    opacity: 0;-->
+<!--    will-change: transform;-->
+<!--    transform: translateY(20px);-->
+<!--    transition:-->
+<!--      transform 0.3s cubic-bezier(0, 0, 0.31, 1),-->
+<!--      opacity 0.3s cubic-bezier(0, 0, 0.31, 1);-->
+<!--  }-->
+
+<!--  .expando__close {-->
+<!--    position: absolute;-->
+<!--    right: 10px;-->
+<!--    top: 10px;-->
+<!--    outline: none;-->
+<!--    border: none;-->
+<!--    background: none;-->
+<!--    cursor: pointer;-->
+<!--  }-->
+
+<!--  .expando__content-list {-->
+<!--    width: 140px;-->
+<!--    margin: 0;-->
+<!--    padding: 30px 0 20px 0;-->
+<!--    list-style: none;-->
+<!--    overflow: hidden;-->
+<!--  }-->
+
+<!--  li {-->
+<!--    line-height: 1.9;-->
+<!--    padding: 0 20px;-->
+<!--  }-->
+
+<!--  li:hover {-->
+<!--    background: #555;-->
+<!--    color: #FFF;-->
+<!--  }-->
+
+<!--  .item&#45;&#45;expanded {-->
+<!--    animation-name: expandAnimation;-->
+<!--    animation-duration: 0.7s;-->
+<!--    animation-timing-function: linear;-->
+<!--    animation-fill-mode: forwards;-->
+<!--  }-->
+
+<!--  .item__contents&#45;&#45;expanded {-->
+<!--    animation-name: expandContentsAnimation;-->
+<!--    animation-duration: 0.7s;-->
+<!--    animation-timing-function: linear;-->
+<!--    animation-fill-mode: forwards;-->
+<!--  }-->
+
+<!--  .item&#45;&#45;collapsed {-->
+<!--    animation-name: collapseAnimation;-->
+<!--    animation-duration: 0.2s;-->
+<!--    animation-timing-function: linear;-->
+<!--    animation-fill-mode: forwards;-->
+<!--  }-->
+
+<!--  .item__contents&#45;&#45;collapsed {-->
+<!--    animation-name: collapseContentsAnimation;-->
+<!--    animation-duration: 0.2s;-->
+<!--    animation-timing-function: linear;-->
+<!--    animation-fill-mode: forwards;-->
+<!--  }-->
+
+<!--  .item__contents&#45;&#45;expanded .expando__content {-->
+<!--    transform: translateY(0px);-->
+<!--    opacity: 1;-->
+<!--    pointer-events: auto;-->
+<!--  }-->
+
+<!--  .item__contents&#45;&#45;expanded .expando__btn {-->
+<!--    transform: rotate(180deg);-->
+<!--    opacity: 0;-->
+<!--    pointer-events: none;-->
+<!--  }-->
+
+<!--</style>-->
+
+
+<!--<div class="expando js-expando">-->
+<!--  <div class="expando__inner js-expando-inner">-->
+<!--    <div class="expando__inner-inverter js-expando-inner-inverter">-->
+<!--      <div class="expando__content js-content">-->
+<!--        <ul class="expando__content-list">-->
+<!--          <li>One</li>-->
+<!--          <li>Two</li>-->
+<!--          <li>Three</li>-->
+<!--          <li>Four</li>-->
+<!--        </ul>-->
+
+<!--        <button class="expando__close js-expando-collapse-btn">Close</button>-->
+<!--      </div>-->
+
+<!--      <button class="expando__btn js-expando-expand-btn">-->
+<!--        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">-->
+<!--          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>-->
+<!--          <path d="M0 0h24v24H0z" fill="none"/>-->
+<!--        </svg>-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--<script>-->
+
+<!--  /**-->
+<!--   *-->
+<!--   * Copyright 2017 Google Inc. All rights reserved.-->
+<!--   *-->
+<!--   * Licensed under the Apache License, Version 2.0 (the "License");-->
+<!--   * you may not use this file except in compliance with the License.-->
+<!--   * You may obtain a copy of the License at-->
+<!--   *-->
+<!--   *     http://www.apache.org/licenses/LICENSE-2.0-->
+<!--   *-->
+<!--   * Unless required by applicable law or agreed to in writing, software-->
+<!--   * distributed under the License is distributed on an "AS IS" BASIS,-->
+<!--   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.-->
+<!--   * See the License for the specific language governing permissions and-->
+<!--   * limitations under the License.-->
+<!--   */-->
+
+<!--  'use strict';-->
+
+<!--  class Expando {-->
+<!--    constructor () {-->
+<!--      this._el = document.querySelector('.js-expando');-->
+<!--      this._elInner = this._el.querySelector('.js-expando-inner');-->
+<!--      this._elInnerInverter = this._el.querySelector('.js-expando-inner-inverter');-->
+<!--      this._expandBtn = this._el.querySelector('.js-expando-expand-btn');-->
+<!--      this._collapseBtn = this._el.querySelector('.js-expando-collapse-btn');-->
+<!--      this._content = this._el.querySelector('.js-content');-->
+
+<!--      this.toggle = this.toggle.bind(this);-->
+<!--      this.expand = this.expand.bind(this);-->
+<!--      this.collapse = this.collapse.bind(this);-->
+
+<!--      this._calculate();-->
+<!--      this._createEaseAnimations();-->
+
+<!--      this._expandBtn.addEventListener('click', this.expand);-->
+<!--      this._collapseBtn.addEventListener('click', this.collapse);-->
+<!--    }-->
+
+<!--    expand () {-->
+<!--      if (this._isExpanded) {-->
+<!--        return;-->
+<!--      }-->
+<!--      this._isExpanded = true;-->
+<!--      this._applyAnimation({expand: true});-->
+<!--    }-->
+
+<!--    collapse () {-->
+<!--      if (!this._isExpanded) {-->
+<!--        return;-->
+<!--      }-->
+<!--      this._isExpanded = false;-->
+<!--      this._applyAnimation({expand: false});-->
+<!--    }-->
+
+<!--    toggle () {-->
+<!--      if (this._isExpanded) {-->
+<!--        return this.collapse();-->
+<!--      }-->
+
+<!--      this.expand();-->
+<!--    }-->
+
+<!--    _applyAnimation ({expand}=opts) {-->
+<!--      this._elInner.classList.remove('item&#45;&#45;expanded');-->
+<!--      this._elInner.classList.remove('item&#45;&#45;collapsed');-->
+<!--      this._elInnerInverter.classList.remove('item__contents&#45;&#45;expanded');-->
+<!--      this._elInnerInverter.classList.remove('item__contents&#45;&#45;collapsed');-->
+
+<!--      // Force a recalc styles here so the classes take hold.-->
+<!--      window.getComputedStyle(this._elInner).transform;-->
+
+<!--      if (expand) {-->
+<!--        this._elInner.classList.add('item&#45;&#45;expanded');-->
+<!--        this._elInnerInverter.classList.add('item__contents&#45;&#45;expanded');-->
+<!--        return;-->
+<!--      }-->
+
+<!--      this._elInner.classList.add('item&#45;&#45;collapsed');-->
+<!--      this._elInnerInverter.classList.add('item__contents&#45;&#45;collapsed');-->
+<!--    }-->
+
+<!--    _calculate () {-->
+<!--      const elBCR = this._el.getBoundingClientRect();-->
+<!--      const collapsed = this._expandBtn.getBoundingClientRect();-->
+<!--      const expanded = this._content.getBoundingClientRect();-->
+
+<!--      const expandedWidth = Math.abs(expanded.right - elBCR.left);-->
+<!--      const expandedHeight = Math.abs(expanded.bottom - elBCR.top);-->
+
+<!--      const collapsedWidth = collapsed.width;-->
+<!--      const collapsedHeight = collapsed.height;-->
+
+<!--      const exRadius = Math.sqrt(expandedWidth * expandedWidth +-->
+<!--        expandedHeight * expandedHeight);-->
+<!--      const colRadius = collapsedWidth * 0.5;-->
+
+<!--      this._scale = (exRadius - colRadius) / colRadius;-->
+
+<!--      // Set initial sizes.-->
+<!--      this._el.style.width = `${expandedWidth}px`;-->
+<!--      this._el.style.height = `${expandedHeight}px`;-->
+
+<!--      this._elInner.style.width = `${collapsedWidth}px`;-->
+<!--      this._elInner.style.height = `${collapsedHeight}px`;-->
+
+<!--      this._elInner.style.transformOrigin =-->
+<!--        `${collapsedWidth * 0.5}px ${collapsedHeight * 0.5}px`;-->
+<!--      this._elInnerInverter.style.transformOrigin =-->
+<!--        `${collapsedWidth * 0.5}px ${collapsedHeight * 0.5}px`;-->
+
+<!--    }-->
+
+<!--    _createEaseAnimations () {-->
+<!--      let ease = document.querySelector('.ease');-->
+<!--      if (ease) {-->
+<!--        return ease;-->
+<!--      }-->
+
+<!--      ease = document.createElement('style');-->
+<!--      ease.classList.add('ease');-->
+
+<!--      const expandAnimation = [];-->
+<!--      const expandContentsAnimation = [];-->
+<!--      const expandCircleAnimation = [];-->
+<!--      const collapseAnimation = [];-->
+<!--      const collapseContentsAnimation = [];-->
+<!--      const collapseCircleAnimation = [];-->
+<!--      for (let i = 0; i <= 100; i++) {-->
+<!--        const step = this._ease(i/100);-->
+
+<!--        // Expand animation.-->
+<!--        this._append({-->
+<!--          i,-->
+<!--          step,-->
+<!--          start: 1,-->
+<!--          end: this._scale,-->
+<!--          outerAnimation: expandAnimation,-->
+<!--          innerAnimation: expandContentsAnimation-->
+<!--        });-->
+
+<!--        // Collapse animation.-->
+<!--        this._append({-->
+<!--          i,-->
+<!--          step,-->
+<!--          start: this._scale,-->
+<!--          end: 1,-->
+<!--          outerAnimation: collapseAnimation,-->
+<!--          innerAnimation: collapseContentsAnimation-->
+<!--        });-->
+<!--      }-->
+
+<!--      ease.textContent = `-->
+<!--      @keyframes expandAnimation {-->
+<!--        ${expandAnimation.join('')}-->
+<!--      }-->
+<!--      @keyframes expandContentsAnimation {-->
+<!--        ${expandContentsAnimation.join('')}-->
+<!--      }-->
+<!--      @keyframes collapseAnimation {-->
+<!--        ${collapseAnimation.join('')}-->
+<!--      }-->
+<!--      @keyframes collapseContentsAnimation {-->
+<!--        ${collapseContentsAnimation.join('')}-->
+<!--      }`;-->
+
+<!--      document.head.appendChild(ease);-->
+<!--      return ease;-->
+<!--    }-->
+
+<!--    _append ({-->
+<!--               i,-->
+<!--               step,-->
+<!--               start,-->
+<!--               end,-->
+<!--               outerAnimation,-->
+<!--               innerAnimation}=opts) {-->
+
+<!--      const scale = start + (end - start) * step;-->
+<!--      const invScale = 1 / scale;-->
+
+<!--      outerAnimation.push(`-->
+<!--      ${i}% {-->
+<!--        transform: scale(${scale});-->
+<!--      }`);-->
+
+<!--      innerAnimation.push(`-->
+<!--      ${i}% {-->
+<!--        transform: scale(${invScale});-->
+<!--      }`);-->
+<!--    }-->
+
+<!--    _clamp (value, min, max) {-->
+<!--      return Math.max(min, Math.min(max, value));-->
+<!--    }-->
+
+<!--    _ease (v, pow=4) {-->
+<!--      v = this._clamp(v, 0, 1);-->
+
+<!--      return 1 - Math.pow(1 - v, pow);-->
+<!--    }-->
+<!--  }-->
+
+<!--  new Expando();-->
+
+<!--</script>-->
+
+
+
+<!--<div id="chat" class="animated-chat tada" onclick="loadChatbox()">Chat</div>-->
+<!--<div class="chatbox" id="chatbox">-->
+<!--  <span class="chat-text">Chatting Yuk!</span>-->
+<!--  <script>-->
+<!--    //<![CDATA[-->
+<!--    document.write('<div id="smartchatbox_img901621879" style="width: 280px; height: 450px; overflow: hidden; margin: auto; padding: 0;">');-->
+<!--    document.write('<div id="smartchatbox901621879" style="width: 280px; height: 450px; overflow: hidden; margin: auto; padding: 0; border:0; ">');-->
+<!--    document.write('<iframe src="https://www3.smartchatbox.com/shoutbox/sb.php?key=901621879" scrolling="no" frameborder="0" width="280px" height="450px" style="border:0; margin:0; padding: 0;">');-->
+<!--    document.write('</iframe></div></div>');-->
+<!--    //]]>-->
+<!--  </script>-->
+<!--  <div id="close-chat" onclick="closeChatbox()">&times;</div>-->
+<!--  <div id="minim-chat" onclick="minimChatbox()"><span class="minim-button">-</span></div>-->
+<!--  <div id="maxi-chat" onclick="loadChatbox()"><span class="maxi-button">+</span></div>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--  //<![CDATA[-->
+<!--  function loadChatbox(){var e=document.getElementById("minim-chat");e.style.display="block";var e=document.getElementById("maxi-chat");e.style.display="none";var e=document.getElementById("chatbox");e.style.margin="0";}-->
+<!--  function closeChatbox(){var e=document.getElementById("chatbox");e.style.margin="0 0 -1500px 0";}-->
+<!--  function minimChatbox(){var e=document.getElementById("minim-chat");e.style.display="none";var e=document.getElementById("maxi-chat");e.style.display="block";var e=document.getElementById("chatbox");e.style.margin="0 0 -460px 0";}-->
+<!--  //]]>-->
+<!--</script>-->
+
+
+
+<!--<style>-->
+
+<!--  #chat,#chat:after,.chatbox{transition:all .4s ease-in-out}-->
+<!--  #chat,#close-chat,.minim-button,.maxi-button,.chat-text{font-weight:700;cursor:pointer;font-family:Arial,sans-serif;text-align:center;height:20px;line-height:20px}-->
+<!--  #chat,#close-chat,.chatbox{border:1px solid #A8A8A8}-->
+<!--  #chat:after,#chat:before{position:absolute;border-style:solid;content:""}-->
+<!--  .chatbox{position:fixed;bottom:0;left:50px;margin:0 0 -1500px;background:#fff;border-bottom:none;padding:28px 10px 10px;z-index:100000}-->
+<!--  #close-chat{position:absolute;top:2px;right:2px;font-size:24px;border:1px solid #dedede;width:20px;background:#fefefe;z-index:2}-->
+<!--  #minim-chat,#maxi-chat{position:absolute;top:0;left:0;width:100%;height:20px;line-height:20px;cursor:pointer;z-index:1}-->
+<!--  .minim-button{position:absolute;top:2px;right:26px;font-size:24px;border:1px solid #dedede;width:20px;background:#fefefe}-->
+<!--  .maxi-button{position:absolute;top:2px;right:26px;font-size:24px;border:1px solid #dedede;width:20px;background:#fefefe;}-->
+<!--  .chat-text{position:absolute;top:5px;left:10px;font-size:16px;}-->
+<!--  #chat{width:40px;border-radius:3px;padding:2px 8px;font-size:12px;background:#fff;-webkit-transform:translateZ(0);transform:translateZ(0)}-->
+<!--  #chat:before{border-width:10px 11px 0 0;border-color:#A8A8A8 transparent transparent;left:7px;bottom:-10px}-->
+<!--  #chat:after{border-width:9px 8px 0 0;border-color:#fff transparent transparent;left:8px;bottom:-8px}-->
+<!--  #chat:hover{background:#ddd;-webkit-animation-name:hvr-pulse-grow;animation-name:hvr-pulse-grow;-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-timing-function:linear;animation-timing-function:linear;-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite;-webkit-animation-direction:alternate;animation-direction:alternate}-->
+<!--  #chat:hover:after{border-color:#ddd transparent transparent!important}-->
+<!--  .animated-chat{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}-->
+<!--  @-webkit-keyframes tada{0%{-webkit-transform:scale(1)}-->
+<!--    10%,20%{-webkit-transform:scale(.9)rotate(-3deg)}-->
+<!--    30%,50%,70%,90%{-webkit-transform:scale(1.1)rotate(3deg)}-->
+<!--    40%,60%,80%{-webkit-transform:scale(1.1)rotate(-3deg)}-->
+<!--    100%{-webkit-transform:scale(1)rotate(0)}-->
+<!--  }-->
+<!--  @keyframes tada{0%{transform:scale(1)}-->
+<!--    10%,20%{transform:scale(.9)rotate(-3deg)}-->
+<!--    30%,50%,70%,90%{transform:scale(1.1)rotate(3deg)}-->
+<!--    40%,60%,80%{transform:scale(1.1)rotate(-3deg)}-->
+<!--    100%{transform:scale(1)rotate(0)}-->
+<!--  }-->
+<!--  .tada{-webkit-animation-name:tada;animation-name:tada}-->
+<!--  @-webkit-keyframes hvr-pulse-grow{to{-webkit-transform:scale(1.1);transform:scale(1.1)}-->
+<!--  }-->
+<!--  @keyframes hvr-pulse-grow{to{-webkit-transform:scale(1.1);transform:scale(1.1)}-->
+<!--  }-->
+
+<!--  body{-->
+<!--    background:#dedede-->
+<!--  }-->
+
+
+<!--</style>-->
+
+
+
+
+
+
+<!--<button class="olark-launch-button olark-size-md" tabindex="0" role="button" aria-hidden="false" data-reactid=".0.4"><svg x="0px" y="0px" viewBox="0 0 27 21.9" aria-label="three small dots to indicate that an agent is available to chat" role="img" data-reactid=".0.4.0"><title data-reactid=".0.4.0.0">Chat Icon </title><desc data-reactid=".0.4.0.1">three small dots to indicate that an agent is available to chat</desc><path fill="#ffffff" d="M23.2,0L2.6,1.7C1,1.9,0,3.2,0,4.9v8c0,1.6,0.8,3,2.4,3.1l5.3,0.5c0,0,1,1.6,0.3,3.2C7.2,21.3,6,21.9,6,21.9 c4.2,0,6.6-3.1,7.8-4.9l9.4,0.7c1.8,0.2,3.8-1.3,3.8-3.1V3.1C27,1.3,25-0.1,23.2,0z M6.4,10.1c-0.9,0-1.7-0.7-1.7-1.7 c0-0.9,0.7-1.7,1.7-1.7C7.3,6.8,8,7.5,8,8.5C8,9.4,7.3,10.1,6.4,10.1z M13.2,10.1c-0.9,0-1.7-0.7-1.7-1.7c0-0.9,0.7-1.7,1.7-1.7 c0.9,0,1.7,0.7,1.7,1.7C14.8,9.4,14.1,10.1,13.2,10.1z M19.9,10.1c-0.9,0-1.7-0.7-1.7-1.7c0-0.9,0.7-1.7,1.7-1.7 c0.9,0,1.7,0.7,1.7,1.7C21.6,9.4,20.9,10.1,19.9,10.1z" data-reactid=".0.4.0.2"></path></svg><div class="olark-notification-badge olark-hidden" data-reactid=".0.4.1"><div class="olark-notification-badge-text" data-reactid=".0.4.1.0">0</div></div><div class="olark-button-text" data-reactid=".0.4.2">Chat with us!</div></button>-->
+
+
+
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!doctype html>
+<html lang="en-US">
+<head>
+
+  <link rel="icon" type="image/png" href="https://www.olark.com/favicon-16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="https://www.olark.com/favicon-32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="https://www.olark.com/favicon-96.png" sizes="96x96">
+
+  <link rel="apple-touch-icon" href="https://www.olark.com/favicon-120.png">
+  <link rel="apple-touch-icon" href="https://www.olark.com/favicon-152.png" sizes="152x152">
+  <link rel="apple-touch-icon" href="https://www.olark.com/favicon-167.png" sizes="167x167">
+  <link rel="apple-touch-icon" href="https://www.olark.com/favicon-180.png" sizes="180x180">
+
+
+  <link rel="canonical" href="https://www.olark.com/help/addimage/">
+
+
+
+  <meta name="pageName" content="Adding a click-to-chat link Help Center">
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Adding a click-to-chat link" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.olark.com/help/addimage/" />
+  <meta property="og:image" content="https://www.olark.com/img/global/social/olark-social-share-landscape.jpg" />
+  <meta property="og:description" content="" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@olark">
+
+  <meta name="twitter:title" content="Adding a click-to-chat link | Olark">
+
+
+  <meta name="twitter:description" content="Being able to make any image or link bring up the Olark chat box lets you highlight your live chat service anywhere on your site. As with all the examples below, we recommend enabling the &amp;ldquo;Hide the chatbox by default&amp;rdquo; option so that your chat box is hidden until someone clicks the link.
+ Note: You need to be on a paid account in order to enable Hide the chatbox by default.">
+
+  <meta name="twitter:image" content="https://www.olark.com/img/global/social/olark-social-share-landscape.jpg">
+  <meta name="slack-app-id" content="A5BKB84CU">
+
+
+
+
+
+  <title>Adding a click-to-chat link | Olark</title>
+  <meta name="og:title" content="Adding a click-to-chat link | Olark">
+  <meta name="twitter:title" content="Adding a click-to-chat link | Olark">
+
+
+
+  <meta name="description" content="Being able to make any image or link bring up the Olark chat box lets you highlight your live chat service anywhere on your site. As with all the examples below, we recommend enabling the &amp;ldquo;Hide the chatbox by default&amp;rdquo; option so that your chat box is hidden until someone clicks the link.
+ Note: You need to be on a paid account in order to enable Hide the chatbox by default.">
+  <meta property="og:description" content="Being able to make any image or link bring up the Olark chat box lets you highlight your live chat service anywhere on your site. As with all the examples below, we recommend enabling the &amp;ldquo;Hide the chatbox by default&amp;rdquo; option so that your chat box is hidden until someone clicks the link.
+ Note: You need to be on a paid account in order to enable Hide the chatbox by default." />
+  <meta name="twitter:description" content="Being able to make any image or link bring up the Olark chat box lets you highlight your live chat service anywhere on your site. As with all the examples below, we recommend enabling the &amp;ldquo;Hide the chatbox by default&amp;rdquo; option so that your chat box is hidden until someone clicks the link.
+ Note: You need to be on a paid account in order to enable Hide the chatbox by default.">
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://www.olark.com/css/main.css?v=2020-05-05-1702">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+
+  <script type="text/javascript">
+    !function(){var analytics=window.analytics=window.analytics||[];
+      if(!analytics.initialize)if(analytics.invoked)window.console&&
+      console.error&&console.error("Segment snippet included twice.");
+      else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick",
+        "trackLink","trackForm","pageview","identify","reset","group","track",
+        "ready","alias","debug","page","once","off","on"];analytics.factory=
+        function(t){return function(){var e=Array.prototype.slice.call(arguments);
+          e.unshift(t);analytics.push(e);return analytics}};for(var t=0;
+                                                                t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=
+        analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");
+        e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?
+          "https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";
+        var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};
+        analytics.SNIPPET_VERSION="4.0.0";}}();
+  </script>
+
+
+
+  <script type="text/javascript">
+    var _vwo_code=(function(){
+      var account_id=150968,
+        settings_tolerance=2000,
+        library_tolerance=2500,
+        use_existing_jquery=false,
+
+        f=false,d=document;return{use_existing_jquery:function(){
+          return use_existing_jquery;},library_tolerance:function(){
+          return library_tolerance;},finish:function(){if(!f){f=true;
+          var a=d.getElementById('_vis_opt_path_hides');
+          if(a)a.parentNode.removeChild(a);}},finished:function(){
+          return f;},load:function(a){var b=d.createElement('script');
+          b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){
+            _vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);
+        },init:function(){settings_timer=setTimeout('_vwo_code.finish()',
+          settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+
+          account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=
+            d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',
+          h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');
+          a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;
+          else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};
+    }());_vwo_settings_timer=_vwo_code.init();
+  </script>
+
+
+  <script src="https://script.tapfiliate.com/tapfiliate.js" type="text/javascript" async></script>
+  <script type="text/javascript">
+    (function(t,a,p){t.TapfiliateObject=a;t[a]=t[a]||function(){ (t[a].q=t[a].q||[]).push(arguments)}})(window,'tap');
+    tap('create', '11931-51b80c', { integration: "javascript" });
+    tap('detect');
+  </script>
+
+
+  <script async type="text/javascript" src="https://www.olark.com/js/app.js?v=2020-05-05-1702"></script>
+
+</head>
+<body >
+<script>
+
+  window.olarkSiteAnnouncements = {};
+
+</script>
+
+<div id="js-announcement-banner" class="announcement-banner hidden">
+  <div class="announcement-banner-inner">
+    <a href="#" id="js-announcement-banner-link" class="announcement-link" target="_blank" rel="noopener">
+      <span class="announcement-prefix">New</span> -
+      <span id="js-announcement-banner-content"></span>
+      <img id="js-announcement-banner-arrow" class="announcement-arrow hidden" src="https://www.olark.com/img/global/text-link-arrow-blue600.svg" alt="Learn more" />
+    </a>
+  </div>
+</div>
+
+
+
+<div class="outer-container">
+
+  <nav class="header-bar-nav hidden">
+    <a href="#hbl-live-chat-wrapper">
+      <div class="header-bar-link">Jump to live chat support</div>
+    </a>
+  </nav>
+  <div class="header-bar">
+    <nav class="header-bar-nav">
+      <a href="https://www.olark.com/">
+        <div aria-label="Olark Live Chat Logo" class="header-bar-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 211.3 140">
+            <path d="M36 23.8c-2.3 0.2-2.9 1.9-2.9 3.2 0 2.8 2.6 6.2 8.7 5.8l1.4-0.1C42 27.3 39.6 23.5 36 23.8z" fill="#ffffff" />
+            <path d="M70.9 12.7c-1.3 0.1-1.8 2.9-1.8 4.8v33.4c2.5-5.1 4.9-20.8 4.9-27.2C74 16 72.8 12.6 70.9 12.7z" fill="#ffffff" />
+            <path d="M208.9 86.3c-0.8 0.1-1 1.2-4.3 1.4l-7.2 0.5c0 0 0 0 0 0l-131.5 10c-1.4 0.1-2.8 0.8-3.8 1.8l-15 16 0-14.9c0-0.9-0.8-1.6-1.7-1.5l-18 1.4 -21.2 1.4c-2.7 0.2-4.9 2.7-4.9 6.4 0 1.6 0.5 3.5 1.2 3.5 0.8-0.1 1-1.2 4.3-1.4l30.3-2.3c1 0 1.7 0.7 1.7 1.6l0 20.1c0 2.3 2.8 3.2 4.5 1.5l22.3-23.7c1-1.1 2.4-1.8 3.9-1.9l90.3-6.9 45.4-3.2c2.7-0.2 4.9-2.7 4.9-6.4C210.1 88.2 209.6 86.2 208.9 86.3z" />
+            <path d="M203.8 57.9c-1.1 5.2-5 12.9-10.4 13.3 -4.6 0.4-7.1-4.1-8.3-9.1 4.7-3.8 11.2-11 11.2-20 0-6.6-3.2-12.4-10.4-11.8 -5.3 0.4-9.9 5.4-13.7 10.8V4.7c0-2.8-2.5-5-6.3-4.6 -1.6 0.1-3.7 0.8-3.7 1.6s1.2 1 1.2 4.4v53.4c-0.2 0.5-0.4 1-0.5 1.6 -1.1 5.2-3 12.9-8.4 13.3 -3.2 0.3-4.7-2.7-4.7-5.9 0-11.7 5.7-23.2 5.7-24.6 0.5-2.7-2.5-5.5-5.6-6.1 0 0-7.3-1.5-12.7-2.3 -1.3-4.7-4.6-5.8-7.4-5.6 -3 0.2-5.9 2.6-5.9 5.8 0 3.4 2.1 5.7 5 7.1 -0.1 6-0.6 15.7-1.9 20.5 0 0.1 0 0.2 0 0.3 0 0.1 0 0.2-0.1 0.3 -1.1 5.2-3.2 12.9-7.8 13.3 -2.8 0.2-4-2.5-4-5.1V52.7c0-2.8-2.5-5-6.3-4.6 -1.6 0.1-3 1.1-3 2.2 0 0.8 0.5 1.5 0.5 3.7v18c-1.3 3.4-3.4 6.4-6.6 6.6 -4.1 0.3-6.7-3-6.7-9.1 0-16.9 10.4-25.3 19.3-26 1.2-0.1 2.3 0 3.4 0 1.2-0.1 1.5-0.8 1.5-2.8 0-3-2.2-4.7-5.4-4.5C97.6 37.4 84 50.4 84 69.9c0 0.8 0 1.5 0.1 2.3 -1.9 4.1-5 8-8.8 8.3 -4.3 0.3-6.2-2.9-6.2-7.6v-6.8c1.5-1.5 12.2-26 12.2-43.2 0-6.6-0.1-18.8-10.4-18C65 5.4 60.2 12 60.2 20.8v1c-1.9 2-5.8 5.8-9 7.3 -2.6-8-7.5-14.4-16-13.7 -6.3 0.5-10.6 5.9-10.6 12 0 9 7.8 14.1 17.6 13.4l2.2-0.2c0.2 2.4 0.4 4.9 0.4 7.1 -0.1 21.9-7.4 34.9-17.1 35.6 -8.3 0.7-17-8-17-29.2 0-30 14.4-38.5 18.5-41.1 0.2 0.1 0.4 0.1 0.6 0.1 1.1-0.1 1.5-1.3 1.5-2.8 0-2.6-1.5-6-4.1-5.8 -0.5 0-0.9 0.2-1.3 0.3C24.9 5.2 1.3 16.2 1.3 56c0 20.9 8.9 37.4 26 36.1C40.9 91 53.8 76.6 53.8 46.9c0-2.8-0.2-6-0.7-9.2 2-1 4.7-2.9 7.1-5v41.3c0 9.2 4.8 15.1 13.8 14.4 5.3-0.4 9.4-3.7 12.5-7.7 2.3 3.9 6.1 6.2 11.4 5.8 4.4-0.4 7.7-2.7 10.1-5.6 1.8 2.7 4.9 4.4 9 4.1 9.7-0.8 14.4-10.9 16.5-18.7 0-0.1 0.1-0.2 0.1-0.3 2.1-7 2.8-17.2 2.9-21.8l10.6 2c-3.7 10.4-6.3 16.1-6.3 23.6 0 10.3 6.6 12.8 12.1 12.4 4.5-0.4 7.9-2.7 10.4-5.9 0 4.3 3.3 4.8 5.6 4.6 3.4-0.3 3.3-3.1 3.3-5.3V55.5c3.6-12.7 8.9-16.9 11.7-17.1 2.2-0.2 3.7 1.7 3.7 4.6 0 10.8-10.9 15.4-10.9 19 0 7.7 6.1 17.8 15.3 17 10.6-0.8 16.4-13.1 18.5-19.6C211.6 55.6 205.2 50.6 203.8 57.9zM69.1 17.5c0-1.9 0.5-4.7 1.8-4.8 1.9-0.1 3.2 3.3 3.2 11 0 6.4-2.5 22.1-4.9 27.2V17.5zM41.7 32.7c-6.1 0.5-8.7-2.9-8.7-5.8 0-1.3 0.6-3 2.9-3.2 3.6-0.3 6 3.5 7.1 8.8L41.7 32.7z" />
+          </svg>
+
+        </div>
+      </a>
+      <a href="https://www.olark.com/features">
+        <div class="header-bar-link">
+          Features
+        </div>
+      </a>
+      <a href="https://www.olark.com/integrations">
+        <div class="header-bar-link">
+          Integrations
+        </div>
+      </a>
+      <a href="https://www.olark.com/pricing">
+        <div class="header-bar-link">
+          Pricing
+        </div>
+      </a>
+      <div class="header-bar-link" id="dropdown">
+        Learn
+        <ul class="dropdown-list dropdown-animate">
+          <li class="dropdown-item">
+            <a href="https://www.olark.com/ecommerce" class="js-cta" data-cta-name="Dropdown Sales">Increase Sales</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="https://www.olark.com/live-chat-lead-generation" class="js-cta" data-cta-name="Dropdown Leads">Generate Leads</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="https://www.olark.com/customer-service" class="js-cta" data-cta-name="Dropdown Customer Service">Provide Great Service</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="https://www.olark.com/live-chat-for-recruiting-students-to-your-university" class="js-cta" data-cta-name="Dropdown Recruit Students">Recruit Students</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="https://www.olark.com/tips-for-remote-managers-and-going-remote-guide" class="js-cta" data-cta-name="Dropdown Remote Team">Manage a Remote Team</a>
+          </li>
+        </ul>
+      </div>
+
+      <nav class="cta-nav">
+        <a href="https://www.olark.com/login" class="header-bar-link">
+          Log in
+        </a>
+        <a href="https://www.olark.com/signup/create_new_account/trial" class="header-bar-link-trial">
+          Free trial
+        </a>
+      </nav>
+      <div class="alert-banner hidden" id="cookie-consent">
+        <p class="alert-banner-text" id="cookie-consent-message">
+          Olark uses cookies to give you the best possible experience on our website. By clicking "Continue", you agree to our use of cookies. Refer to our <a href="https://www.olark.com/privacy-policy" class="consent-pp-link" target="_blank">privacy policy</a> for details. <a href="#" class="alert-banner-action" id="cookie-consent-accept">Continue</a>
+        </p>
+      </div>
+    </nav>
+  </div>
+
+  <nav class="mobile-nav">
+    <div class="mobile-menu-open mobile-menu-open-button">
+      <svg width="32" height="22" viewBox="0 0 32 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#2B2929"><g transform="translate(-1140.000000, -38.000000) translate(1140.000000, 38.000000)"><rect x="0" y="20" width="32" height="2"/><rect x="0" y="10" width="32" height="2"/><rect x="0" y="0" width="32" height="2"/></g></g></g></svg>
+    </div>
+    <div class="mobile-menu mobile-menu-display">
+      <div class="mobile-nav-primary">
+        <div class="mobile-menu-close mobile-menu-close-button">
+          <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#FFF"><path d="M1019.6066,49.0208153 L1009,59.627417 L1010.41421,61.0416306 L1021.02082,50.4350288 L1031.62742,61.0416306 L1033.04163,59.627417 L1022.43503,49.0208153 L1033.04163,38.4142136 L1031.62742,37 L1021.02082,47.6066017 L1010.41421,37 L1009,38.4142136 L1019.6066,49.0208153 Z" transform="translate(-1009.000000, -37.000000)"/></g></g></svg>
+        </div>
+        <ul>
+          <li>
+            <a href="https://www.olark.com/features"  class="nav-link-mobile">
+              Features
+            </a>
+          </li>
+          <li>
+            <a href="https://www.olark.com/integrations"  class="nav-link-mobile">
+              Integrations
+            </a>
+          </li>
+          <li>
+            <a href="https://www.olark.com/pricing"  class="nav-link-mobile">
+              Pricing
+            </a>
+          </li>
+          <li>
+            <a href="https://www.olark.com/login"  class="nav-link-mobile">
+              Log in
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="mobile-nav-secondary">
+        <ul class="mobile-nav-secondary-list">
+          <li>
+            <a href="https://www.olark.com/help" class="mobile-nav-secondary-link">
+              Help Center
+            </a>
+          </li>
+          <li>
+            <a href="https://www.olark.com/about" class="mobile-nav-secondary-link">
+              Our Team
+            </a>
+          </li>
+          <li>
+            <a href="https://www.olark.com/values" class="mobile-nav-secondary-link">
+              Values
+            </a>
+          </li>
+          <li>
+            <a href="https://www.olark.com/jobs" class="mobile-nav-secondary-link">
+              Jobs
+            </a>
+          </li>
+        </ul>
+        <ul class="mobile-nav-secondary-list">
+          <li>
+            <a href="https://www.olark.com/contact" class="mobile-nav-secondary-link">
+              Contact
+            </a>
+          </li>
+          <li>
+            <a href="https://blog.olark.com" class="mobile-nav-secondary-link">
+              Blog
+            </a>
+          </li>
+          <li>
+            <a href="https://www.olark.com/faq" class="mobile-nav-secondary-link">
+              FAQ
+            </a>
+          </li>
+          <li>
+            <a href="https://www.olark.com/sales" class="mobile-nav-secondary-link">
+              Talk to sales
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <div class="help-outer-container">
+    <div id="helpcenter_article">
+      <div class="container">
+        <div class="single_post_content">
+          <div class="article-content content_background" data-url="/help/addimage">
+            <a href="https://www.olark.com/help" class="breadcrumbs">Help</a>
+            <span>&nbsp;/&nbsp;</span>
+            <a href="https://www.olark.com/categories/api" class="breadcrumbs">api</a>
+            <h1 class="help-article-heading">Adding a click-to-chat link</h1>
+            <div class="article-body markdown-content" data-swiftype-index='true'>
+
+
+              <p>Being able to make any image or link bring up the Olark chat box lets you highlight your live chat service anywhere on your site. As with all the examples below, we recommend <a href="https://www.olark.com/customize/advanced">enabling the &ldquo;Hide the chatbox by default&rdquo; option</a> so that your chat box is hidden until someone clicks the link.</p>
+
+              <blockquote>
+                <p><strong>Note:</strong> You need to be on a paid account in order to enable <strong>Hide the chatbox by default</strong>.</p>
+              </blockquote>
+
+              <p>If you send a message to your visitor, either as an agent or using the Greeter or Targeted Chat rules, the chat box will automatically appear and expand itself.</p>
+
+              <h2 id="contents">Contents</h2>
+
+              <p>This article contains four short guides with examples. They are:</p>
+
+              <ul>
+                <li><a href="#click-to-chat-link">Click-to-chat link</a><br />
+                  Put a link on your website that expands the chat box when clicked</li>
+                <li><a href="#click-to-chat-image">Click-to-chat image</a> Put an image on your website that expands the chat box when clicked</li>
+                <li><a href="#chat-side-tab">Chat side-tab</a><br />
+                  Create a tab on the side of your page that expands the chat box when clicked</li>
+                <li><a href="#chat-side-tab-css-only">Chat side-tab (CSS only)</a> Creates a side-tab, without using any Javascript</li>
+              </ul>
+
+              <h2 id="click-to-chat-link">Click-to-chat link</h2>
+
+              <p>This click-to-chat link makes use of the <a href="https://www.olark.com/documentation">Olark Javascript API</a>. You can modify or hide the link itself when your agents are away by using the <a href="https://www.olark.com/documentation/javascript/api.chat.onOperatorsAway">api.chat.onOperatorsAway</a> call.</p>
+
+              <ol>
+                <li><p>Copy the following HTML code.</p>
+
+                  <pre><code>&lt;!-- BEGIN OLARK CHAT LINK --&gt;
+&lt;a href=&quot;javascript:void(0);&quot; onclick=&quot;olark('api.box.expand')&quot;&gt;
+    Click here to chat!
+&lt;/a&gt;
+&lt;!-- END OLARK CHAT LINK --&gt;
+</code></pre></li>
+
+                <li><p>Paste the code in to your website source, anywhere between the two body tags.</p></li>
+
+                <li><p>Save your page and reload.</p></li>
+              </ol>
+
+              <p>It should look something like this:</p>
+
+              <p><img src="https://www.olark.com/img/help/addimage/addimage01.png" alt="click to chat text link" /></p>
+
+              <h2 id="click-to-chat-image">Click-to-chat image</h2>
+
+              <ol>
+                <li><p>Copy the following HTML code.</p>
+
+                  <pre><code>&lt;!-- BEGIN OLARK CHAT IMAGE --&gt;
+&lt;a href=&quot;javascript:void(0);&quot; onclick=&quot;olark('api.box.expand')&quot;&gt;
+      &lt;img src=&quot;https://static.olark.com/imageservice/library/thumbnails/simple/hummingbird-attention-woman-2.jpg.thumb-200-200.png&quot;&gt;
+    &lt;/a&gt;
+&lt;!-- END OLARK CHAT IMAGE --&gt;
+</code></pre></li>
+              </ol>
+
+              <p><strong>Note:</strong> You can find the siteID for your account <a href="https://www.olark.com/install">here</a>.</p>
+
+              <ol>
+                <li><p>Place this code where you want your image to appear. The links to the images should be after online= and offline= in the src attribute.</p></li>
+
+                <li><p>Save your page and reload.</p></li>
+              </ol>
+
+              <p>It should look something like this:</p>
+
+              <p><img src="https://www.olark.com/img/help/addimage/addimage02.png" alt="click to chat link image" /></p>
+
+              <p><strong>Note: if you&rsquo;d like your images to display differently based on online/offline status, you can use the following code:</strong></p>
+
+              <pre><code>&lt;!-- BEGIN OLARK CHAT IMAGE--&gt;
+&lt;a href=&quot;javascript:void(0);&quot; onclick=&quot;olark('api.box.expand')&quot;&gt;
+&lt;img src=&quot;https://images-async.olark.com/status/YOUR_SITE_ID/image.png?online=https://static.olark.com/images/image-orangelark-available.png&amp;offline=https://static.olark.com/images/image-orangelark-unavailable.png&quot; border=0&gt;&lt;/a&gt;
+</code></pre>
+
+              <!-- END OLARK CHAT IMAGE -->
+
+              <p><strong>After you insert your Site ID where it shows, &ldquo;YOUR_SITE_ID&rdquo;, you can reference the image file path after <em>online=</em>, and you can use <em>offline=</em> for an offline image file.</strong></p>
+
+              <h2 id="chat-side-tab">Chat side tab</h2>
+
+              <p>You can add a click-to-chat tab to the side of your page. Remember, you can use your own custom image or change the position by modifying this code.</p>
+
+              <p><img src="https://www.olark.com/img/help/chat-tab.jpg" alt="Chat side tab" /></p>
+
+              <ol>
+                <li><p>Copy the following HTML and CSS code.</p>
+
+                  <pre><code>&lt;!-- BEGIN OLARK TAB--&gt;
+&lt;div id=&quot;olark_tab&quot;&gt;
+    &lt;a href=&quot;javascript:void(0);&quot; onclick=&quot;olark('api.box.expand')&quot;&gt;
+        &lt;img src=&quot;https://static.olark.com/images/livehelp-tab-icon.png&quot; /&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;!-- END OLARK TAB--&gt;
+</code></pre></li>
+
+                <li><p>Paste the code in to your website source, anywhere between the two <em>body</em> tags.</p></li>
+
+                <li><p>Include the following CSS either in your HTML document or your CSS stylesheet. If including in your CSS stylesheet, the <code>&lt;style&gt;</code> and <code>&lt;/style&gt;</code> tags are not necessary:</p>
+
+                  <pre><code>&lt;style&gt;
+  div#olark_tab{
+                    position: fixed;
+                    left: 0;
+                    bottom:0%;
+                    z-index:5000;
+  }
+
+  #olark_tab a {
+                    display:block;
+                    /*Edit these to change the look of your tab*/
+                    border: 3px solid white;
+                    border-left-style: none;
+                    border-bottom-style: none;
+                    margin-top:0px;
+  }
+
+  #olark_tab a:hover{
+                    border-color: orange;
+  }
+&lt;/style&gt;
+</code></pre></li>
+
+                <li><p>Save your page and reload.</p></li>
+              </ol>
+
+              <p>It should look something like this:</p>
+
+              <p><img src="https://www.olark.com/img/help/addimage/addimage03.gif" alt="Side tab click to chat image" /></p>
+
+              <h2 id="chat-side-tab-css-only">Chat side tab (CSS only)</h2>
+
+              <p>If you&rsquo;d rather use a solution that doesn&rsquo;t require any images, you can use CSS to position a click-to-chat tab on the side of your page.</p>
+
+              <blockquote>
+                <p><strong>Note:</strong> This method uses CSS3 which may not work on older browsers.</p>
+              </blockquote>
+
+              <ol>
+                <li><p>Copy the following HTML code.</p>
+
+                  <pre><code>&lt;!-- BEGIN OLARK TAB--&gt;
+&lt;div id=&quot;olark_tab&quot;&gt;
+    &lt;div&gt;
+        &lt;a href=&quot;javascript:void(0);&quot; onclick=&quot;olark('api.box.expand')&quot;&gt;
+            Click to chat
+        &lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- END OLARK TAB--&gt;
+</code></pre></li>
+
+                <li><p>Paste the code in to your website source, anywhere between the two body tags.</p></li>
+
+                <li><p>Include the following CSS either in your HTML document or your CSS stylesheet. If including in your CSS stylesheet, the <code>&lt;style&gt;</code> and <code>&lt;/style&gt;</code> tags are not necessary:</p>
+
+                  <pre><code>&lt;style&gt;
+  div#olark_tab{
+                    position: fixed;
+                    left: 0;
+                    bottom:40%;
+                    z-index:5000;
+  }
+
+  #olark_tab div{
+                    height: 150px;
+                    width: 150px;
+                    float: left;
+                    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+                    -webkit-transform: rotate(-90deg);
+                    -moz-transform: rotate(-90deg);
+  }
+
+  #olark_tab a{
+                    /*Edit these to change the look of your tab*/
+                    background-color: black;
+                    color: white;
+                    font: bold 18px &quot;century gothic&quot;;
+    height: 20px;
+    padding: 6px;
+    border: 2px solid #363636;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    width: auto;
+    -webkit-border-bottom-right-radius:9px;
+    -webkit-border-bottom-left-radius:9px;
+    -moz-border-radius-bottomleft:9px;
+    -moz-border-radius-bottomright:9px;
+    border-top-style: none;
+    border-top-width: 0;
+  }
+
+  #olark_tab a:hover{
+                    background-color: white;
+                    color: black;
+  }
+&lt;/style&gt;
+</code></pre></li>
+
+                <li><p>Save your page and reload. It should look something like <a href="https://codepen.io/olark/pen/bJLYry">this example</a>.</p></li>
+              </ol>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="single_post_sidebar">
+          <div class="help_sidebar sidebar_background_padding">
+            <form action="#" class="search-form-help" autocomplete="off">
+              <input type="text" id="st-search-input-large" class="search-input search-input-help" placeholder="Search Olark help" autocomplete="off" />
+              <div id="search-results"></div>
+            </form>
+            <div class="hc-setup-links">
+              <a href="javascript:void(0);" onclick="olark('api.box.expand')" class="setup-link">
+                <img alt="Chat with us graphic" src="https://www.olark.com/img/views/help/lets_chat.png" class="hc-setup-graphic">
+                <div class="hc-text-indent">Chat with an Olarker<br>
+                  <div class="tooltip">
+                    <div class="hc-setup-text">Monday - Friday, 7am - 4pm Pacific</div>
+                    <span>10am-7pm Eastern<br>3pm-12am GMT</span>
+                  </div>
+                </div>
+              </a>
+              <a href="https://www.olark.com/help/ticket" class="setup-link supportForm">
+                <img alt="Email us graphic" src="https://www.olark.com/img/views/help/email_us.png" class="hc-setup-graphic">
+                <div class="hc-text-indent">Open a support ticket<br>
+                  <div class="hc-setup-text">Or email support@olark.com</div>
+                </div>
+              </a>
+              <a href="//twitter.com/intent/tweet?screen_name=OlarkSupport&amp;share_with_retweet=never" class="setup-link">
+                <img alt="Tweet us graphic" src="https://www.olark.com/img/views/help/twitter.png" class="hc-setup-graphic">
+                <div class="hc-text-indent"> Tweet @olarksupport<br>
+                  <div class="hc-setup-text">Quick answers to short questions</div>
+                </div>
+              </a>
+              <a class="setup-link" href="http://status.olark.com/">
+                <div id="status-indicator" class="status-indicator-icon"></div>
+                <div class="hc-text-indent"><span id="status-description">All Systems Operational</span><br>
+                  <div class="hc-setup-text">Subscribe to status notifications</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var Swiftype = window.Swiftype || {};
+    (function() {
+      Swiftype.key = 'fG4ske6DtTq2EpXqNc4a';
+      Swiftype.renderStyle = "new_page";
+      Swiftype.resultPageURL = "/help/search";
+      Swiftype.additionalInputElements = ['#st-search-input-large'];
+      Swiftype.resultContainingElement = "#full-search-results";
+      Swiftype.autocompleteResultLimit = 5;
+      Swiftype.searchPerPage = 5;
+
+
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = "//s.swiftypecdn.com/embed.js";
+      var entry = document.getElementsByTagName('script')[0];
+      entry.parentNode.insertBefore(script, entry);
+    }());
+  </script>
+  <script src="//cdn.statuspage.io/se-v2.js"></script>
+  <script>
+    var sp = new StatusPage.page({
+      page: 'ch35l9p6dzhj'
+    });
+    sp.status({
+      success: function(data) {
+        var icon;
+        if (data.status.description && data.status.indicator) {
+          document.getElementById('status-description').textContent = data.status.description;
+          icon = document.getElementById('status-indicator');
+          icon.className += ' ' + data.status.indicator;
+        }
+      }
+    });
+  </script>
+  <script src="//platform.twitter.com/widgets.js"></script>
+
+
+
+
+  <footer class="footer-main">
+    <div class="footer-inner">
+
+      <div class="footer-column">
+        <ul class="footer-column-link-list">
+          <li>
+            <h4 class="footer-column-heading-one">About</h4>
+          </li>
+          <li><a href="https://www.olark.com/help" class="footer-link">Help Center</a></li>
+          <li><a href="https://www.olark.com/api" class="footer-link">JavaScript API</a></li>
+          <li><a href="https://changelog.olark.com" class="footer-link">Product Updates</a></li>
+          <li><a href="https://www.olark.com/tos" class="footer-link">Terms of Service</a></li>
+          <li><a href="https://www.olark.com/privacy-policy" class="footer-link">Privacy Policy</a></li>
+          <li><a href="https://www.olark.com/help/gdpr" class="footer-link">GDPR</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <ul class="footer-column-link-list">
+          <li>
+            <h4 class="footer-column-heading-two">Resources</h4>
+          </li>
+          <li><a href="https://www.olark.com/about" class="footer-link">Our Team</a></li>
+          <li><a href="https://www.olark.com/values" class="footer-link">Values</a></li>
+          <li><a href="https://www.olark.com/jobs" class="footer-link">Jobs</a></li>
+          <li><a href="https://blog.olark.com/" class="footer-link">Blog</a></li>
+          <li><a href="https://www.olark.com/faq" class="footer-link">FAQ</a></li>
+          <li><a href="https://www.olark.com/press" class="footer-link">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <ul class="footer-column-link-list">
+          <li>
+            <h4 class="footer-column-heading-three">Product</h4>
+          </li>
+          <li><a href="https://www.olark.com/features" class="footer-link">Features</a></li>
+          <li><a href="https://www.olark.com/integrations" class="footer-link">Integrations</a></li>
+          <li><a href="https://www.olark.com/pricing" class="footer-link">Pricing</a></li>
+          <li><a href="https://www.olark.com/contact" class="footer-link">Contact</a></li>
+          <li><a href="https://www.olark.com/partners" class="footer-link">Partner Program</a></li>
+          <li><a href="https://hello.olark.com/olark-demo-videos" class="footer-link">Product Tour</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <a href="https://www.olark.com/">
+          <div class="footer-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 211.3 132.7">
+              <path fill="#ffffff" d="M208.9 86.3c-0.8 0.1-1 1.2-4.3 1.4l-7.2 0.5c0 0 0 0 0 0l-131.5 10c-1.4 0.1-2.8 0.8-3.8 1.8l-15 16 0-14.9c0-0.9-0.8-1.6-1.7-1.5l-18 1.4 -21.2 1.4c-2.7 0.2-4.9 2.7-4.9 6.4 0 1.6 0.5 3.5 1.2 3.5 0.8-0.1 1-1.2 4.3-1.4l30.3-2.3c1 0 1.7 0.7 1.7 1.6l0 20.1c0 2.3 2.8 3.2 4.5 1.5l22.3-23.7c1-1.1 2.4-1.8 3.9-1.9l90.3-6.9 45.4-3.2c2.7-0.2 4.9-2.7 4.9-6.4C210.1 88.2 209.6 86.2 208.9 86.3z"/><path fill="#ffffff" d="M203.8 57.9c-1.1 5.2-5 12.9-10.4 13.3 -4.6 0.4-7.1-4.1-8.3-9.1 4.7-3.8 11.2-11 11.2-20 0-6.6-3.2-12.4-10.4-11.8 -5.3 0.4-9.9 5.4-13.7 10.8V4.7c0-2.8-2.5-5-6.3-4.6 -1.6 0.1-3.7 0.8-3.7 1.6s1.2 1 1.2 4.4v53.4c-0.2 0.5-0.4 1-0.5 1.6 -1.1 5.2-3 12.9-8.4 13.3 -3.2 0.3-4.7-2.7-4.7-5.9 0-11.7 5.7-23.2 5.7-24.6 0.5-2.7-2.5-5.5-5.6-6.1 0 0-7.3-1.5-12.7-2.3 -1.3-4.7-4.6-5.8-7.4-5.6 -3 0.2-5.9 2.6-5.9 5.8 0 3.4 2.1 5.7 5 7.1 -0.1 6-0.6 15.7-1.9 20.5 0 0.1 0 0.2 0 0.3 0 0.1 0 0.2-0.1 0.3 -1.1 5.2-3.2 12.9-7.8 13.3 -2.8 0.2-4-2.5-4-5.1V52.7c0-2.8-2.5-5-6.3-4.6 -1.6 0.1-3 1.1-3 2.2 0 0.8 0.5 1.5 0.5 3.7v18c-1.3 3.4-3.4 6.4-6.6 6.6 -4.1 0.3-6.7-3-6.7-9.1 0-16.9 10.4-25.3 19.3-26 1.2-0.1 2.3 0 3.4 0 1.2-0.1 1.5-0.8 1.5-2.8 0-3-2.2-4.7-5.4-4.5C97.6 37.4 84 50.4 84 69.9c0 0.8 0 1.5 0.1 2.3 -1.9 4.1-5 8-8.8 8.3 -4.3 0.3-6.2-2.9-6.2-7.6v-6.8c1.5-1.5 12.2-26 12.2-43.2 0-6.6-0.1-18.8-10.4-18C65 5.4 60.2 12 60.2 20.8v1c-1.9 2-5.8 5.8-9 7.3 -2.6-8-7.5-14.4-16-13.7 -6.3 0.5-10.6 5.9-10.6 12 0 9 7.8 14.1 17.6 13.4l2.2-0.2c0.2 2.4 0.4 4.9 0.4 7.1 -0.1 21.9-7.4 34.9-17.1 35.6 -8.3 0.7-17-8-17-29.2 0-30 14.4-38.5 18.5-41.1 0.2 0.1 0.4 0.1 0.6 0.1 1.1-0.1 1.5-1.3 1.5-2.8 0-2.6-1.5-6-4.1-5.8 -0.5 0-0.9 0.2-1.3 0.3C24.9 5.2 1.3 16.2 1.3 56c0 20.9 8.9 37.4 26 36.1C40.9 91 53.8 76.6 53.8 46.9c0-2.8-0.2-6-0.7-9.2 2-1 4.7-2.9 7.1-5v41.3c0 9.2 4.8 15.1 13.8 14.4 5.3-0.4 9.4-3.7 12.5-7.7 2.3 3.9 6.1 6.2 11.4 5.8 4.4-0.4 7.7-2.7 10.1-5.6 1.8 2.7 4.9 4.4 9 4.1 9.7-0.8 14.4-10.9 16.5-18.7 0-0.1 0.1-0.2 0.1-0.3 2.1-7 2.8-17.2 2.9-21.8l10.6 2c-3.7 10.4-6.3 16.1-6.3 23.6 0 10.3 6.6 12.8 12.1 12.4 4.5-0.4 7.9-2.7 10.4-5.9 0 4.3 3.3 4.8 5.6 4.6 3.4-0.3 3.3-3.1 3.3-5.3V55.5c3.6-12.7 8.9-16.9 11.7-17.1 2.2-0.2 3.7 1.7 3.7 4.6 0 10.8-10.9 15.4-10.9 19 0 7.7 6.1 17.8 15.3 17 10.6-0.8 16.4-13.1 18.5-19.6C211.6 55.6 205.2 50.6 203.8 57.9zM69.1 17.5c0-1.9 0.5-4.7 1.8-4.8 1.9-0.1 3.2 3.3 3.2 11 0 6.4-2.5 22.1-4.9 27.2V17.5zM41.7 32.7c-6.1 0.5-8.7-2.9-8.7-5.8 0-1.3 0.6-3 2.9-3.2 3.6-0.3 6 3.5 7.1 8.8L41.7 32.7z"/>
+            </svg>
+
+          </div>
+        </a>
+        <ol class="footer-address">
+          <li>
+            427 N Tatnall St #63602
+          </li>
+          <li>
+            Wilmington, DE 19801
+          </li>
+          <li class="copyright">
+            © Olark
+          </li>
+        </ol>
+
+
+        <div class="social-icons">
+          <a href="https://www.facebook.com/olarklivechat/" target="_blank" rel="noopener" class="footer-social-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#5B5757" fill-rule="nonzero"><path d="M28,4.66697778 C28,2.2148 25.7861333,0 23.3333333,0 L4.66666667,0 C2.21386667,0 0,2.2148 0,4.66697778 L0,23.3330222 C0,25.7852 2.21386667,28 4.66697778,28 L14,28 L14,17.4222222 L10.5777778,17.4222222 L10.5777778,12.7555556 L14,12.7555556 L14,10.9374222 C14,7.80173333 16.3544889,4.97777778 19.25,4.97777778 L23.0222222,4.97777778 L23.0222222,9.64444444 L19.25,9.64444444 C18.8371556,9.64444444 18.3555556,10.1456444 18.3555556,10.8963556 L18.3555556,12.7555556 L23.0222222,12.7555556 L23.0222222,17.4222222 L18.3555556,17.4222222 L18.3555556,28 L23.3333333,28 C25.7861333,28 28,25.7852 28,23.3330222 L28,4.66697778 Z"/></g></g></svg>
+          </a>
+          <a href="https://twitter.com/olark" target="_blank" rel="noopener" class="footer-social-icon">
+            <svg width="28" height="23" viewBox="0 0 28 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#5B5757" fill-rule="nonzero"><path d="M28,2.67526769 C26.9694444,3.12587093 25.8636732,3.43146489 24.7018562,3.56789641 C25.8881503,2.86691289 26.7962288,1.7550547 27.2266144,0.434260352 C26.1138431,1.08341615 24.885549,1.55478659 23.5767778,1.81031353 C22.5287451,0.707078244 21.0380196,0.0199094308 19.3845556,0.0199094308 C16.2124118,0.0199094308 13.6403922,2.55788783 13.6403922,5.68633209 C13.6403922,6.13002797 13.6911307,6.5633854 13.7891307,6.97778147 C9.01604575,6.7412159 4.78360784,4.4846783 1.95089542,1.05578673 C1.45572549,1.89144107 1.17403268,2.86515219 1.17403268,3.90455089 C1.17403268,5.87106993 2.18884967,7.60621521 3.72857516,8.62137045 C2.78723529,8.59030993 1.90189542,8.33478299 1.12681699,7.91004847 L1.12681699,7.98083756 C1.12681699,10.7259914 3.10745098,13.0170658 5.73368627,13.5385033 C5.25251634,13.6662667 4.74513072,13.7370558 4.22022222,13.7370558 C3.84931373,13.7370558 3.49062092,13.7008035 3.1389281,13.63173 C3.87026797,15.8848364 5.99090196,17.5232788 8.50344444,17.5681991 C6.53854902,19.087546 4.06100654,19.9905132 1.37003268,19.9905132 C0.906385621,19.9905132 0.44969281,19.9628838 4.5751634e-05,19.9128168 C2.5423268,21.5236748 5.56051634,22.4628943 8.80439869,22.4628943 C19.3706471,22.4628943 25.1463333,13.8268514 25.1463333,6.33724858 L25.1270719,5.60348899 C26.2555817,4.80923362 27.2318758,3.81132419 28,2.67526769 Z"/></g></g></svg>
+          </a>
+          <a href="https://www.instagram.com/olarklivechat/" target="_blank" rel="noopener" class="footer-social-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#5B5757" fill-rule="nonzero"><path d="M20.2728466,0 L7.72682211,0 C3.46625498,0 0,3.4664206 0,7.72698773 L0,20.2730123 C0,24.533745 3.46625498,28 7.72682211,28 L20.2728466,28 C24.533745,28 28,24.5335794 28,20.2730123 L28,7.72698773 C28.0001656,3.4664206 24.533745,0 20.2728466,0 Z M25.5158699,20.2730123 C25.5158699,23.1639044 23.1639044,25.5157043 20.2730123,25.5157043 L7.72682211,25.5157043 C4.83609563,25.5158699 2.4842957,23.1639044 2.4842957,20.2730123 L2.4842957,7.72698773 C2.4842957,4.83626125 4.83609563,2.4842957 7.72682211,2.4842957 L20.2728466,2.4842957 C23.1637387,2.4842957 25.5157043,4.83626125 25.5157043,7.72698773 L25.5157043,20.2730123 L25.5158699,20.2730123 Z"/><path d="M14,6.75294118 C10.0039116,6.75294118 6.75294118,10.0039862 6.75294118,14.0001664 C6.75294118,17.9961802 10.0039116,21.2470588 14,21.2470588 C17.9960884,21.2470588 21.2470588,17.9961802 21.2470588,14.0001664 C21.2470588,10.0039862 17.9960884,6.75294118 14,6.75294118 Z M14,18.7514634 C11.380026,18.7514634 9.24831299,16.6200342 9.24831299,14 C9.24831299,11.3797994 11.3798596,9.24820391 14,9.24820391 C16.6201404,9.24820391 18.751687,11.3797994 18.751687,14 C18.751687,16.6200342 16.619974,18.7514634 14,18.7514634 Z"/><path d="M21.5764706,4.61176471 C21.1004706,4.61176471 20.6328706,4.80447059 20.2967059,5.14211765 C19.9588941,5.47811765 19.7647059,5.94588235 19.7647059,6.42352941 C19.7647059,6.89969412 19.9590588,7.36729412 20.2967059,7.70494118 C20.6327059,8.04094118 21.1004706,8.23529412 21.5764706,8.23529412 C22.0541176,8.23529412 22.5202353,8.04094118 22.8578824,7.70494118 C23.1955294,7.36729412 23.3882353,6.89952941 23.3882353,6.42352941 C23.3882353,5.94588235 23.1955294,5.47811765 22.8578824,5.14211765 C22.5218824,4.80447059 22.0541176,4.61176471 21.5764706,4.61176471 Z"/></g></g></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/469764/" target="_blank" rel="noopener" class="footer-social-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#5B5757" fill-rule="nonzero"><path d="M25.2,0 L2.8,0 C1.26,0 0,1.24508876 0,2.76686391 L0,24.9017751 C0,26.4235503 1.26,27.6686391 2.8,27.6686391 L25.2,27.6686391 C26.74,27.6686391 28,26.4235503 28,24.9017751 L28,2.76686391 C28,1.24508876 26.74,0 25.2,0 Z M8.4,23.5183432 L4.2,23.5183432 L4.2,11.0674556 L8.4,11.0674556 L8.4,23.5183432 Z M6.3,8.7156213 C4.9,8.7156213 3.78,7.60887574 3.78,6.22544379 C3.78,4.84201183 4.9,3.73526627 6.3,3.73526627 C7.7,3.73526627 8.82,4.84201183 8.82,6.22544379 C8.82,7.60887574 7.7,8.7156213 6.3,8.7156213 Z M23.8,23.5183432 L19.6,23.5183432 L19.6,16.1861538 C19.6,15.0794625 18.62,14.1110059 17.5,14.1110059 C16.38,14.1110059 15.4,15.0794625 15.4,16.1861538 L15.4,23.5183432 L11.2,23.5183432 L11.2,11.0674556 L15.4,11.0674556 L15.4,12.727574 C16.1,11.6208284 17.64,10.7907692 18.9,10.7907692 C21.56,10.7907692 23.8,13.0042604 23.8,15.6327811 L23.8,23.5183432 Z"/></g></g></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <div class="footer-inner-mobile">
+      <input class="mobile-footer-toggle" id="mobile-footer-resources" type="checkbox">
+      <label class="mobile-footer-header" for="mobile-footer-resources">
+        About
+      </label>
+      <ul class="footer-column-link-list">
+        <li><a href="https://www.olark.com/help" class="footer-link">Help Center</a></li>
+        <li><a href="https://www.olark.com/integrations" class="footer-link">Integrations</a></li>
+        <li><a href="https://www.olark.com/api" class="footer-link">JavaScript API</a></li>
+        <li><a href="https://www.olark.com/tos" class="footer-link">Terms of Service</a></li>
+        <li><a href="https://www.olark.com/privacy-policy" class="footer-link">Privacy Policy</a></li>
+        <li><a href="https://changelog.olark.com" class="footer-link">Product Updates</a></li>
+      </ul>
+
+      <input class="mobile-footer-toggle" id="mobile-footer-our-company" type="checkbox">
+      <label class="mobile-footer-header" for="mobile-footer-our-company">
+        Resources
+      </label>
+      <ul class="footer-column-link-list">
+        <li><a href="https://www.olark.com/about" class="footer-link">Our Team</a></li>
+        <li><a href="https://www.olark.com/values" class="footer-link">Values</a></li>
+        <li><a href="https://www.olark.com/jobs" class="footer-link">Jobs</a></li>
+        <li><a href="https://blog.olark.com/" class="footer-link">Blog</a></li>
+        <li><a href="https://www.olark.com/faq" class="footer-link">FAQ</a></li>
+      </ul>
+
+      <input class="mobile-footer-toggle" id="mobile-footer-get-started" type="checkbox">
+      <label class="mobile-footer-header" for="mobile-footer-get-started">
+        Product
+      </label>
+      <ul class="footer-column-link-list">
+        <li><a href="https://www.olark.com/features" class="footer-link">Features</a></li>
+        <li><a href="https://www.olark.com/pricing" class="footer-link">Pricing</a></li>
+        <li><a href="https://www.olark.com/contact" class="footer-link">Contact</a></li>
+        <li><a href="https://www.olark.com/partners" class="footer-link">Partner Program</a></li>
+        <li><a href="https://hello.olark.com/olark-demo-videos" class="footer-link">Product Tour</a></li>
+      </ul>
+
+      <div class="footer-column-logo-mobile">
+        <a href="https://www.olark.com/">
+          <div class="footer-logo-mobile">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 211.3 132.7">
+              <path fill="#ffffff" d="M208.9 86.3c-0.8 0.1-1 1.2-4.3 1.4l-7.2 0.5c0 0 0 0 0 0l-131.5 10c-1.4 0.1-2.8 0.8-3.8 1.8l-15 16 0-14.9c0-0.9-0.8-1.6-1.7-1.5l-18 1.4 -21.2 1.4c-2.7 0.2-4.9 2.7-4.9 6.4 0 1.6 0.5 3.5 1.2 3.5 0.8-0.1 1-1.2 4.3-1.4l30.3-2.3c1 0 1.7 0.7 1.7 1.6l0 20.1c0 2.3 2.8 3.2 4.5 1.5l22.3-23.7c1-1.1 2.4-1.8 3.9-1.9l90.3-6.9 45.4-3.2c2.7-0.2 4.9-2.7 4.9-6.4C210.1 88.2 209.6 86.2 208.9 86.3z"/><path fill="#ffffff" d="M203.8 57.9c-1.1 5.2-5 12.9-10.4 13.3 -4.6 0.4-7.1-4.1-8.3-9.1 4.7-3.8 11.2-11 11.2-20 0-6.6-3.2-12.4-10.4-11.8 -5.3 0.4-9.9 5.4-13.7 10.8V4.7c0-2.8-2.5-5-6.3-4.6 -1.6 0.1-3.7 0.8-3.7 1.6s1.2 1 1.2 4.4v53.4c-0.2 0.5-0.4 1-0.5 1.6 -1.1 5.2-3 12.9-8.4 13.3 -3.2 0.3-4.7-2.7-4.7-5.9 0-11.7 5.7-23.2 5.7-24.6 0.5-2.7-2.5-5.5-5.6-6.1 0 0-7.3-1.5-12.7-2.3 -1.3-4.7-4.6-5.8-7.4-5.6 -3 0.2-5.9 2.6-5.9 5.8 0 3.4 2.1 5.7 5 7.1 -0.1 6-0.6 15.7-1.9 20.5 0 0.1 0 0.2 0 0.3 0 0.1 0 0.2-0.1 0.3 -1.1 5.2-3.2 12.9-7.8 13.3 -2.8 0.2-4-2.5-4-5.1V52.7c0-2.8-2.5-5-6.3-4.6 -1.6 0.1-3 1.1-3 2.2 0 0.8 0.5 1.5 0.5 3.7v18c-1.3 3.4-3.4 6.4-6.6 6.6 -4.1 0.3-6.7-3-6.7-9.1 0-16.9 10.4-25.3 19.3-26 1.2-0.1 2.3 0 3.4 0 1.2-0.1 1.5-0.8 1.5-2.8 0-3-2.2-4.7-5.4-4.5C97.6 37.4 84 50.4 84 69.9c0 0.8 0 1.5 0.1 2.3 -1.9 4.1-5 8-8.8 8.3 -4.3 0.3-6.2-2.9-6.2-7.6v-6.8c1.5-1.5 12.2-26 12.2-43.2 0-6.6-0.1-18.8-10.4-18C65 5.4 60.2 12 60.2 20.8v1c-1.9 2-5.8 5.8-9 7.3 -2.6-8-7.5-14.4-16-13.7 -6.3 0.5-10.6 5.9-10.6 12 0 9 7.8 14.1 17.6 13.4l2.2-0.2c0.2 2.4 0.4 4.9 0.4 7.1 -0.1 21.9-7.4 34.9-17.1 35.6 -8.3 0.7-17-8-17-29.2 0-30 14.4-38.5 18.5-41.1 0.2 0.1 0.4 0.1 0.6 0.1 1.1-0.1 1.5-1.3 1.5-2.8 0-2.6-1.5-6-4.1-5.8 -0.5 0-0.9 0.2-1.3 0.3C24.9 5.2 1.3 16.2 1.3 56c0 20.9 8.9 37.4 26 36.1C40.9 91 53.8 76.6 53.8 46.9c0-2.8-0.2-6-0.7-9.2 2-1 4.7-2.9 7.1-5v41.3c0 9.2 4.8 15.1 13.8 14.4 5.3-0.4 9.4-3.7 12.5-7.7 2.3 3.9 6.1 6.2 11.4 5.8 4.4-0.4 7.7-2.7 10.1-5.6 1.8 2.7 4.9 4.4 9 4.1 9.7-0.8 14.4-10.9 16.5-18.7 0-0.1 0.1-0.2 0.1-0.3 2.1-7 2.8-17.2 2.9-21.8l10.6 2c-3.7 10.4-6.3 16.1-6.3 23.6 0 10.3 6.6 12.8 12.1 12.4 4.5-0.4 7.9-2.7 10.4-5.9 0 4.3 3.3 4.8 5.6 4.6 3.4-0.3 3.3-3.1 3.3-5.3V55.5c3.6-12.7 8.9-16.9 11.7-17.1 2.2-0.2 3.7 1.7 3.7 4.6 0 10.8-10.9 15.4-10.9 19 0 7.7 6.1 17.8 15.3 17 10.6-0.8 16.4-13.1 18.5-19.6C211.6 55.6 205.2 50.6 203.8 57.9zM69.1 17.5c0-1.9 0.5-4.7 1.8-4.8 1.9-0.1 3.2 3.3 3.2 11 0 6.4-2.5 22.1-4.9 27.2V17.5zM41.7 32.7c-6.1 0.5-8.7-2.9-8.7-5.8 0-1.3 0.6-3 2.9-3.2 3.6-0.3 6 3.5 7.1 8.8L41.7 32.7z"/>
+            </svg>
+
+          </div>
+        </a>
+        <p class="footer-address">
+          427 N Tatnall St #63602
+          <br/>
+          Wilmington, DE 19801
+          <br/>
+          <span class="copyright">
+          © Olark
+        </span>
+        </p>
+
+
+        <div class="social-icons">
+          <a href="https://www.facebook.com/olarklivechat/" target="_blank" rel="noopener" class="footer-social-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#5B5757" fill-rule="nonzero"><path d="M28,4.66697778 C28,2.2148 25.7861333,0 23.3333333,0 L4.66666667,0 C2.21386667,0 0,2.2148 0,4.66697778 L0,23.3330222 C0,25.7852 2.21386667,28 4.66697778,28 L14,28 L14,17.4222222 L10.5777778,17.4222222 L10.5777778,12.7555556 L14,12.7555556 L14,10.9374222 C14,7.80173333 16.3544889,4.97777778 19.25,4.97777778 L23.0222222,4.97777778 L23.0222222,9.64444444 L19.25,9.64444444 C18.8371556,9.64444444 18.3555556,10.1456444 18.3555556,10.8963556 L18.3555556,12.7555556 L23.0222222,12.7555556 L23.0222222,17.4222222 L18.3555556,17.4222222 L18.3555556,28 L23.3333333,28 C25.7861333,28 28,25.7852 28,23.3330222 L28,4.66697778 Z"/></g></g></svg>
+          </a>
+          <a href="https://twitter.com/olark" target="_blank" rel="noopener" class="footer-social-icon">
+            <svg width="28" height="23" viewBox="0 0 28 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#5B5757" fill-rule="nonzero"><path d="M28,2.67526769 C26.9694444,3.12587093 25.8636732,3.43146489 24.7018562,3.56789641 C25.8881503,2.86691289 26.7962288,1.7550547 27.2266144,0.434260352 C26.1138431,1.08341615 24.885549,1.55478659 23.5767778,1.81031353 C22.5287451,0.707078244 21.0380196,0.0199094308 19.3845556,0.0199094308 C16.2124118,0.0199094308 13.6403922,2.55788783 13.6403922,5.68633209 C13.6403922,6.13002797 13.6911307,6.5633854 13.7891307,6.97778147 C9.01604575,6.7412159 4.78360784,4.4846783 1.95089542,1.05578673 C1.45572549,1.89144107 1.17403268,2.86515219 1.17403268,3.90455089 C1.17403268,5.87106993 2.18884967,7.60621521 3.72857516,8.62137045 C2.78723529,8.59030993 1.90189542,8.33478299 1.12681699,7.91004847 L1.12681699,7.98083756 C1.12681699,10.7259914 3.10745098,13.0170658 5.73368627,13.5385033 C5.25251634,13.6662667 4.74513072,13.7370558 4.22022222,13.7370558 C3.84931373,13.7370558 3.49062092,13.7008035 3.1389281,13.63173 C3.87026797,15.8848364 5.99090196,17.5232788 8.50344444,17.5681991 C6.53854902,19.087546 4.06100654,19.9905132 1.37003268,19.9905132 C0.906385621,19.9905132 0.44969281,19.9628838 4.5751634e-05,19.9128168 C2.5423268,21.5236748 5.56051634,22.4628943 8.80439869,22.4628943 C19.3706471,22.4628943 25.1463333,13.8268514 25.1463333,6.33724858 L25.1270719,5.60348899 C26.2555817,4.80923362 27.2318758,3.81132419 28,2.67526769 Z"/></g></g></svg>
+          </a>
+          <a href="https://www.instagram.com/olarklivechat/" target="_blank" rel="noopener" class="footer-social-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#5B5757" fill-rule="nonzero"><path d="M20.2728466,0 L7.72682211,0 C3.46625498,0 0,3.4664206 0,7.72698773 L0,20.2730123 C0,24.533745 3.46625498,28 7.72682211,28 L20.2728466,28 C24.533745,28 28,24.5335794 28,20.2730123 L28,7.72698773 C28.0001656,3.4664206 24.533745,0 20.2728466,0 Z M25.5158699,20.2730123 C25.5158699,23.1639044 23.1639044,25.5157043 20.2730123,25.5157043 L7.72682211,25.5157043 C4.83609563,25.5158699 2.4842957,23.1639044 2.4842957,20.2730123 L2.4842957,7.72698773 C2.4842957,4.83626125 4.83609563,2.4842957 7.72682211,2.4842957 L20.2728466,2.4842957 C23.1637387,2.4842957 25.5157043,4.83626125 25.5157043,7.72698773 L25.5157043,20.2730123 L25.5158699,20.2730123 Z"/><path d="M14,6.75294118 C10.0039116,6.75294118 6.75294118,10.0039862 6.75294118,14.0001664 C6.75294118,17.9961802 10.0039116,21.2470588 14,21.2470588 C17.9960884,21.2470588 21.2470588,17.9961802 21.2470588,14.0001664 C21.2470588,10.0039862 17.9960884,6.75294118 14,6.75294118 Z M14,18.7514634 C11.380026,18.7514634 9.24831299,16.6200342 9.24831299,14 C9.24831299,11.3797994 11.3798596,9.24820391 14,9.24820391 C16.6201404,9.24820391 18.751687,11.3797994 18.751687,14 C18.751687,16.6200342 16.619974,18.7514634 14,18.7514634 Z"/><path d="M21.5764706,4.61176471 C21.1004706,4.61176471 20.6328706,4.80447059 20.2967059,5.14211765 C19.9588941,5.47811765 19.7647059,5.94588235 19.7647059,6.42352941 C19.7647059,6.89969412 19.9590588,7.36729412 20.2967059,7.70494118 C20.6327059,8.04094118 21.1004706,8.23529412 21.5764706,8.23529412 C22.0541176,8.23529412 22.5202353,8.04094118 22.8578824,7.70494118 C23.1955294,7.36729412 23.3882353,6.89952941 23.3882353,6.42352941 C23.3882353,5.94588235 23.1955294,5.47811765 22.8578824,5.14211765 C22.5218824,4.80447059 22.0541176,4.61176471 21.5764706,4.61176471 Z"/></g></g></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/469764/" target="_blank" rel="noopener" class="footer-social-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#5B5757" fill-rule="nonzero"><path d="M25.2,0 L2.8,0 C1.26,0 0,1.24508876 0,2.76686391 L0,24.9017751 C0,26.4235503 1.26,27.6686391 2.8,27.6686391 L25.2,27.6686391 C26.74,27.6686391 28,26.4235503 28,24.9017751 L28,2.76686391 C28,1.24508876 26.74,0 25.2,0 Z M8.4,23.5183432 L4.2,23.5183432 L4.2,11.0674556 L8.4,11.0674556 L8.4,23.5183432 Z M6.3,8.7156213 C4.9,8.7156213 3.78,7.60887574 3.78,6.22544379 C3.78,4.84201183 4.9,3.73526627 6.3,3.73526627 C7.7,3.73526627 8.82,4.84201183 8.82,6.22544379 C8.82,7.60887574 7.7,8.7156213 6.3,8.7156213 Z M23.8,23.5183432 L19.6,23.5183432 L19.6,16.1861538 C19.6,15.0794625 18.62,14.1110059 17.5,14.1110059 C16.38,14.1110059 15.4,15.0794625 15.4,16.1861538 L15.4,23.5183432 L11.2,23.5183432 L11.2,11.0674556 L15.4,11.0674556 L15.4,12.727574 C16.1,11.6208284 17.64,10.7907692 18.9,10.7907692 C21.56,10.7907692 23.8,13.0042604 23.8,15.6327811 L23.8,23.5183432 Z"/></g></g></svg>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <script type="text/javascript">
+    ;(function(o,l,a,r,k,y){if(o.olark)return;
+      r="script";y=l.createElement(r);r=l.getElementsByTagName(r)[0];
+      y.async=1;y.src="//"+a;r.parentNode.insertBefore(y,r);
+      y=o.olark=function(){k.s.push(arguments);k.t.push(+new Date)};
+      y.extend=function(i,j){y("extend",i,j)};
+      y.identify=function(i){y("identify",k.i=i)};
+      y.configure=function(i,j){y("configure",i,j);k.c[i]=j};
+      k=y._={s:[],t:[+new Date],c:{},l:a};
+    })(window,document,"static.olark.com/jsclient/loader.js");
+
+    olark.identify('9353-431-10-4341');
+  </script>
+
+
+  <script>
+
+
+
+    window.callbacksWhenVisitorHasConsented = [];
+    window.callbacksWhenVisitorHasConsented.push(function () {
+      analytics.load("skpn2o50ooslt1t0endk");
+    });
+
+
+    (function(){
+      var pageName;
+
+      if(document.head.querySelector) {
+        var metaTag = document.head.querySelector("meta[name=pageName]");
+        pageName = metaTag && metaTag.content;
+      };
+
+      analytics.page(pageName, {path:document.location.pathname, url:document.location.href});
+    })();
+  </script>
+
+
+  <script async type="text/javascript" src="//static.olark.com/a/cookie-consent/cookie-consent.js"></script>
+
+  <button class="olark-launch-button olark-size-md" tabindex="0" role="button" aria-hidden="false" data-reactid=".0.4"><svg x="0px" y="0px" viewBox="0 0 27 21.9" aria-label="three small dots to indicate that an agent is available to chat" role="img" data-reactid=".0.4.0"><title data-reactid=".0.4.0.0">Chat Icon </title><desc data-reactid=".0.4.0.1">three small dots to indicate that an agent is available to chat</desc><path fill="#ffffff" d="M23.2,0L2.6,1.7C1,1.9,0,3.2,0,4.9v8c0,1.6,0.8,3,2.4,3.1l5.3,0.5c0,0,1,1.6,0.3,3.2C7.2,21.3,6,21.9,6,21.9 c4.2,0,6.6-3.1,7.8-4.9l9.4,0.7c1.8,0.2,3.8-1.3,3.8-3.1V3.1C27,1.3,25-0.1,23.2,0z M6.4,10.1c-0.9,0-1.7-0.7-1.7-1.7 c0-0.9,0.7-1.7,1.7-1.7C7.3,6.8,8,7.5,8,8.5C8,9.4,7.3,10.1,6.4,10.1z M13.2,10.1c-0.9,0-1.7-0.7-1.7-1.7c0-0.9,0.7-1.7,1.7-1.7 c0.9,0,1.7,0.7,1.7,1.7C14.8,9.4,14.1,10.1,13.2,10.1z M19.9,10.1c-0.9,0-1.7-0.7-1.7-1.7c0-0.9,0.7-1.7,1.7-1.7 c0.9,0,1.7,0.7,1.7,1.7C21.6,9.4,20.9,10.1,19.9,10.1z" data-reactid=".0.4.0.2"></path></svg><div class="olark-notification-badge olark-hidden" data-reactid=".0.4.1"><div class="olark-notification-badge-text" data-reactid=".0.4.1.0">0</div></div><div class="olark-button-text" data-reactid=".0.4.2">Chat with us!</div></button>
+
+  <button class="olark-launch-button olark-hidden olark-size-md" tabindex="-1" role="button" aria-hidden="true" data-reactid=".0.4"><svg x="0px" y="0px" viewBox="0 0 27 21.9" aria-label="three small dots to indicate that an agent is available to chat" role="img" data-reactid=".0.4.0"><title data-reactid=".0.4.0.0">Chat Icon </title><desc data-reactid=".0.4.0.1">three small dots to indicate that an agent is available to chat</desc><path fill="#ffffff" d="M23.2,0L2.6,1.7C1,1.9,0,3.2,0,4.9v8c0,1.6,0.8,3,2.4,3.1l5.3,0.5c0,0,1,1.6,0.3,3.2C7.2,21.3,6,21.9,6,21.9 c4.2,0,6.6-3.1,7.8-4.9l9.4,0.7c1.8,0.2,3.8-1.3,3.8-3.1V3.1C27,1.3,25-0.1,23.2,0z M6.4,10.1c-0.9,0-1.7-0.7-1.7-1.7 c0-0.9,0.7-1.7,1.7-1.7C7.3,6.8,8,7.5,8,8.5C8,9.4,7.3,10.1,6.4,10.1z M13.2,10.1c-0.9,0-1.7-0.7-1.7-1.7c0-0.9,0.7-1.7,1.7-1.7 c0.9,0,1.7,0.7,1.7,1.7C14.8,9.4,14.1,10.1,13.2,10.1z M19.9,10.1c-0.9,0-1.7-0.7-1.7-1.7c0-0.9,0.7-1.7,1.7-1.7 c0.9,0,1.7,0.7,1.7,1.7C21.6,9.4,20.9,10.1,19.9,10.1z" data-reactid=".0.4.0.2"></path></svg><div class="olark-notification-badge olark-hidden" data-reactid=".0.4.1"><div class="olark-notification-badge-text" data-reactid=".0.4.1.0">0</div></div><div class="olark-button-text" data-reactid=".0.4.2">Chat with us!</div></button>
+
+</div>
+
+
+</body>
+</html>
