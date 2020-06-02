@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth-service/auth.service';
+import {NotificationService} from "../_services/notification/notification.service";
+import {stringify} from "querystring";
 
 @Component({
   selector: 'app-register',
@@ -12,12 +14,13 @@ export class RegisterComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private notificationService:NotificationService) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
+
     this.authService.register(this.form).subscribe(
       data => {
         console.log(data);
@@ -29,5 +32,7 @@ export class RegisterComponent implements OnInit {
         this.isSignUpFailed = true;
       }
     );
+    this.notificationService.success("Ви успішно зареєструвались");
+    window.location.href = "login"
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-help-bot',
@@ -8,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class HelpBotComponent implements OnInit {
   MSG: string = 'empty';
   question: string;
+
+  // @Output() modelMsg: EventEmitter<string> = new EventEmitter<string>() ;
+  // @Output() modelMsg : string;
 
   click() {
     this.MSG  = this.MSG + ' hello';
@@ -28,6 +32,18 @@ export class HelpBotComponent implements OnInit {
     document.getElementById("myForm").style.display = "none";
 
   }
+
+
+  // openDialog() {
+  //
+  //   const dialogConfig = new MatDialogConfig();
+  //
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //
+  //   this.dialog.open(CourseDialogComponent, dialogConfig);
+  // }
+
 
   lol(question:string) {
 
@@ -50,7 +66,17 @@ export class HelpBotComponent implements OnInit {
       }
       case 'Потрібний гуртожиток': {
 
+
+        // this.MSG = ` Клікніть <a href='#'>сюди</a> для перегляду детальної інформація`
+
+
         this.MSG = ` Клікніть <a href='#'>сюди</a> для перегляду детальної інформація`
+
+
+
+
+
+
         // this.MSG = "Клікніть <a href='google.com'>сюди</a>"
         break;
       }
@@ -68,5 +94,11 @@ export class HelpBotComponent implements OnInit {
 
   answer(question: string) {
     console.log(question);
+  }
+
+  outputTest() {
+    // console.log(this.modelMsg);
+    // this.modelMsg = "aa";
+    // this.modelMsg.("string test")
   }
 }

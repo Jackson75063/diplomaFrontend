@@ -9,6 +9,7 @@ import {Abit} from '../model/Abit';
 import {SpecializationsDTO} from "../model/SpecializationsDTO";
 import {FacultiesDTO} from "../model/FacultiesDTO";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {NotificationService} from "../_services/notification/notification.service";
 
 
 const httpOptions = {
@@ -39,7 +40,7 @@ export class AboutUsComponent implements OnInit {
   options: FormGroup;
   private reqq2: Abit;
 
-  constructor(fb: FormBuilder,private  abitutientServiceService: AbitutientServiceService, private cd: ChangeDetectorRef, private httpClient: HttpClient) {
+  constructor(fb: FormBuilder,private  abitutientServiceService: AbitutientServiceService, private cd: ChangeDetectorRef, private httpClient: HttpClient, private notificationService:NotificationService) {
 
     this.options = fb.group({
       bottom: 0,
@@ -171,6 +172,10 @@ export class AboutUsComponent implements OnInit {
         console.log(value);
       });
     this.decreaseCounter();
+
+    // this
+    this.notificationService.success("Запит відправлено")
+
   }
 
 

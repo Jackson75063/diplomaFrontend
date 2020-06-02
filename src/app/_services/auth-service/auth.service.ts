@@ -30,6 +30,15 @@ export class AuthService {
   }
 
   register(user): Observable<any> {
+
+    this.http.post("http://localhost:8081/send",{
+      "to":user.email,
+      "subject":"Вступ",
+      "text":" Доброго дня " + user.username + "  ласкаво просимо до нашого університету."
+    },httpOptions).subscribe(value => {
+      console.log(value);
+    })
+
     return this.http.post(AUTH_API + 'signup', {
       username: user.username,
       email:    user.email,

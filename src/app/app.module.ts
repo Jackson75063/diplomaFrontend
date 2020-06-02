@@ -234,7 +234,9 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatRadioModule} from "@angular/material/radio";
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HelpBotComponent } from './help-bot/help-bot.component';
+import { NewsComponent } from './news/news.component';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -273,7 +275,8 @@ import { HelpBotComponent } from './help-bot/help-bot.component';
     MapSubjTestComponent,
     FinishMapComponent,
     SidebarComponent,
-    HelpBotComponent
+    HelpBotComponent,
+    NewsComponent
 
   ],
   imports: [
@@ -293,6 +296,7 @@ import { HelpBotComponent } from './help-bot/help-bot.component';
     MatToolbarModule,
     ReactiveFormsModule,
     MatRadioModule,
+    MatSnackBarModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
